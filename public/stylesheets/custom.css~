@@ -29,7 +29,7 @@ background:transparent;
 top:120px;
 margin-left:0px;
 width:auto;
-font-size:1.2em;
+font-size:16px;
 padding:0;
 }
 
@@ -223,12 +223,12 @@ color:#6B3C6A;
 #frontpage_splash h2 {
 font-size:26px;
 font-weight:400;
-color:#6B3C6A;
+color:#231F20;
 font-family:'DeliciousRoman', Arial, sans-serif;
 }
 
 #frontpage_splash h2 strong {
-font-size:16px;
+font-size:26px;
 color:#2178BA;
 font-family:'DeliciousBold', Arial, sans-serif;
 }
@@ -294,6 +294,9 @@ margin-right:10;
 width:68%;
 }
 
+#frontpage_splash #frontpage_search_box {
+margin-top:40px;
+}
 
 #ui-datepicker-div.ui-widget {
 font-family:Arial, sans-serif;

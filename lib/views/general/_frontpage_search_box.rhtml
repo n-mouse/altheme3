@@ -1,0 +1,6 @@
+<h2>
+  <%= _("Зараз на сайті<br/><strong>зареєстрованих<br/>запитів: {{number_of_requests}}<br/>
+  розпорядників<br/>інформації: {{number_of_authorities}}</strong>",
+  :number_of_requests => InfoRequest.visible.count, :number_of_authorities => PublicBody.visible.count) %>
+</h2>
+
