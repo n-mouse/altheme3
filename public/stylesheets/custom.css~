@@ -375,10 +375,6 @@ color:#93278F;
 
 body.front {
 background:url(../images/home-grad.png) repeat-x 0 160px;
-background:url(../images/kliuch.png);
-background-repeat:no-repeat;
-
-background-position:bottom; 
 }
 
 .request_listing span.desc {
