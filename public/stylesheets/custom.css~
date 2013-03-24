@@ -3,6 +3,8 @@ color:#444;
 font-family:Arial, sans-serif;
 }
 
+
+
 #banner {
 background-repeat:no-repeat;
 background-position:center top;
@@ -43,7 +45,7 @@ text-decoration:underline;
 text-align:right;
 right:0;
 color:#6D839B;
-padding: 10px 5px 10px 120px;
+padding: 10px 5px 10px 140px;
 }
 
 #topnav ul li {
@@ -284,7 +286,7 @@ font-family:Georgia;
   margin-top: 24px;
 }
 
-#steps li a#but {
+#steps li img#but {
   margin-top:5px;
 }
 
@@ -373,6 +375,10 @@ color:#93278F;
 
 body.front {
 background:url(../images/home-grad.png) repeat-x 0 160px;
+background:url(../images/kliuch.png);
+background-repeat:no-repeat;
+
+background-position:bottom; 
 }
 
 .request_listing span.desc {
