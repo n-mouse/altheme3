@@ -269,9 +269,11 @@ font-family:Georgia;
   margin-right: auto;
 }
 
+
 #steps li img#folks {
   margin-top: 18px;
 }
+
 
 #steps li img#quest {
   margin-top: 5px;
@@ -280,6 +282,10 @@ font-family:Georgia;
 
 #steps li img#dots {
   margin-top: 24px;
+}
+
+#steps li img#but {
+  margin-top:5px;
 }
 
 
