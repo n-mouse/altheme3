@@ -57,19 +57,23 @@ color:#6D839B;
 }
 
 #topnav li a,#topnav li a:visited {
-color:#ADADAD;
+color:#000000;
 }
 
 #topnav li a:hover {
-color:#fff;
+color:#000000;
+font-style:italic;
+font-weight:bold;
 }
 
 #topnav ul li.selected {
  background:#fff;
+ font-style:italic;
+ font-weight:bold;
 }
 
 #topnav ul li a {
-color:#6B3C6A !important;
+color:#000000;
 }
 
 #logged_in_bar {
