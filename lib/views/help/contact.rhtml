@@ -1,0 +1,67 @@
+<% @title = "Зворотній зв’язок" %>
+
+<%= foi_error_messages_for :contact %>
+
+<h1><%= @title %></h1>
+
+<div id="contact_preamble">
+
+   <p>
+   Щоб звернутися до команди сайту, заповніть форму:
+   </p>
+</div>
+
+<% form_for :contact do |f| %>
+
+    <% if not @user %>
+        <p>
+            <label class="form_label" for="contact_name">Ваше ім’я:</label>
+            <%= f.text_field :name, :size => 20 %>
+            (або <%= link_to "авторизуйтесь", signin_path(:r => request.request_uri) %>)
+        </p>
+
+        <p>
+            <label class="form_label" for="contact_email">Ваш мейл:</label>
+            <%= f.text_field :email, :size => 20 %>
+        </p>
+    <% end %>
+
+    <p>
+        <label class="form_label" for="contact_subject">Тема:</label>
+        <%= f.text_field :subject, :size => 50 %>
+    </p>
+
+    <p>
+        <label class="form_label" for="contact_message">Текст повідомлення:</label>
+        <%= f.text_area :message, :rows => 10, :cols => 60 %>
+    </p>
+
+    <% if !@last_request.nil? %>
+        <p>
+            <label class="form_label" for="contact_message">Додати посилання на запит:</label>
+            <%=request_link(@last_request) %>
+            <%= submit_tag "remove", :name => 'remove' %>
+        </p>
+    <% end %>
+    <% if !@last_body.nil? %>
+        <p>
+            <label class="form_label" for="contact_message">Додати посилання на розпорядника:</label>
+            <%=public_body_link(@last_body) %>
+            <%= submit_tag "remove", :name => 'remove' %>
+        </p>
+    <% end %>
+
+    <p class="form_note">
+    Ми можемо допомогти вам лише з <strong>технічних питань</strong> або питань щодо свободи інформації. Ми не маємо ніякого відношення до органів державної влади, тож якщо у вас є питання до них, скористайтесь формою для надсилання запитів. 
+    </P>
+
+
+    <div class="form_button">
+        <%= hidden_field_tag(:submitted_contact_form, 1) %>
+        <%= submit_tag "Надіслати повідомлення" %>
+        
+    </div>
+
+<% end %>
+
+

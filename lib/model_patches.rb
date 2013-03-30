@@ -6,11 +6,11 @@
 #
 require 'dispatcher'
 Dispatcher.to_prepare do
-    OutgoingMessage.class_eval do
-        # Add intro paragraph to new request template
-        def default_letter
+
+   OutgoingMessage.class_eval do
+      def default_letter
             return nil if self.message_type == 'followup'
-            #"If you uncomment this line, this text will appear as default text in every message"    
+            "На підставі статей 1, 13, 19, 20 Закону України «Про доступ до публічної інформації» від 13 січня 2011 року, які надають право звертатись із запитами до розпорядників інформації щодо надання публічноїінформації, прошу надати наступну інформацію (наступні документи):"    
         end
     end        
 end
