@@ -40,11 +40,7 @@
             <label class="form_label"><%= _('To:') %></label>
             <span id="to_public_body"><%=h(@info_request.public_body.name)%></span>
             <div class="form_item_note">
-                <% if @info_request.public_body.info_requests.size > 0 %>
-                    <%= _("Browse <a href='{{url}}'>other requests</a> to '{{public_body_name}}' for examples of how to word your request.", :public_body_name=>h(@info_request.public_body.name), :url=>public_body_path(@info_request.public_body)) %>
-                <% else %>
-                    <%= _("Browse <a href='{{url}}'>other requests</a> for examples of how to word your request.", :url=>request_list_url) %>
-                <% end %>
+               <%= _("Browse <a href='{{url}}'>other requests</a> to '{{public_body_name}}' for examples of how to word your request.", :public_body_name=>h(@info_request.public_body.name), :url=>public_body_path(@info_request.public_body)) %> 
             </div>
 
             <% if @info_request.public_body.has_notes? %>
