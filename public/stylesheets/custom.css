@@ -449,3 +449,7 @@ background:url(../images/quote-marks.png) no-repeat;
     text-align: center;
     z-index: 10;
 }
+
+.request_listing span.bottomline {
+font-size:1.4em;
+}
