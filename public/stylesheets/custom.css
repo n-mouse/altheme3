@@ -69,6 +69,10 @@ color:#000000;
 color:#7d7d7d;
 }
 
+#topnav li a:hover, a:hover {
+color:#7d7d7d;
+}
+
 #topnav ul li.selected {
  background:#fff;
 }
@@ -301,6 +305,18 @@ font-family:Georgia;
 }
 
 
+#steps li a {
+  text-decoration:none;
+  color:#444444;
+  
+}
+
+#steps li a:hover {
+  text-decoration:none;
+  color:#444444;
+  cursor: auto;
+}
+
 #frontpage_splash #frontpage_right_to_know {
   margin-top:100px;
   font-size:16px;
@@ -403,4 +419,33 @@ background:url(../images/quote-marks.png) no-repeat;
 
 #follow_count {
  color: #2178BA;
+}
+
+
+.tip { 
+    position:relative !important;
+   
+} 
+
+.tip > .tooltipB {
+    display:none;
+}
+
+
+.tip:hover > .tooltipB {
+    display:block;
+}
+
+.tooltipB {
+    background: #5C6F8A; 
+    -moz-box-shadow: 0 0 6px 1px #666666;
+    -webkit-box-shadow: 0 0 6px 1px #666666;
+    box-shadow: 0 0 6px 1px #666666;
+    border:solid #FFFFFF;
+    color: #E7E7E7;
+    min-width:200px;
+    padding: 5px;
+    position: absolute;
+    text-align: center;
+    z-index: 10;
 }
