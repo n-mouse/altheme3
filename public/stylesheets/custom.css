@@ -453,3 +453,8 @@ background:url(../images/quote-marks.png) no-repeat;
 .request_listing span.bottomline {
 font-size:1.4em;
 }
+
+#examples_1 {
+min-height:320px;
+}
+
