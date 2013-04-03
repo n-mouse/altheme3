@@ -302,6 +302,7 @@ font-family:Georgia;
 
 #steps li img#but {
   margin-top:5px;
+  cursor:pointer;
 }
 
 
@@ -455,6 +456,14 @@ font-size:1.4em;
 }
 
 #examples_1 {
+min-height:320px;
+}
+
+#user_profile_search {
+margin-top:30px;
+}
+
+.controller_user {
 min-height:320px;
 }
 

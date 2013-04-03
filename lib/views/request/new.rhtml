@@ -108,24 +108,15 @@
 
         <% if !@user %>
             <p class="form_note">
-                <%= raw(_('Everything that you enter on this page, including <strong>your name</strong>,
-                will be <strong>displayed publicly</strong> on
-                this website forever (<a href="%s">why?</a>).') % [help_privacy_path+"#public_request"]) %>
-                <%= raw(_('If you are thinking of using a pseudonym,
-                please <a href="%s">read this first</a>.') % [help_privacy_path+"#real_name"]) %>
+                <%= _('Усе, що ви введете на цій сторінці (включно з вашим іменем), буде опубліковано у вільному доступі на цьому вебсайті') %>
             </p>
         <% else %>
             <p class="form_note">
-                <%= raw(_('Everything that you enter on this page
-                will be <strong>displayed publicly</strong> on
-                this website forever (<a href="%s">why?</a>).') % [help_privacy_path+"#public_request"]) %>
+                <%= _('Усе, що ви введете на цій сторінці (включно з вашим іменем), буде опубліковано у вільному доступі на цьому вебсайті')  %>
             </p>
         <% end %>
 
-        <p class="form_note">
-            <%= raw(_("<strong> Can I request information about myself?</strong>\n" +
-            "\t\t\t<a href=\"%s\">No! (Click here for details)</a>") % [help_requesting_path+"#data_protection"]) %>
-        </p>
+      
 
         <div class="form_button">
             <%= f.hidden_field(:public_body_id, { :value => @info_request.public_body_id } ) %>
