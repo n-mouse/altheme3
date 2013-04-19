@@ -146,7 +146,19 @@ color:#5C6F8A;
 }
 
 #request_form label,label.form_label,span#to_public_body {
-color:#5C6F8A;
+color:#2178BA;
+}
+
+#request_form label,label.form_label {
+
+display:block;
+float:left;
+clear:none;
+width:160px;
+text-align:right;
+margin:2px 0 0;
+padding:0 10px 0 0;
+
 }
 
 span#to_public_body {
@@ -187,7 +199,13 @@ font-family:'DeliciousRoman', Arial, sans-serif;
 background-image: none;
 border:none;
 text-shadow:none;
+}
 
+form input[type=submit],a.link_button_green_large {
+  border-radius:12px;
+  -moz-border-radius:12px;
+  font-size:16px;
+  font-style:italic;
 }
 
 div.frontpage-box {
@@ -521,3 +539,30 @@ body#bluebodies {
 .request_listing,.user_listing,.body_listing {
 border-bottom:none;
 }
+
+#contact_preamble {
+  margin:40px 0 30px 240px;
+  font-size:18px;
+  font-style:italic;
+}
+
+#contact_preamble ul li {
+ list-style-image:url(../images/lil-blu.png);
+ margin-top:10px;
+}
+
+#contact-form {
+  margin-left:60px;
+  min-height:600px;
+}
+
+.form_item_note,.form_note {
+margin-left:170px;
+font-style:italic;
+}
+
+.form_button {
+margin:0 0 0 12em;
+}
+
+

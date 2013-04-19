@@ -2,15 +2,15 @@
 
 <%= foi_error_messages_for :contact %>
 
-<h1><%= @title %></h1>
 
 <div id="contact_preamble">
 
-   <p>
-   Щоб звернутися до команди сайту, заповніть форму:
-   </p>
+   <ul>
+   <li>Ознайомтесь з інформацією, яку містить розділ <%= link_to "Як це працює", help_about_path %>
+   <li>Якщо ви не знайшли відповідь на своє запитання, звертайтесь, заповнивши форму нижче:
+   </ul>
 </div>
-
+<div id="contact-form">
 <% form_for :contact do |f| %>
 
     <% if not @user %>
@@ -64,4 +64,4 @@
 
 <% end %>
 
-
+</div>
