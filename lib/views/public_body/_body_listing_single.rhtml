@@ -13,14 +13,15 @@
     <% end %>
 	</span>
     <span class="bottomline">
-        <%= n_('%d request made.', '%d requests made.', public_body.info_requests.size) % public_body.info_requests.size %>
+        <%= link_to n_('%d request made.', '%d requests made.', public_body.info_requests.size) % public_body.info_requests.size, public_body_path(public_body) %>
+        
         <% if !@include_request_link_in_authority_listing.nil? %>
         <%= link_to _("Make your own request"), public_body_path(public_body) %>.
         <% end %>
         <br>
-        <span class="date_added">
-            <%= _("Added on {{date}}", :date => simple_date(public_body.created_at)) %>.
-        </span>
+  
+       
+      
     </span>
 </div>
 

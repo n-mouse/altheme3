@@ -3,7 +3,9 @@ color:#444;
 font-family:Arial, sans-serif;
 }
 
-
+li {
+list-style-type: none;
+}
 
 #banner {
 background-repeat:no-repeat;
@@ -65,16 +67,16 @@ font-weight:bold;
 color:#000000;
 }
 
-#topnav li a:hover {
-color:#7d7d7d;
+#topnav li a:hover, a:hover {
+color:#231f20;
 }
 
-#topnav li a:hover, a:hover {
+#topnav ul#navigation li a:hover {
 color:#7d7d7d;
 }
 
 #topnav ul li.selected {
- background:#fff;
+ background:url(../images/home-grad.png) repeat-x 0 10px;
 }
 
 #topnav ul li a {
@@ -112,13 +114,14 @@ font-weight:400;
 }
 
 h3 {
-color:#5C6F8A;
+color:#1679BC;
 font-family:'DeliciousRoman', Arial, sans-serif;
 font-weight:400;
 }
 
 a {
-color:#2178BA;
+color:#6E829B;
+font-style:italic;
 }
 
 p.subtitle {
@@ -127,9 +130,10 @@ color:#6B3C7F;
 }
 
 .request_listing span.head a,.user_listing span.head a,.body_listing span.head a {
-color:#5C6F8A;
+color:#1679BC;
 font-family:'DeliciousRoman', Arial, sans-serif;
 font-weight:400;
+font-style:normal;
 }
 
 .request_listing span.desc {
@@ -229,7 +233,7 @@ font-weight:400;
 }
 
 #frontpage_splash h1 span {
-font-family:Georgia;
+font-family:Georgia;ic
 font-style:italic;
 font-weight:400;
 font-size:25px;
@@ -265,54 +269,74 @@ font-family:Georgia;
   
 }
 
-#steps {
+.steps {
   margin:0;
   padding:0;
   font-size:16px;
 }
 
+.steps-in {
+  font-size:14px;
+  margin:0;
+  padding:0;
+}
 
-#steps li {
-  list-style-type: none;
+.steps-in li {
+  float:left;
+  margin:5px;
+  padding:0;
+}
+
+
+.steps-in li p.small {
+  margin-top: 25px;
+}
+
+.steps-in li img.pic {
+  display: block; 
+  margin: 10px auto 30px;
+}
+
+.steps li {
   float:left;
   margin:0 5px;
   padding:0;
 }
 
-#steps li img.pic {
+.steps li img.pic {
   display: block; 
   margin-left: auto; 
   margin-right: auto;
 }
 
 
-#steps li img#folks {
+.steps li img#folks {
   margin-top: 18px;
 }
 
 
-#steps li img#quest {
+.steps li img#quest {
   margin-top: 5px;
 }
 
 
-#steps li img#dots {
+.steps li img#dots {
   margin-top: 24px;
 }
 
-#steps li img#but {
+.steps li img#but {
   margin-top:5px;
   cursor:pointer;
 }
 
 
-#steps li a {
+.steps li a {
   text-decoration:none;
   color:#444444;
   
 }
 
-#steps li a:hover {
+.steps li a:hover {
   text-decoration:none;
   color:#444444;
   cursor: auto;
@@ -467,3 +491,33 @@ margin-top:30px;
 min-height:320px;
 }
 
+
+#left_column_flip h2 {
+  color:#231f20;
+font-style:italic;
+font-size:18px;
+}
+
+#left_column_flip_search {
+  margin:45px 0;
+}
+
+#left_column_flip_search form input[type=text] {
+  width:500px;
+  font-size:1em;
+}
+
+body#bluebodies {
+  background:url(../images/home-grad.png) repeat-x 0 25px;
+}
+
+.bottomline a {
+  font-size:16px;
+  text-decoration:underline;
+  margin-left:15px;
+}
+
+
+.request_listing,.user_listing,.body_listing {
+border-bottom:none;
+}

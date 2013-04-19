@@ -1,7 +1,11 @@
+<body id = "bluebodies">
 <div id="right_column_flip">
-    <h2><%=_('Show only...')%></h2>
-
-    <h3><%=_('Beginning with') %></h3>
+    <ul class="steps-in">
+    <li><%= image_tag "/alavetelitheme/images/folksbutton.png", :class=>'pic' %>  
+    <li><p class = "small"><i><strong>ОБЕРІТЬ</strong><br/>розпоряд-<br/>ника<br/>інформації</i></p>
+    <li><%= image_tag "/alavetelitheme/images/red2.png" %>
+    </ul>
+    <h2><%=_('Пошук за алфавітом') %></h2>
     <ul><li>
         <%= render :partial => 'alphabet' %>
     </li>
@@ -30,12 +34,14 @@
 
 <% @title = @description.empty? ? _("Public authorities") : _("Public authorities - {{description}}", :description => @description) %>
 <div id="left_column_flip">
-<h2><%= _('Написання запиту починається з вибору розпорядника інформації') %></h2>
+<div id="left_column_flip_search">
+<h2><%= _('Написання запиту починається з вибору розпорядника інформації:') %></h2>
 
 <% form_tag(list_public_bodies_default_url, :method => "get", :id=>"search_form") do %>
  <div>
-  <%= text_field_tag(:public_body_query, params[:public_body_query], { :title => "type your search term here" } ) %> 
+  <%= text_field_tag(:public_body_query, params[:public_body_query], { :title => "введіть слова для пошуку" } ) %> 
   <%= submit_tag(_("Search")) %>
+ </div>
  </div>
 <% end %>
 
@@ -45,3 +51,4 @@
   <%= will_paginate(@public_bodies) %><br/>
   
 </div>
+</body>
