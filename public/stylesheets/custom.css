@@ -151,8 +151,13 @@ padding:0;
 }
 
 
-#request_form label,label.form_label,span#to_public_body {
+#request_form label,label.form_label {
 color:#2178BA;
+font-size:20px;
+}
+
+span#to_public_body {
+color:000000;
 }
 
 #request_form label,label.form_label {
@@ -552,7 +557,7 @@ border-bottom:none;
   font-style:italic;
 }
 
-#contact_preamble ul li {
+#contact_preamble ul li{
  list-style-image:url(../images/lil-blu.png);
  margin-top:10px;
 }
@@ -588,4 +593,34 @@ margin-left: -130px;
 
 .list-filter-item {
 margin-left:240px;
+}
+
+#request_header {
+background:none;
+margin-left:80px;
+}
+
+#request_form {
+margin-left:80px;
+}
+
+.steps-in li.blu{
+list-style-image:url(../images/lil-blu.png);
+width:540px;
+margin-top:40px;
+margin-left:60px;
+font-size:18px;
+font-style:italic;
+}
+
+#request_list {
+margin-top:15px;
+}
+
+#request_list h1 {
+font-size: 1.7em;
+}
+
+#signin {
+font-size:16px;
 }

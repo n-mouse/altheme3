@@ -19,7 +19,18 @@
 
 <% @title = _("Make an {{law_used_short}} request to '{{public_body_name}}'",:law_used_short=>h(@info_request.law_used_short),:public_body_name=>h(@info_request.public_body.name))  %>
 
-    
+<body id = "bluebodies">
+
+<div style="margin-top:20px;">
+<ul class="steps-in">
+    <li><%= image_tag "/alavetelitheme/images/questbutton.png", :class=>'pic' %>  
+    <li><p class = "small"><i><strong>ОПИШІТЬ</strong><br/>інформацію<br/>чи документ,<br/>який хочете<br/>отримати</i></p>
+    <li><%= image_tag "/alavetelitheme/images/red2.png" %>
+    <li class="blu">Загальний опис інформації або вид, назва, реквізити чи зміст документа, щодо якого зроблено запит
+
+</ul>
+</div>
+<div style="position:absolute; margin-top:140px;">
 
     <% if @existing_request %>
       <div class="errorExplanation" id="errorExplanation"><ul>
@@ -37,7 +48,7 @@
 
     <div id="request_header">
         <div id="request_header_body">
-            <label class="form_label"><%= _('To:') %></label>
+            <label class="form_label"><%= _('Розпорядник:') %></label>
             <span id="to_public_body"><%=h(@info_request.public_body.name)%></span>
             <div class="form_item_note">
                <%= _("Browse <a href='{{url}}'>other requests</a> to '{{public_body_name}}' for examples of how to word your request.", :public_body_name=>h(@info_request.public_body.name), :url=>public_body_path(@info_request.public_body)) %> 
@@ -90,13 +101,7 @@
         </div>
     </div>
 
-    <div id="request_advice">
-        <ul>
-        <li><%= _('Write your request in <strong>simple, precise language</strong>.') %></li>
-        <li><%= _('Ask for <strong>specific</strong> documents or information, this site is not suitable for general enquiries.') %></li>
-        <li><%= raw(_('Keep it <strong>focused</strong>, you\'ll be more likely to get what you want.') % [help_requesting_path + '#focused']) %></li>
-        </ul>
-    </div>
+
 
     <div id="request_form">
         <% fields_for :outgoing_message do |o| %>
@@ -137,5 +142,6 @@
 
         </div>
 <% end %>
+</div>
 
-
+</body>
