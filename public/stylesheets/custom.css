@@ -145,6 +145,12 @@ color:#444;
 color:#5C6F8A;
 }
 
+.feed_link,.act_link {
+margin-bottom:0;
+padding:0;
+}
+
+
 #request_form label,label.form_label,span#to_public_body {
 color:#2178BA;
 }
@@ -199,14 +205,12 @@ font-family:'DeliciousRoman', Arial, sans-serif;
 background-image: none;
 border:none;
 text-shadow:none;
+border-radius:10px;
+-moz-border-radius:10px;
+font-size:16px;
+font-style:italic;
 }
 
-form input[type=submit],a.link_button_green_large {
-  border-radius:12px;
-  -moz-border-radius:12px;
-  font-size:16px;
-  font-style:italic;
-}
 
 div.frontpage-box {
 background:url(/images/stripes.png);
@@ -450,7 +454,9 @@ background:url(../images/home-grad.png) repeat-x 0 160px;
 background:url(../images/kliuch.png);
 background-repeat:no-repeat;
 background-position:bottom; 
+min-height:800px;
 }
+
 
 .request_listing span.desc {
 background:url(../images/quote-marks.png) no-repeat;
@@ -512,12 +518,12 @@ min-height:320px;
 
 #left_column_flip h2 {
   color:#231f20;
-font-style:italic;
-font-size:18px;
+  font-style:italic;
+  font-size:18px;
 }
 
 #left_column_flip_search {
-  margin:45px 0;
+  margin:25px 0 50px 0;
 }
 
 #left_column_flip_search form input[type=text] {
@@ -565,4 +571,21 @@ font-style:italic;
 margin:0 0 0 12em;
 }
 
+#left_column_flip {
+margin-top:30px;
+}
 
+#foi_results_section {
+  margin-top:10px;
+}
+
+#filter_requests_form label.title,h3.title {
+display:inline-block;
+float:none;
+width:120px;
+margin-left: -130px;
+}
+
+.list-filter-item {
+margin-left:240px;
+}
