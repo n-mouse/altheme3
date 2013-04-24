@@ -8,10 +8,16 @@ require 'dispatcher'
 Dispatcher.to_prepare do
 
    OutgoingMessage.class_eval do
+   
+   
       def default_letter
             return nil if self.message_type == 'followup'
-            "На підставі статей 1, 13, 19, 20 Закону України «Про доступ до публічної інформації» від 13 січня 2011 року, які надають право звертатись із запитами до розпорядників інформації щодо надання публічної інформації, прошу надати наступну інформацію (наступні документи):\n\n\n\n\n\n"    
+            "На підставі статей 1, 13, 19, 20 Закону України «Про доступ до публічної інформації» від 13 січня 2011 року, які надають право звертатись із запитами до розпорядників інформації щодо надання публічної інформації, прошу надати наступну інформацію (наступні документи):\n\n\n"    
         end
+        
+      def get_address(addr)
+          myaddr = "Будь ласка, надішліть копію відповіді за адресою: " + addr
+      end
         
       def format_of_body
         if self.body.empty? || self.body =~ /\A#{get_salutation}\s+#{get_signoff}/ || self.body =~ /#{get_internal_review_insert_here_note}/

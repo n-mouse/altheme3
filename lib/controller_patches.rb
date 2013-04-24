@@ -93,6 +93,9 @@ Dispatcher.to_prepare do
             params[:outgoing_message][:info_request] = @info_request
             @outgoing_message = OutgoingMessage.new(params[:outgoing_message])
             @outgoing_message.set_signature_name(@user.name) if !@user.nil?
+            if params[:send_by_post] == "1" && params[:address]
+              @outgoing_message.get_address(params[:address])
+            end
 
             if @info_request.public_body.is_requestable?
                 render :action => 'new'
@@ -158,6 +161,7 @@ Dispatcher.to_prepare do
             if not message.empty?
                 flash.now[:error] = message.html_safe
             end
+            
             render :action => 'preview'
             return
         end
