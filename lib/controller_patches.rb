@@ -1,3 +1,4 @@
+# encoding: utf-8
 # Add a callback - to be executed before each request in development,
 # and at startup in production - to patch existing app classes.
 # Doing so in init/environment.rb wouldn't work in development, since
@@ -210,7 +211,7 @@ Dispatcher.to_prepare do
           @user_signup = User.new(params[:user_signup])
           error = false
           if params[:name_public_ok] != "1"
-	      flash.now[:error] = _("You have to agree")
+	      flash.now[:error] = _("Ви маєте погодитись на використання вашої персональної інформації. Поставте, будь ласка, відповідну галочку.")
 	      error = true
           elsif @request_from_foreign_country && !verify_recaptcha
               flash.now[:error] = _("There was an error with the words you entered, please try again.")
