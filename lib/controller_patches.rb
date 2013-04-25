@@ -91,13 +91,15 @@ Dispatcher.to_prepare do
             params[:outgoing_message][:body] = params[:body] if params[:body]
             params[:outgoing_message][:default_letter] = params[:default_letter] if params[:default_letter]
             params[:outgoing_message][:info_request] = @info_request
+            #if params[:send_by_post] == "1"
+             # params[:outgoing_message][:address] = params[:address] if params[:address]
+            #end
+              
+            
             @outgoing_message = OutgoingMessage.new(params[:outgoing_message])
             @outgoing_message.set_signature_name(@user.name) if !@user.nil?
-            if params[:send_by_post] == "1" && params[:address]
-              @outgoing_message.get_address(params[:address])
-            end
-
-            if @info_request.public_body.is_requestable?
+           
+	        if @info_request.public_body.is_requestable?
                 render :action => 'new'
             else
                 if @info_request.public_body.not_requestable_reason == 'bad_contact'

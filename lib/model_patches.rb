@@ -15,9 +15,6 @@ Dispatcher.to_prepare do
             "На підставі статей 1, 13, 19, 20 Закону України «Про доступ до публічної інформації» від 13 січня 2011 року, які надають право звертатись із запитами до розпорядників інформації щодо надання публічної інформації, прошу надати наступну інформацію (наступні документи):\n\n\n"    
         end
         
-      def get_address(addr)
-          myaddr = "Будь ласка, надішліть копію відповіді за адресою: " + addr
-      end
         
       def format_of_body
         if self.body.empty? || self.body =~ /\A#{get_salutation}\s+#{get_signoff}/ || self.body =~ /#{get_internal_review_insert_here_note}/
