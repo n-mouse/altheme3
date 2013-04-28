@@ -206,9 +206,9 @@ Dispatcher.to_prepare do
           # Make the user and try to save it
           @user_signup = User.new(params[:user_signup])
           error = false
-          if params[:name_public_ok] != "1"
-	      flash.now[:error] = _("Ви маєте погодитись на використання вашої персональної інформації. Поставте, будь ласка, відповідну галочку.")
-	      error = true
+          if params[:name_public_ok] != "1" 
+	        flash.now[:error] = _("Ви маєте погодитись на використання вашої персональної інформації. Поставте, будь ласка, відповідну галочку.")
+	        error = true
           elsif @request_from_foreign_country && !verify_recaptcha
               flash.now[:error] = _("There was an error with the words you entered, please try again.")
               error = true
