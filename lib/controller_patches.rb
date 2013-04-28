@@ -91,11 +91,7 @@ Dispatcher.to_prepare do
             params[:outgoing_message] = {} if !params[:outgoing_message]
             params[:outgoing_message][:body] = params[:body] if params[:body]
             params[:outgoing_message][:default_letter] = params[:default_letter] if params[:default_letter]
-            params[:outgoing_message][:info_request] = @info_request
-            #if params[:send_by_post] == "1"
-             # params[:outgoing_message][:address] = params[:address] if params[:address]
-            #end
-              
+            params[:outgoing_message][:info_request] = @info_request              
             
             @outgoing_message = OutgoingMessage.new(params[:outgoing_message])
             @outgoing_message.set_signature_name(@user.name) if !@user.nil?

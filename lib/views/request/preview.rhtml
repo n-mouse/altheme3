@@ -6,8 +6,7 @@
     <ul>
     <li><%= _('Check you haven\'t included any <strong>personal information</strong>.') %></li>
    
-      <li>   <%= check_box_tag("send_by_post") %>
-         <%= _('Я хочу отримати копію відповіді за вказаною мною поштовою адресою') %></li>
+     
      
     </ul>
 
@@ -22,9 +21,8 @@
             <div class="correspondence_text">
                 <p><%= @outgoing_message.get_body_for_html_display %></p>
                 <%= o.hidden_field(:body) %>
-               <% if params[:send_by_post] == "1" %>
                 <%= o.hidden_field(:address) %>
-              <% end %>
+              
             </div>
 
             <p class="event_actions"> 

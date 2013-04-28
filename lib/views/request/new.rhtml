@@ -86,11 +86,29 @@
         <p>
             <label class="form_label" for="outgoing_message_body"><%= _('Your request:') %></label>
             <%= o.text_area :body, :rows => 15, :cols => 65 %>
-            <label class="form_label" for="outgoing_message_address"><%= _('Поштова адреса (якщо ви хочете отримати копію відповіді поштою):') %></label>
+            <p style="margin-left:200px;">
+            <%= o.check_box :bypost %>
+            <%= _('Я хочу отримати копію відповіді поштою') %>
+            </p>
+            <div id="addr" style="display:none;">
+            <label class="form_label" for="outgoing_message_address"><%= _('Поштова адреса:') %></label>
             <%= o.text_area :address, :rows => 3, :cols => 40 %>
-            
+            </div>            
         </p>
         <% end %>
+        
+   <script type="text/javascript">
+          var checkbox = document.getElementById('outgoing_message_bypost');
+          var address = document.getElementById('addr');
+          checkbox.onchange = function() {
+          if (this.checked) {
+            address.style['display'] = 'block';
+            } else  {
+            address.style['display'] = 'none';
+            }
+  };
+   </script>
+        
 
 
         <% if !@user %>
