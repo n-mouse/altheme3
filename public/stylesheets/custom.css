@@ -157,7 +157,7 @@ font-size:20px;
 }
 
 span#to_public_body {
-color:000000;
+color:#000000;
 }
 
 #request_form label,label.form_label {
@@ -376,7 +376,7 @@ font-family:Georgia;
 
 #frontpage_examples div#examples_1 {
 float:left;
-margin-right:10;
+margin-right:10px;
 width:68%;
 }
 
@@ -423,7 +423,7 @@ position:absolute;
 text-align:left;
 background-color:#FFF;
 z-index:999;
-opacity:0.9px;
+
 border-radius:6px;
 -moz-border-radius:6px;
 border:1px solid #2178BA;
