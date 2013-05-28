@@ -36,20 +36,7 @@
         <%= f.text_area :message, :rows => 10, :cols => 60 %>
     </p>
 
-    <% if !@last_request.nil? %>
-        <p>
-            <label class="form_label" for="contact_message">Додати посилання на запит:</label>
-            <%=request_link(@last_request) %>
-            <%= submit_tag "remove", :name => 'remove' %>
-        </p>
-    <% end %>
-    <% if !@last_body.nil? %>
-        <p>
-            <label class="form_label" for="contact_message">Додати посилання на розпорядника:</label>
-            <%=public_body_link(@last_body) %>
-            <%= submit_tag "remove", :name => 'remove' %>
-        </p>
-    <% end %>
+
 
     <p class="form_note">
     Ми можемо допомогти вам лише з <strong>технічних питань</strong> або питань щодо свободи інформації. Ми не маємо ніякого відношення до органів державної влади, тож якщо у вас є питання до них, скористайтесь формою для надсилання запитів. 
