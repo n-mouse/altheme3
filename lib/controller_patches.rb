@@ -10,7 +10,7 @@ Rails.configuration.to_prepare do
   RequestController.class_eval do
      def new
      
-        if Configuration::force_registration_on_new_request && !authenticated?(
+        if AlaveteliConfiguration::force_registration_on_new_request && !authenticated?(
                 :web => _("To send your FOI request"),
                 :email => _("Then you'll be allowed to send FOI requests."),
                 :email_subject => _("Confirm your email address")
@@ -194,7 +194,7 @@ Rails.configuration.to_prepare do
             replied by then.</p>
             <p>If you write about this request (for example in a forum or a blog) please link to this page, and add an
             annotation below telling people about your writing.</p>",:law_used_full=>@info_request.law_used_full,
-            :late_number_of_days => Configuration::reply_late_after_days)
+            :late_number_of_days => AlaveteliConfiguration::reply_late_after_days)
         redirect_to show_new_request_url(:url_title => @info_request.url_title)
     end
   end
