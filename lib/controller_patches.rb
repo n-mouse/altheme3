@@ -276,13 +276,13 @@ Rails.configuration.to_prepare do
                 @description = _(" у категорії ‘{{category_name}}’", :category_name=>category_name)
             end
         end
-        PublicBody.with_locale(@locale) do
-            @public_bodies = PublicBody.paginate(
-              :order => "public_body_translations.name", :page => params[:page], :per_page => 100,
-              :conditions => conditions,
-              :joins => :translations
+         I18n.with_locale(@locale) do
+            @public_bodies = PublicBody.where(conditions).joins(:translations).order("public_body_translations.name").paginate(
+              :page => params[:page], :per_page => 100
             )
-            render :template => "public_body/list"
+            respond_to do |format|
+                format.html { render :template => "public_body/list" }
+            end
         end
       end
     end
