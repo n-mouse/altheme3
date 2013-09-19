@@ -10,7 +10,7 @@
         <% if @user %>
          <li class="signed"><%= link_to _("Вийти"), signout_path(:r => request.fullpath) %>
           <% else %>
-              <li class="signed"><%= link_to _("Авторизуватися"), signin_path(:r => request.fullpath) %>
+              <li class="signed"><%= link_to _("Авторизуватись"), signin_path(:r => request.fullpath) %>
           <% end %>     
     </ul>
     
