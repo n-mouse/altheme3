@@ -3,4 +3,4 @@
   розпорядників<br/>інформації: {{number_of_authorities}}</strong>",
   :number_of_requests => InfoRequest.visible.count, :number_of_authorities => PublicBody.visible.count) %>
 </h2>
-
+<p style="font-size:18px;"><%= link_to _('Повний перелік розпорядників (у форматі CSV)'), all_public_bodies_csv_path %></p>
