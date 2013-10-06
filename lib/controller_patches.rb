@@ -230,6 +230,7 @@ Rails.configuration.to_prepare do
           end
       end
     end
+
     PublicBodyController.class_eval do
       def list
         long_cache

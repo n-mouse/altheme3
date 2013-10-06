@@ -26,7 +26,7 @@ p.subtitle{font-family:'DeliciousRoman';color:#6B3C7F;}
 .request_listing span.desc{background:url(/images/quote-marks.png) no-repeat;color:#444;}
 .feed_link a,.act_link a,#header_right > a{color:#5C6F8A;}
 .feed_link,.act_link{margin-bottom:0;padding:0;}
-#request_form label,label.form_label{color:#2178BA;font-size:20px;}
+#request_form label,label.form_label{color:#2178BA;}
 span#to_public_body{color:#000000;}
 #request_form label,label.form_label{display:block;float:left;clear:none;width:160px;text-align:right;margin:2px 0 0;padding:0 10px 0 0;}
 span#to_public_body{font-family:'DeliciousBold', Arial, sans-serif;}
@@ -111,3 +111,12 @@ body#bluebodies{background:url(../images/home-grad.png) repeat-x 0 25px;}
 #request_list{margin-top:15px;}
 #request_list h1{font-size:1.7em;}
 #signin{font-size:16px;}
+#signup .form_item_note {
+margin-left:0em;
+}
+#right_half {
+width:50%;
+}
+#request_form label,label.form_label,span#to_public_body {
+font-size: 1em;
+}
