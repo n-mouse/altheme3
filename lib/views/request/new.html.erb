@@ -18,9 +18,7 @@
 </script>
 
 <% @title = _("Make an {{law_used_short}} request to '{{public_body_name}}'",:law_used_short=>h(@info_request.law_used_short),:public_body_name=>h(@info_request.public_body.name))  %>
-
 <body id = "bluebodies">
-
 <div style="margin-top:20px;">
 <ul class="steps-in">
     <li><%= image_tag "/alavetelitheme/images/questbutton.png", :class=>'pic' %>  
@@ -30,6 +28,7 @@
 
 </ul>
 </div>
+
 <div style="position:absolute; margin-top:140px;">
 
     <% if @existing_request %>
@@ -44,14 +43,18 @@
 
     <%= foi_error_messages_for :info_request, :outgoing_message %>
 
-    <%= form_for(:info_request, @info_request, :html => { :id => 'write_form' }  ) do |f| %>
+    <%= form_for(@info_request, :url => new_request_path, :html => { :id => 'write_form' }  ) do |f| %>
 
     <div id="request_header">
         <div id="request_header_body">
             <label class="form_label"><%= _('Розпорядник:') %></label>
             <span id="to_public_body"><%=h(@info_request.public_body.name)%></span>
             <div class="form_item_note">
-               <%= _("Browse <a href='{{url}}'>other requests</a> to '{{public_body_name}}' for examples of how to word your request.", :public_body_name=>h(@info_request.public_body.name), :url=>public_body_path(@info_request.public_body)) %> 
+                <% if @info_request.public_body.info_requests.size > 0 %>
+                    <%= _("Browse <a href='{{url}}'>other requests</a> to '{{public_body_name}}' for examples of how to word your request.", :public_body_name=>h(@info_request.public_body.name), :url=>public_body_path(@info_request.public_body)) %>
+                <% else %>
+                    <%= _("Browse <a href='{{url}}'>other requests</a> for examples of how to word your request.", :url=>request_list_url) %>
+                <% end %>
             </div>
 
             <% if @info_request.public_body.has_notes? %>
@@ -61,7 +64,6 @@
               </div>
             <% end %>
 
-        
         </div>
 
         <div id="request_header_subject">
@@ -79,20 +81,15 @@
         </div>
     </div>
 
-
-
     <div id="request_form">
-        <% fields_for :outgoing_message do |o| %>
+        <%= fields_for :outgoing_message do |o| %>
         <p>
             <label class="form_label" for="outgoing_message_body"><%= _('Your request:') %></label>
             <%= o.text_area :body, :rows => 15, :cols => 65 %>
-            <p style="margin-left:200px;">
-                       
         </p>
         <% end %>
 
-
- <% if !@user %>
+<% if !@user %>
             <p class="form_note">
                 <%= _("Зазначені вами ім'я та прізвище повідомляються розпоряднику інформації, до якого ви адресуєте свій запит, а також оприлюднюються на сайті. Так само автоматично оприлюднюється повний текст вашого запиту і повний текст відповіді на нього.<br/>
                 Адреса вашої електронної пошти не повідомляється розпоряднику інформації та не оприлюднюється на сайті (розпорядник отримує електронний лист з адреси сайту).<br/>
@@ -108,7 +105,7 @@
             </p>
         <% end %>
 
-         
+
         <div class="form_button">
             <%= f.hidden_field(:public_body_id, { :value => @info_request.public_body_id } ) %>
             <%= f.hidden_field(:user_id, { :value => @user.id } ) %>
@@ -119,15 +116,15 @@
 
         <% if !@info_request.tag_string.empty? %>
             <p class="form_note">
-                <!-- <label class="form_label" for="info_request_tag_string">Tags:</label>
+                <!-- <label class="form_label" for="info_request_tag_string"><%= _("Tags (separated by a space):") %></label>
                 <%= f.text_field :tag_string, :size => 50 %> -->
 
                 <%= f.hidden_field(:tag_string) %>
                 <strong>Tags:</strong> <%=h @info_request.tag_string %>
             </p>
         <% end %>
+
         </div>
 <% end %>
 </div>
-
 </body>

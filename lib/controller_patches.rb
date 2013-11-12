@@ -198,7 +198,7 @@ Rails.configuration.to_prepare do
         redirect_to show_new_request_url(:url_title => @info_request.url_title)
     end
   end
-    
+ 
     UserController.class_eval do
         def signup
           work_out_post_redirect
