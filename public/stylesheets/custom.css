@@ -13,7 +13,7 @@ border:none;
 margin:0;
 }
 #banner_inner a#logo{display:block;margin-left:290px;top:90px;z-index:100;}
-#banner_inner a#logogo{display:block;margin-right:900px;top:50px;z-index:100;}
+#banner_inner a#logogo{display:block;margin-right:890px;top:50px;z-index:100;}
 #topnav{font-family:'DeliciousRoman', Arial, sans-serif;position:relative;left:0;height:auto;overflow:auto;z-index:100;background-color:#000;background:transparent;top:120px;margin-left:0px;width:auto;font-size:16px;padding:0;}
 #dammit{margin-top:130px;}
 ul#rozdily {float:left;left:0;padding-left:0;width:auto;}
@@ -79,7 +79,7 @@ div.outgoing.correspondence{background:url(/images/stripes-70-light.png);}
 #frontpage_splash #frontpage_right_to_know{margin-top:50px;font-size:10px;}
 #frontpage_splash #frontpage_right_to_know p {line-height:11px}
 #frontpage_right_to_know {width:120px;float:right}
-#frontpage_examples div#examples_1{float:left;margin-right:10px;width:68%;}
+#frontpage_examples2 div#examples_1{float:left;margin-right:10px;width:68%;}
 #frontpage_splash #frontpage_search_box{margin-top:220px;}
 #frontpage_examples2 {margin-top:60px;}
 #ui-datepicker-div.ui-widget{font-family:Arial, sans-serif;color:#2178BA;}
@@ -175,4 +175,5 @@ position:absolute;
 .ohr{color:#F08143;font-size:16px;}
 #topnav2 li a{text-decoration:none;color:#666666}
 #topnav2 li.signed a{color:#ffffff;font-style:italic}
+
 
