@@ -1,6 +1,8 @@
-<h2>
-  <%= _("<span style='font-size:24px;font-style:normal;'>Зараз на сайті</span><br/><strong>запитів: {{number_of_requests}}<br/>
-  розпорядників<br/>інформації: {{number_of_authorities}}</strong>",
-  :number_of_requests => InfoRequest.visible.count, :number_of_authorities => PublicBody.visible.count) %>
-</h2>
-<p style="font-size:18px;"><%= link_to _('Повний перелік розпорядників (у форматі CSV)'), all_public_bodies_csv_path %></p>
+<p>
+  <span class="ohr"'>Зараз на сайті</span><br/><strong> <%= link_to "Запитів: "+InfoRequest.visible.count.to_s, request_list_all_path, :style=>"color:#666666;text-decoration:none;font-size:14px" %><br/>
+  <%= link_to "Розпорядників\nінформації: "+PublicBody.visible.count.to_s, list_public_bodies_default_path, :style=>"color:#666666;text-decoration:none;font-size:14px" %></strong>
+</p>
+<p class="ohr">Дізнайтеся більше</p>
+<iframe width="290" height="218" src="//www.youtube.com/embed/NyPyh9Qtawk" frameborder="0" allowfullscreen></iframe>
+
+

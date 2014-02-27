@@ -75,34 +75,46 @@
   <p class="popup-close"><a href="#top" onclick="$.cookie('seen_foi2', 1, { expires: 7, path: '/' }); $('#everypage').hide('slow'); return false;"><%= _('Close') %></a></p>
 </div>
 <% end %>
-
-<div class="entirebody">
-    <div id="banner">
-	    <% if not (controller.action_name == 'signin' or controller.action_name == 'signup') %>
-          <div id="logged_in_bar">
-          <% if @user %>
+	
+      <div id="banner_inner">
+         <% if not (controller.action_name == 'signin' or controller.action_name == 'signup') %>
+          <div id="logged_in_bar2">
+            <% if @user %>
               <%= _('Hello, {{username}}!', :username => h(@user.name))%>
 
-                <% if @user %>
-                    <%=link_to _("My requests"), show_user_requests_path(:url_name => @user.url_name) %>
-                    <%=link_to _("My profile"), show_user_profile_path(:url_name => @user.url_name) %>
-                    <%=link_to _("My wall"), show_user_wall_path(:url_name => @user.url_name) %>
-                <% end %>
-          <% end %>
+               
+                    <%=link_to _("Мої запити |"), show_user_requests_path(:url_name => @user.url_name) %>
+                    <%=link_to _("Мій профіль |"), show_user_profile_path(:url_name => @user.url_name) %>
+                    <%=link_to _("Моя стіна"), show_user_wall_path(:url_name => @user.url_name) %>
+            <%else%>
+                    <%= _('Вітаємо, Вадим Міський')%>               
+                    <%=link_to _("Мої запити |"), "google.com" %>
+                    <%=link_to _("Мій профіль |"), "google.com" %>
+                    <%=link_to _("Моя стіна"), "google.com" %>
+                
+            <% end %>
           </div>
         <% end %>
-		
-      <div id="banner_inner">
-
+        <div id="topnav2">
+        <ul style="float:right;">
+        <li class="<%= 'selected' if params[:controller] == 'help' %>" style="color:#FFFFFF"><%= link_to _("Як це працює |"), help_about_path, :style=>"color:#ffffff" %></li>
+        <li class="<%= 'selected' if params[:controller] == 'request' and !['new', 'select_authority'].include?(params[:action]) %>"><%= link_to _("Переглянути запити |"), request_list_all_url %></li>
+        <li class="<%= 'selected' if params[:controller] == 'public_body' %>"><%= link_to _("Зробити запит |"), list_public_bodies_default_path %></li>
+        <li class="<%= 'selected' if params[:controller] == 'help' and params[:action] == 'contact' %>"><%= link_to _("Зворотній зв’язок"), help_contact_url %></li>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<% if @user %>
+         <li class="signed"><%= link_to _("Вийти"), signout_path(:r => request.fullpath) %>
+          <% else %>
+              <li class="signed"><%= link_to _("Авторизуватись"), signin_path(:r => request.fullpath) %>
+          <% end %>     
+         </ul>
+    
+</div>
+        <%= render :partial => 'general/up' %>
         <%= render :partial => 'general/orglink' %>
-
-        <%= render :partial => 'general/topnav' %>
-        <div id="dammit">
-        <hr>
-        </div>
       </div>
-    </div>
-    <div id="wrapper">
+
+<div id="wrapper">
         <div id="content">
             <% if flash[:notice] %>
                 <div id="notice"><%= flash[:notice] %></div>
@@ -116,6 +128,7 @@
             </div>
             <div style="clear:both"></div>
         </div>
+<%= render :partial => 'general/before_body_end' %>
     </div>
 
     
@@ -140,6 +153,6 @@
 
       <% end %>
 
-      <%= render :partial => 'general/before_body_end' %>
+   
     </body>
 </html>

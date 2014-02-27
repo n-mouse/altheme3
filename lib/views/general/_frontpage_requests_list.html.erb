@@ -1,11 +1,11 @@
 <div id="examples_1">
-  <h3>
+  <p class="ohr">
     <% if @request_events_all_successful %>
       <%= _("What information has been released?") %>
     <% else %>
-      <%= _("What information has been requested?") %>
+      <%= _("Приклади надісланих запитів") %>
     <% end %>
-  </h3>
+  </p>
    
     <ul>
       <% for event in @request_events %>
@@ -26,9 +26,9 @@
     </ul>
     <p><strong>
       <% if @request_events_all_successful %>
-        <%=link_to _('More successful requests...'), request_list_successful_path %>
+        <%=link_to _('More successful requests...'), request_list_successful_path, :style=>"color:#299fcc;text-decoration:none" %>
       <% else %>
-        <%=link_to _('More requests...'), request_list_all_path %>
+        <%=link_to _('More requests...'), request_list_all_path, :style=>"color:#299fcc;text-decoration:none" %>
       <% end %>
     </strong></p>
   

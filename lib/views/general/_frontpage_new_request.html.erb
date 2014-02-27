@@ -1,24 +1,9 @@
-<h1>
-  <%= _("<strong>Реалізуйте своє право</strong><br/> 
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;на доступ до публічної інформації") %>
-</h1>
+<span class="ohr">
+  <%= _("Реалізуй своє право на доступ до публічної інформації") %>
+</span>
 
-<div id="stepwise">
-  <ul class="steps">
-    <li id="step"><%= image_tag "/alavetelitheme/images/folksicon.png", :class=>'pic', :id=>'folks' %>
-<br/><i><strong>ОБЕРІТЬ</strong><br/>розпорядника<br/>інформації</i><br/>
-<a href="<%= list_public_bodies_default_path %>"><%= image_tag "/alavetelitheme/images/button.png", :mouseover=>'/alavetelitheme/images/button_act.png', :id=>"but" %></a>
-    <li><%= image_tag "/alavetelitheme/images/red.png" %>
-    <li class="tip"><a href=""><%= image_tag "/alavetelitheme/images/questicon.png", :class=>'pic', :id=>'quest' %>
-<br/><i><strong>ОПИШІТЬ</strong><br/>інформацію<br/>чи документ<br/>який хочете <br/>отримати</i></a>
-    <li><%= image_tag "/alavetelitheme/images/blue.png" %>
-    <li class="tip"><a href=""><%= image_tag "/alavetelitheme/images/dotsicon.png", :class=>'pic', :id=>'dots' %>
-<br/><i><strong>ВІДПРАВТЕ</strong><br/>запит<br/>онлайн</i></a>
-    <li><%= image_tag "/alavetelitheme/images/blue.png" %>
-    <li class="tip"><a href=""><%= image_tag "/alavetelitheme/images/homeicon.png", :class=>'pic', :id=>'home' %>
-<br/><i><strong>ОТРИМАЙТЕ</strong><br/>відповідь<br/>на вашу<br/>електронну<br/>скриньку</i></a>
-    <li><%= image_tag "/alavetelitheme/images/blue.png" %>
+<div id="stepwise" style="padding-top:20px">
+  <%= link_to image_tag('/alavetelitheme/images/steps.png'), list_public_bodies_default_path, :id=>'mainsteps' %>
 
-  </ul>
 </div>
 
