@@ -19,19 +19,16 @@
 
 <% @title = _("Make an {{law_used_short}} request to '{{public_body_name}}'",:law_used_short=>h(@info_request.law_used_short),:public_body_name=>h(@info_request.public_body.name))  %>
 
-<div style="margin-top:20px;">
-<ul class="steps-in">
-    <li><%= image_tag "/alavetelitheme/images/questbutton.png", :class=>'pic' %>  
-    <li><p class = "small"><i><strong>ОПИШІТЬ</strong><br/>інформацію<br/>чи документ,<br/>який хочете<br/>отримати</i></p>
+<div id="frontpage_splash">
+<div id="left_column">
+<span class="ohr">
+  <%= _("Реалізуй своє право на доступ до публічної інформації") %>
+</span>
+<div id="stepwise" style="padding-top:20px">
+  <%= image_tag('/alavetelitheme/images/step2.png')%>
 
-    <li class="blu">Загальний опис інформації або вид, назва, реквізити чи зміст документа, щодо якого зроблено запит
-
-</ul>
 </div>
-
-<div style="margin-top:140px;">
-
-    <% if @existing_request %>
+ <% if @existing_request %>
       <div class="errorExplanation" id="errorExplanation"><ul>
       <li>
        <%= _('{{existing_request_user}} already
@@ -42,51 +39,38 @@
     <% end %>
 
     <%= foi_error_messages_for :info_request, :outgoing_message %>
-
+<div class="forma" >
     <%= form_for(@info_request, :url => new_request_path, :html => { :id => 'write_form' }  ) do |f| %>
-
-    <div id="request_header">
+      <div id="request_header">
         <div id="request_header_body">
             <label class="form_label"><%= _('Розпорядник:') %></label>
             <span id="to_public_body"><%=h(@info_request.public_body.name)%></span>
             <div class="form_item_note">
                 <% if @info_request.public_body.info_requests.size > 0 %>
                     <%= _("Browse <a href='{{url}}'>other requests</a> to '{{public_body_name}}' for examples of how to word your request.", :public_body_name=>h(@info_request.public_body.name), :url=>public_body_path(@info_request.public_body)) %>
-                <% else %>
+                    <% else %>
                     <%= _("Browse <a href='{{url}}'>other requests</a> for examples of how to word your request.", :url=>request_list_url) %>
                 <% end %>
             </div>
-
-            <% if @info_request.public_body.has_notes? %>
-              <div id="request_header_text">
-                <h3><%= _('Special note for this authority!') %></h3>
-                <p><%= @info_request.public_body.notes_as_html.html_safe %></p>
-              </div>
-            <% end %>
-
         </div>
-
         <div id="request_header_subject">
             <p>
                 <label class="form_label" for="typeahead_search"><%= _('Summary:') %></label>
                 <%= f.text_field :title, :size => 50, :id =>"typeahead_search" %>
             </p>
             <div class="form_item_note">
-                (<%= _("a one line summary of the information you are requesting, \n\t\t\te.g.") %>
-                  <%= render :partial => "summary_suggestion" %>)
+                тема запиту - одним рядком
             </div>
         </div>
 
-        <div id="typeahead_response">
-        </div>
     </div>
 
     <div id="request_form">
         <%= fields_for :outgoing_message do |o| %>
-        <p>
+        
             <label class="form_label" for="outgoing_message_body"><%= _('Your request:') %></label>
-            <%= o.text_area :body, :rows => 15, :cols => 65 %>
-        </p>
+            <%= o.text_area :body, :rows => 20, :cols => 60 %>
+        
         <% end %>
 
 <% if !@user %>
@@ -127,4 +111,12 @@
         </div>
 <% end %>
 </div>
+ </div>
+ <div id="right_column">
+      <div id="frontpage_right_to_know">
+        <%= render :partial => 'general/frontpage_intro_sentence'  %>
+      </div>
+   </div>   
 
+
+</div>

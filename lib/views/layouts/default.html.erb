@@ -86,13 +86,7 @@
                     <%=link_to _("Мої запити |"), show_user_requests_path(:url_name => @user.url_name) %>
                     <%=link_to _("Мій профіль |"), show_user_profile_path(:url_name => @user.url_name) %>
                     <%=link_to _("Моя стіна"), show_user_wall_path(:url_name => @user.url_name) %>
-            <%else%>
-                    <%= _('Вітаємо, Вадим Міський')%>               
-                    <%=link_to _("Мої запити |"), "google.com" %>
-                    <%=link_to _("Мій профіль |"), "google.com" %>
-                    <%=link_to _("Моя стіна"), "google.com" %>
-                
-            <% end %>
+                       <% end %>
           </div>
         <% end %>
         <div id="topnav2">

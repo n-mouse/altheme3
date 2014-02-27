@@ -41,16 +41,16 @@ p.subtitle{font-family:'DeliciousRoman';color:#6B3C7F;}
 .request_listing span.desc{background:url(/images/quote-marks.png) no-repeat;color:#444;}
 .feed_link a,.act_link a,#header_right > a{color:#5C6F8A;}
 .feed_link,.act_link{margin-bottom:0;padding:0;}
-#request_form label,label.form_label{color:#299fcc;}
+#request_form label,label.form_label{color:#666666;}
 span#to_public_body{color:#ffffff;}
-#request_form label,label.form_label{display:block;float:left;clear:none;width:160px;text-align:right;margin:2px 0 0;padding:0 10px 0 0;}
+#request_form label,label.form_label{margin:0;padding:0}
 span#to_public_body{font-family:'DeliciousBold', Arial, sans-serif;}
 #middle_strip{color:#299fcc;}
 #stepwise_make_request{background-color:#d0d0d0;background:url(/images/stripes.png);border:1px solid #DEBEDD;font-family:'DeliciousRoman', Arial, sans-serif;color:#5C6F8A;}
 div.comment_in_request{background:url(/images/stripes-70-light2.png);border-color:#5F5F5F;border-style:dotted;border-width:1px;}
 #request_form label,label.form_label{font-family:'DeliciousRoman', Arial, sans-serif;}
 #navigation_search input[type=text]{border-color:#BE7DBC;}
-form input[type=submit],a.link_button_green,a.link_button_green_large{background-color:#299fcc;font-family:'DeliciousRoman', Arial, sans-serif;background-image:none;border:none;text-shadow:none;border-radius:10px;-moz-border-radius:10px;font-size:16px;}
+form input[type=submit],a.link_button_green,a.link_button_green_large{background-color:#299fcc;font-family:'DeliciousRoman', Arial, sans-serif;background-image:none;border:none;text-shadow:none;font-size:16px;color:#000000}
 div.frontpage-box{background:url(/images/stripes.png);border:1px solid #DEBEDD;font-family:'DeliciousRoman', Arial, sans-serif;color:#5C6F8A;}
 div.correspondence,div.comment_in_request{background:url(/images/stripes-70.png);}
 div.outgoing.correspondence{background:url(/images/stripes-70-light.png);}
@@ -125,14 +125,12 @@ color:#299fcc;
 #contact_preamble{margin:40px 0 30px 240px;font-size:18px;}
 #contact_preamble ul li{list-style-image:url(../images/lil-blu.png);margin-top:10px;}
 #contact-form{margin-left:60px;min-height:600px;}
-.form_item_note,.form_note{margin-left:170px;}
 .form_button{margin:0 0 0 12em;}
 #left_column_flip{margin-top:30px;}
 #foi_results_section{margin-top:10px;}
 #filter_requests_form label.title,h3.title{display:inline-block;float:none;width:120px;margin-left:-130px;}
 .list-filter-item{margin-left:240px;}
-#request_header{background:none;margin-left:80px;}
-#request_form{margin-left:80px;}
+#request_header{background:none;}
 .steps-in li.blu{list-style-image:url(../images/lil-blu.png);width:540px;margin-top:40px;margin-left:60px;font-size:18px;font-style:italic;}
 #request_list{margin-top:15px;}
 #request_list h1{font-size:1.7em;}
@@ -202,3 +200,13 @@ bottom:0;
 }
 
 form input[type="text"]#public_body_query {width:500px}
+form input[type="text"]#typeahead_search {width:400px}
+
+.icon_waiting_response,.icon_waiting_classification,.icon_waiting_clarification {
+background-image:url(../images/status-pending.png);
+}
+
+#request_form label, label.form_label{text-align:right;padding-right:5px}
+#frontpage_splash #right_column {
+width:150px;
+}
