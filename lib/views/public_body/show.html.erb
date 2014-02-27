@@ -1,12 +1,12 @@
 
 <% @title = h(@public_body.name) + _(" - view and make Freedom of Information requests") %>
-<body id = "bluebodies">
+
 
 <div style="margin-top:20px;">
 <ul class="steps-in">
     <li><%= image_tag "/alavetelitheme/images/folksbutton.png", :class=>'pic' %>  
-    <li><p class = "small"><i><strong>ОБЕРІТЬ</strong><br/>розпоряд-<br/>ника<br/>інформації</i></p>
-    <li><%= image_tag "/alavetelitheme/images/red2.png" %>
+    <li style="padding-right:20px"><p class = "small"><i><strong>ОБЕРІТЬ</strong><br/>розпоряд-<br/>ника<br/>інформації</i></p>
+
     <li><h3 style="margin-top:20px;"><%=h(@public_body.name)%></h3>
           <% if @public_body.is_requestable? || @public_body.not_requestable_reason == 'bad_contact' %>
                 <%= link_to _("Зробити запит"), new_request_to_body_path(:url_name => @public_body.url_name), :class => "link_button_green" %>
@@ -93,4 +93,4 @@
     </div>
 </div>
 
-</body>
+
