@@ -1,14 +1,18 @@
 <% @title = "Preview new " + h(@info_request.law_used_short) + " request to '" + h(@info_request.public_body.name) + "'" %>
 
 <%= form_for(@info_request, :url => new_request_path, :html => { :id => 'preview_form' }  ) do |f| %>
-    
-    <h1><%= _('Перегляньте свій запит') %></h1>
-    <ul>
-    <li><%= _('Check you haven\'t included any <strong>personal information</strong>.') %></li>
-   
-     
-     
-    </ul>
+
+<div id="frontpage_splash">
+  <div id="left_column">
+     <span class="ohr">
+       <%= _("Реалізуй своє право на доступ до публічної інформації") %>
+     </span>
+     <div id="stepwise" style="padding-top:20px">
+        <%= image_tag('/alavetelitheme/images/step3.png')%>
+     </div>
+<div style="margin-top:40px">
+    <h3 class="ohr"><%= _('Перегляньте свій запит') %></h3>
+     <p><%= _('Check you haven\'t included any <strong>personal information</strong>.') %></p>
 
     <%= fields_for :outgoing_message do |o| %>
 
@@ -21,7 +25,7 @@
             <div class="correspondence_text">
                 <p><%= @outgoing_message.get_body_for_html_display %></p>
                 <%= o.hidden_field(:body) %>
-                <%= o.hidden_field(:address) %>
+                
               
             </div>
 
@@ -48,3 +52,13 @@
     <% end %>
 
 <% end %>
+</div>
+  </div>
+<div id="right_column">
+      <div id="frontpage_right_to_know">
+        <%= render :partial => 'general/frontpage_intro_sentence'  %>
+      </div>
+   </div> 
+    
+    
+</div>

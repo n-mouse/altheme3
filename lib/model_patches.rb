@@ -30,9 +30,9 @@ Rails.configuration.to_prepare do
                 raise "Message id #{self.id} has type '#{self.message_type}' which validate can't handle"
             end
         end
-        if !self.body.include?(self.info_request.user.name)
-            errors.add(:body, _("Будь ласка, підпишіться іменем, вказаним при реєстрації - #{self.info_request.user.name}"))
-        end
+       # if !self.body.include?(self.info_request.user.name)
+        #    errors.add(:body, _("Будь ласка, підпишіться іменем, вказаним при реєстрації - #{self.info_request.user.name}"))
+        #end
         if !MySociety::Validate.uses_mixed_capitals(self.body)
             errors.add(:body, _('Please write your message using a mixture of capital and lower case letters. This makes it easier for others to read.'))
         end

@@ -26,7 +26,7 @@ ul#rozdily {float:left;left:0;padding-left:0;width:auto;}
 #topnav li a,#topnav li a:visited{color:white;}
 #topnav li a:hover, a:hover{color:#white;}
 #topnav ul#navigation li a:hover{color:#white;}
-#topnav ul li.selected{background:url(../images/home-grad.png) repeat-x 0 10px;}
+#topnav2 ul li.selected a{color:#ffffff}
 #topnav ul li a{color:#white;}
 #logged_in_bar{color:#444;}
 #logged_in_bar a,#logged_in_bar a:visited{color:#92B3FF;}
@@ -36,7 +36,7 @@ h2{font-size:1.4em;}
 h2,dt{color:#299fcc;font-family:'DeliciousBold', Arial, sans-serif;font-weight:400;}
 h3{color:#299fcc;font-family:'DeliciousRoman', Arial, sans-serif;font-weight:400;}
 a{color:#6E829B;}
-p.subtitle{font-family:'DeliciousRoman';color:#6B3C7F;}
+p.subtitle{font-family:'DeliciousRoman';color:#666666;}
 .request_listing span.head a,.user_listing span.head a,.body_listing span.head a{color:#299fcc;font-family:'DeliciousRoman', Arial, sans-serif;font-weight:400;font-style:normal;}
 .request_listing span.desc{background:url(/images/quote-marks.png) no-repeat;color:#444;}
 .feed_link a,.act_link a,#header_right > a{color:#5C6F8A;}
@@ -52,8 +52,8 @@ div.comment_in_request{background:url(/images/stripes-70-light2.png);border-colo
 #navigation_search input[type=text]{border-color:#BE7DBC;}
 form input[type=submit],a.link_button_green,a.link_button_green_large{background-color:#299fcc;font-family:'DeliciousRoman', Arial, sans-serif;background-image:none;border:none;text-shadow:none;font-size:16px;color:#000000}
 div.frontpage-box{background:url(/images/stripes.png);border:1px solid #DEBEDD;font-family:'DeliciousRoman', Arial, sans-serif;color:#5C6F8A;}
-div.correspondence,div.comment_in_request{background:url(/images/stripes-70.png);}
-div.outgoing.correspondence{background:url(/images/stripes-70-light.png);}
+div.correspondence,div.comment_in_request{background:#ffffff;}
+div.outgoing.correspondence{background:#ffffff}
 #frontpage_splash{background:none;height:320px;}
 #frontpage_splash #left_column{line-height:20px;margin-top:66px;}
 #frontpage_splash h1{font-family:'DeliciousRoman', Arial, sans-serif;font-size:20px;color:#299fcc;font-weight:400;margin:0 0 20px;}
@@ -91,8 +91,6 @@ p.public-body-name-prefix{color:#DEB4D8;}
 #other-country-notice a{color:#FFF;}
 #link_box{position:absolute;text-align:left;background-color:#FFF;z-index:999;border-radius:6px;-moz-border-radius:6px;border:1px solid #299fcc;display:none;padding:5px;}
 #link_box .close-button{background-color:#299fcc;margin-left:15px;padding:0;}
-div.correspondence p.preview_subject{font-family:'DeliciousRoman';color:#6B3C7F;}
-div.correspondence p.preview_subject strong{color:#6B3C7F;}
 div.controller_help h1 a,#logged_in_bar a,#logged_in_bar a:visited,#stepwise_make_request strong{color:#299fcc;}
 
 #content{background:#000000;padding-bottom:80px}
@@ -209,4 +207,10 @@ background-image:url(../images/status-pending.png);
 #request_form label, label.form_label{text-align:right;padding-right:5px}
 #frontpage_splash #right_column {
 width:150px;
+}
+
+
+#notice,.describe_state_form,#other_recipients {
+background:#ffffff !important;
+color:#299fcc;
 }
