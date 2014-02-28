@@ -214,3 +214,11 @@ width:150px;
 background:#ffffff !important;
 color:#299fcc;
 }
+
+.icon_successful,.icon_partially_successful {
+background-image:url(../images/status-complete.png);
+}
+
+.icon_requires_admin,.icon_waiting_response_overdue,.icon_waiting_response_very_overdue {
+background-image:url(../images/status-overdue.png);
+}
