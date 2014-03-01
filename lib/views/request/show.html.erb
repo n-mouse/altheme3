@@ -22,8 +22,16 @@
     </div>
 <% end %>
 
+<div id="frontpage_splash">
 <div id="left_column">
-    <h1><%=h(@info_request.title)%></h1>
+<span class="ohr">
+  <%= _("Реалізуй своє право на доступ до публічної інформації") %>
+</span>
+<div id="stepwise" style="padding-top:20px">
+  <%= image_tag('/alavetelitheme/images/step4.png')%>
+
+</div>
+    <h2 style="color:#F08143"><%=h(@info_request.title)%></h2>
 
     <% if !@info_request.is_external? && @info_request.user.profile_photo %>
         <p class="user_photo_on_request">
@@ -134,13 +142,9 @@
         <% end %>
     <% end %>
 
-    <% if @info_request.awaiting_description && ! @info_request.is_external? %>
-        <div class="describe_state_form" id="describe_state_form_2">
-        <%= render :partial => 'describe_state', :locals => { :id_suffix => "2" } %>
-        </div>
-    <% end %>
 
     <%= render :partial => 'after_actions' %>
 </div>
 
 <%= render :partial => 'sidebar' %>
+</div>

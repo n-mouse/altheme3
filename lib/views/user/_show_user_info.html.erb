@@ -1,0 +1,27 @@
+
+         <% if @is_you %>
+        <div class="user_about_me">
+
+                       <% if @display_user.profile_photo %>
+                <%= link_to _('Change profile photo'), set_profile_photo_path, :class=>"abme" %> <br />
+            <% end %>
+ 
+          <%= link_to _('Change your password'), signchangepassword_path, :class=>"abme" %> <br />
+          <%= link_to _('Change your email'), signchangeemail_path, :class=>"abme" %> <br />
+                   
+                <%= link_to _("Редагувати інформацію про себе"), set_profile_about_me_path, :class=>"abme" %> <br />
+        
+        </div>
+    <% end %>
+
+    <div class="aboutuser" >
+       <%= _('Joined {{site_name}} in', :site_name=>'сайту "Доступ до правди"') %> <%= year_from_date(@display_user.created_at) %>
+        <% if !@user.nil? && @user.admin_page_links? %>
+        (<%= link_to "admin", admin_user_show_path(@display_user) %>)
+        <% end %>
+               <% if !@display_user.get_about_me_for_html_display.empty? || @is_you %>
+    <p style="font-style:italic"><%= @display_user.get_about_me_for_html_display %></p>
+        <% end %>
+    </p>
+    </div>
+

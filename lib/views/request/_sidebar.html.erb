@@ -1,6 +1,11 @@
 <div id="right_column">
+ <div id="right_column">
+      <div id="frontpage_right_to_know">
+        <%= render :partial => 'general/frontpage_intro_sentence'  %>
+      </div>
+   </div>  
   <div id="follow_box">
-    <h2><%= _('Follow this request') %></h2>
+    <h4><%= _('Follow this request') %></h4>
 
     <% follower_count = TrackThing.count(:all, :conditions => ["info_request_id = ?", @info_request.id]) + 1 %>
     <p><%= n_("There is {{count}} person following this request",
@@ -10,7 +15,7 @@
      <%= render :partial => 'track/tracking_links', :locals => { :track_thing => @track_thing, :own_request => @info_request.user && @info_request.user == @user, :location => 'sidebar' } %>
    </div>
     <% if @info_request.described_state != "attention_requested" %>
-    <h2><%= _('Offensive? Unsuitable?') %></h2>
+    <h4><%= _('Offensive? Unsuitable?') %></h4>
       <% if @info_request.attention_requested %>
         <% if @info_request.prominence == 'hidden' %>
           <%# The eccentric formatting of the following string is in order that it be identical
@@ -31,14 +36,13 @@
        <%= link_to _("Report this request"), new_request_report_path(:request_id => @info_request.url_title) %>
       <% end %>
     <% end %>
-    <h2><%= _("Act on what you've learnt") %></h2>
 
-    <div class="act_link">
+    <div class="act_link" style="margin-top:10px">
         <%
           # Cast "related" to normal string because html safe string (from rails_xss gem) and CGI::escape
           # interact badly with ':' character. Go figure! Might go away in rails 3
         %>
-        <% link_to "https://twitter.com/share?" + {:url => request.url, :via => AlaveteliConfiguration::twitter_username, :text => @info_request.title, :related => _('alaveteli_foi:The software that runs {{site_name}}', :site_name => site_name).to_str}.to_query do %>
+        <%= link_to "https://twitter.com/share?" + {:url => request.url, :via => AlaveteliConfiguration::twitter_username, :text => @info_request.title, :related => _('alaveteli_foi:The software that runs {{site_name}}', :site_name => "Доступ до правди").to_str}.to_query do %>
           <%= image_tag "twitter-16.png", :alt => "twitter icon" %>
           <%= _("Tweet this request") %>
         <% end %>
@@ -48,7 +52,7 @@
 
     <% # TODO: Cache for 1 day %>
       <% if !@xapian_similar.nil? && @xapian_similar.results.size > 0 %>
-        <h2><%= _('Similar requests')%></h2>
+        <h4><%= _('Similar requests')%></h4>
         <% for result in @xapian_similar.results %>
             <%= render :partial => 'request/request_listing_short_via_event', :locals => { :event => result[:model], :info_request => result[:model].info_request } %>
         <% end %>
