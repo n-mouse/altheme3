@@ -16,12 +16,6 @@
 <% end %>
 
 
-<% if ( @update_status || @info_request.awaiting_description ) && ! @info_request.is_external? %>
-    <div class="describe_state_form" id="describe_state_form_1">
-    <%= render :partial => 'describe_state', :locals => { :id_suffix => "1" } %>
-    </div>
-<% end %>
-
 <div id="frontpage_splash">
 <div id="left_column">
 <span class="ohr">
@@ -33,11 +27,7 @@
 </div>
     <h2 style="color:#F08143"><%=h(@info_request.title)%></h2>
 
-    <% if !@info_request.is_external? && @info_request.user.profile_photo %>
-        <p class="user_photo_on_request">
-            <img src="<%= get_profile_photo_url(:url_name => @info_request.user.url_name) %>" alt="">
-        </p>
-    <% end %>
+
 
     <p class="subtitle">
         <% if !@user.nil? && @user.admin_page_links? %>
@@ -53,6 +43,12 @@
             <%= _('to {{public_body}}',:public_body=>public_body_link(@info_request.public_body)) %>
         <% end %>
     </p>
+<% if ( @update_status || @info_request.awaiting_description ) && ! @info_request.is_external? %>
+    <div class="describe_state_form" id="describe_state_form_1">
+    <%= render :partial => 'describe_state', :locals => { :id_suffix => "1" } %>
+    </div>
+<% end %>
+
 
     <p id="request_status" class="request_icon_line icon_<%= @info_request.calculate_status %>">
     <% if @info_request.awaiting_description %>

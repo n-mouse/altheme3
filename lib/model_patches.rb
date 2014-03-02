@@ -36,9 +36,9 @@ Rails.configuration.to_prepare do
         if !MySociety::Validate.uses_mixed_capitals(self.body)
             errors.add(:body, _('Please write your message using a mixture of capital and lower case letters. This makes it easier for others to read.'))
         end
-        if self.what_doing.nil? || !['new_information', 'internal_review', 'normal_sort'].include?(self.what_doing)
-            errors.add(:what_doing_dummy, _('Please choose what sort of reply you are making.'))
-        end
+        #if self.what_doing.nil? || !['new_information', 'internal_review', 'normal_sort'].include?(self.what_doing)
+         #   errors.add(:what_doing_dummy, _('Please choose what sort of reply you are making.'))
+        #end
       end
     end    
     

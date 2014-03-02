@@ -1,6 +1,6 @@
 <% if @is_owning_user %>
 
-    <%= form_for(:incoming_message, @info_request, :url => describe_state_url(:id => @info_request.id)) do |f| %>
+    <%= form_for(@info_request, :as => :incoming_message, :url => describe_state_url(:id => @info_request.id), :html => {:id => "describe_form_#{id_suffix}"}) do |f| %>
         <h2><%= _('What best describes the status of this request now?') %></h2>
 
         <hr>
@@ -12,12 +12,6 @@
                 <small>(maybe you got an acknowledgement)</small>') %></label>
             </div>
         <% end %>
-        <% if @info_request.described_state == 'internal_review' %>
-            <div>
-                <%= radio_button "incoming_message", "described_state", "internal_review", :id => 'internal_review' + id_suffix %>
-                <label for="internal_review<%=id_suffix%>"><%= _('I\'m still <strong>waiting</strong> for the internal review') %></label>
-            </div>
-        <% end %>
 
         <% if @info_request.described_state != 'internal_review' %>
             <div>
@@ -26,13 +20,7 @@
             </div>
         <% end %>
 
-        <% if @update_status && @info_request.described_state != 'internal_review' %>
-            <div>
-                <%= radio_button "incoming_message", "described_state", "internal_review", :id => 'internal_review' + id_suffix %>
-                <label for="internal_review<%=id_suffix%>"><%= _('I\'m waiting for an <strong>internal review</strong> response') %></label>
-            </div>
-        <% end %>
-        
+       
         <div>
             <%= radio_button "incoming_message", "described_state", "gone_postal", :id => 'gone_postal' + id_suffix %>
             <label for="gone_postal<%=id_suffix%>"><%= _('They are going to reply <strong>by post</strong>') %></label>
@@ -43,9 +31,6 @@
         <hr>
 	<h3><%= _('This particular request is finished:') %></h3>
 
-        <% if @info_request.described_state == 'internal_review' %>
-            <p><%= _('The <strong>review has finished</strong> and overall:') %></p>
-        <% end %>
 
         <div>
             <%= radio_button "incoming_message", "described_state", "not_held", :id => 'not_held' + id_suffix %>
@@ -97,11 +82,11 @@
 
         <p>
         <%= hidden_field_tag 'last_info_request_event_id', @last_info_request_event_id, :id => 'last_info_request_event_id' + id_suffix %>
-        <%= submit_tag _("Submit status") %> (<%= _('and we\'ll suggest <strong>what to do next</strong>') %>)
+        <%= submit_tag _("Оновити статус") %>
         </p>
     <% end %>
 <% elsif @old_unclassified %>
-    <%= render :partial => 'other_describe_state', :locals => {:id_suffix => id_suffix } %>
+    <%= render :partial => 'request/other_describe_state', :locals => {:id_suffix => id_suffix } %>
 <% else %>
   <% if !@info_request.is_external? %>
     <%=  _('We don\'t know whether the most recent response to this request contains
