@@ -18,7 +18,8 @@ margin:0;
 #dammit{margin-top:130px;}
 ul#rozdily {float:left;left:0;padding-left:0;width:auto;}
 #rozdily li {float:left;padding-right:5px;font-size:10px;display:inline;color:#666666}
-#rozdily li a{text-decoration:none}
+#rozdily li a{text-decoration:none;color:#666666}
+#rozdily li a:hover{color:#299fcc}
 #topnav ul li.signed{font-style:italic;text-decoration:underline;float:right;right:0;color:#6D839B;}
 #topnav ul li{padding:10px 5px;}
 #topnav ul li.signed a{color:#6D839B;}
@@ -26,7 +27,8 @@ ul#rozdily {float:left;left:0;padding-left:0;width:auto;}
 #topnav li a,#topnav li a:visited{color:white;}
 #topnav li a:hover, a:hover{color:#white;}
 #topnav ul#navigation li a:hover{color:#white;}
-#topnav2 ul li.selected a{color:#ffffff}
+#topnav2 ul li, #topnav2 ul li a{color:#ffffff;font-size:14px}
+#topnav2 ul li a:hover{color:#666666;font-size:14px}
 #topnav ul li a{color:#white;}
 #logged_in_bar{color:#444;}
 #logged_in_bar a,#logged_in_bar a:visited{color:#92B3FF;}
@@ -56,7 +58,7 @@ div.frontpage-box{background:url(/images/stripes.png);border:1px solid #DEBEDD;f
 div.correspondence,div.comment_in_request{background:#ffffff;}
 div.outgoing.correspondence{background:#ffffff;}
 #frontpage_splash{background:none;height:320px;}
-#frontpage_splash #left_column{line-height:20px;margin-top:66px;}
+#frontpage_splash #left_column{line-height:20px;margin-top:40px;}
 #frontpage_splash h1{font-family:'DeliciousRoman', Arial, sans-serif;font-size:20px;color:#299fcc;font-weight:400;margin:0 0 20px;}
 #frontpage_splash h1 strong{font-family:'DeliciousHeavyRegular', Arial, sans-serif;font-size:34px;color:#299fcc;font-weight:400;}
 #frontpage_splash h1 span{font-family:Georgia;font-style:italic;font-weight:400;font-size:25px;color:#5C6F8A;}
@@ -77,7 +79,7 @@ div.outgoing.correspondence{background:#ffffff;}
 .steps li img#but{margin-top:5px;cursor:pointer;}
 .steps li a{text-decoration:none;color:#666666;}
 .steps li a:hover{text-decoration:none;color:#666666;cursor:auto;}
-#frontpage_splash #frontpage_right_to_know{margin-top:25px;font-size:10px;}
+#frontpage_splash #frontpage_right_to_know{margin-top:40px;font-size:10px;}
 #frontpage_splash #frontpage_right_to_know p {line-height:11px}
 #frontpage_right_to_know {width:120px;float:right}
 #frontpage_examples2 div#examples_1{width:80%;}
@@ -138,7 +140,7 @@ color:#299fcc;
 margin-left:0em;
 }
 #right_half {
-width:50%;
+width:50%;десь
 }
 #request_form label,label.form_label,span#to_public_body {
 font-size: 1em;
@@ -186,7 +188,7 @@ position:absolute;
 
 h3.smaller{font-size:1em}
 
-.infoot {width:980px;margin:auto;padding-top:10px;}
+.infoot {width:900px;margin:auto;padding-top:10px;}
 .push {
 height: 120px;
 }
@@ -207,7 +209,7 @@ background-image:url(../images/status-pending.png);
 
 #request_form label, label.form_label{text-align:right;padding-right:5px}
 #frontpage_splash #right_column {
-width:150px;
+width:220px;
 }
 
 
@@ -243,4 +245,7 @@ color:#555;
 padding:5px;
 }
 
+.feed_link a.link_button_green {
+ color:black;
+}
 
