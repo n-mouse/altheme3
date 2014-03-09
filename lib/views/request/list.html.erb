@@ -1,10 +1,17 @@
+<div id="frontpage_splash">
+<div id="left_column">
+<span class="ohr">
+  <%= _("Реалізуй своє право на доступ до публічної інформації") %>
+</span>
 
-<div id="header_left">
-  <h1><%=@title%></h1>
+<div id="stepwise" style="padding-top:20px">
+  <%= image_tag('/alavetelitheme/images/step4.png')%>
+
+</div>
+<div style="margin-top:40px">
+  <h3 class="ohr"><%=@title%></h3>
   <%= render :partial => 'request/request_filter_form' %>
 </div>
-
-<div style="clear:both"></div>
 
 <div class="results_section">
   <% # TODO: Cache for 5 minutes %>
@@ -24,4 +31,11 @@
     <% end %>
 
   <%= will_paginate WillPaginate::Collection.new(@page, @per_page, @show_no_more_than) %>
+</div>
+</div>
+ <div id="right_column">
+      <div id="frontpage_right_to_know">
+        <%= render :partial => 'general/frontpage_intro_sentence'  %>
+      </div>
+      
 </div>

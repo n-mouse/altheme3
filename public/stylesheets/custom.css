@@ -79,7 +79,7 @@ div.outgoing.correspondence{background:#ffffff;}
 .steps li img#but{margin-top:5px;cursor:pointer;}
 .steps li a{text-decoration:none;color:#666666;}
 .steps li a:hover{text-decoration:none;color:#666666;cursor:auto;}
-#frontpage_splash #frontpage_right_to_know{margin-top:40px;font-size:10px;}
+#frontpage_splash #frontpage_right_to_know{margin-top:30px;font-size:10px;}
 #frontpage_splash #frontpage_right_to_know p {line-height:11px}
 #frontpage_right_to_know {width:120px;float:right}
 #frontpage_examples2 div#examples_1{width:80%;}
@@ -130,7 +130,7 @@ color:#299fcc;
 #left_column_flip{margin-top:30px;}
 #foi_results_section{margin-top:10px;}
 #filter_requests_form label.title,h3.title{display:inline-block;float:none;width:120px;margin-left:-130px;}
-.list-filter-item{margin-left:240px;}
+.list-filter-item{margin-left:100px;}
 #request_header{background:none;}
 .steps-in li.blu{list-style-image:url(../images/lil-blu.png);width:540px;margin-top:40px;margin-left:60px;font-size:18px;font-style:italic;}
 #request_list{margin-top:15px;}
@@ -249,3 +249,6 @@ padding:5px;
  color:black;
 }
 
+form input[type=text] {width:295px}
+
+#examples_1 ul li a {color:white}

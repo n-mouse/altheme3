@@ -54,7 +54,7 @@
     <% if @info_request.awaiting_description %>
         <% if @is_owning_user && !@info_request.is_external? %>
             <%= _('Please <strong>answer the question above</strong> so we know whether the ')%>
-            <%= MySociety::Format.fancy_pluralize(@new_responses_count, 'recent response contains', 'recent responses contain') %> <%= _('useful information.') %>
+            
         <% else %>
             <%= _('This request has an <strong>unknown status</strong>.') %>
             <% if @old_unclassified %>
