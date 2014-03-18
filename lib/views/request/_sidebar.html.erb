@@ -41,11 +41,16 @@
         <%
           # Cast "related" to normal string because html safe string (from rails_xss gem) and CGI::escape
           # interact badly with ':' character. Go figure! Might go away in rails 3
-        %>
+        %><p>
         <%= link_to "https://twitter.com/share?" + {:url => request.url, :via => AlaveteliConfiguration::twitter_username, :text => @info_request.title, :related => _('alaveteli_foi:The software that runs {{site_name}}', :site_name => "Доступ до правди").to_str}.to_query do %>
           <%= image_tag "twitter-16.png", :alt => "twitter icon" %>
           <%= _("Tweet this request") %>
+        <% end %></p><p>
+         <%= link_to "http://www.facebook.com/sharer/sharer.php?" + {:u => request.url}.to_query do %>
+          <%= image_tag "/alavetelitheme/images/fb-16.png", :alt => "facebook icon" %>
+          <%= _("Поширте через Facebook") %>
         <% end %>
+        </p>
     </div>
 
     <%= render :partial => 'request/next_actions' %>

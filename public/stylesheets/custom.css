@@ -82,7 +82,7 @@ div.outgoing.correspondence{background:#ffffff;}
 #frontpage_splash #frontpage_right_to_know{margin-top:30px;font-size:10px;}
 #frontpage_splash #frontpage_right_to_know p {line-height:11px}
 #frontpage_right_to_know {width:120px;float:right}
-#frontpage_examples2 div#examples_1{width:80%;}
+#frontpage_examples2 div#examples_1{width:90%;}
 #frontpage_splash #frontpage_search_box{margin-top:220px;}
 #frontpage_examples2 {margin-top:60px;}
 #ui-datepicker-div.ui-widget{font-family:Arial, sans-serif;color:#299fcc;}
@@ -209,7 +209,7 @@ background-image:url(../images/status-pending.png);
 
 #request_form label, label.form_label{text-align:right;padding-right:5px}
 #frontpage_splash #right_column {
-width:220px;
+width:290px;
 }
 
 
@@ -250,5 +250,8 @@ padding:5px;
 }
 
 form input[type=text] {width:295px}
+div#signin form input[type=text], form input[type=password] {width:200px}
 
-#examples_1 ul li a {color:white}
+#examples_1 p a {color:white}
+
+#left_column {width:580px}

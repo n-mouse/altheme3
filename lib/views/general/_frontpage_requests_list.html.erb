@@ -7,9 +7,9 @@
     <% end %>
   </p>
    
-    <ul>
+
       <% for event in @request_events %>
-        <li>
+        <p>
           <% if @request_events_all_successful %>
             <%= _("{{public_body_link}} answered a request about",
                 :public_body_link => public_body_link(event.info_request.public_body)) %>
@@ -21,9 +21,9 @@
            <%=link_to h(event.info_request.title), request_path(event.info_request)%>
            <%= _('{{length_of_time}} ago', :length_of_time => time_ago_in_words(event.described_at)) %>
            
-        </li>
+        </p>
       <% end %>
-    </ul>
+
     <p><strong>
       <% if @request_events_all_successful %>
         <%=link_to _('More successful requests...'), request_list_successful_path, :style=>"color:#299fcc;text-decoration:none" %>

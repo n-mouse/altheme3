@@ -20,11 +20,6 @@
             </div>
         <% end %>
 
-       
-        <div>
-            <%= radio_button "incoming_message", "described_state", "gone_postal", :id => 'gone_postal' + id_suffix %>
-            <label for="gone_postal<%=id_suffix%>"><%= _('They are going to reply <strong>by post</strong>') %></label>
-        </div>
 
         <%= render :partial => 'general/custom_state_transitions_pending', :locals => {:id_suffix => id_suffix } %>
 
@@ -67,13 +62,6 @@
              <%= radio_button "incoming_message", "described_state", "requires_admin", :id => 'requires_admin' + id_suffix %>
               <label for="error_message<%=id_suffix%>">
               <%= _('This request <strong>requires administrator attention</strong>') %> 
-              </label>
-          </div>
-        
-          <div>
-             <%= radio_button "incoming_message", "described_state", "user_withdrawn", :id => 'user_withdrawn' + id_suffix %>
-              <label for="user_withdrawn<%=id_suffix%>">
-              <%= _('I would like to <strong>withdraw this request</strong>') %> 
               </label>
           </div>
         <% end %>
