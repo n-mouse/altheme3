@@ -82,8 +82,8 @@ div.outgoing.correspondence{background:#ffffff;}
 #frontpage_splash #frontpage_right_to_know{margin-top:50px;font-size:10px;}
 #frontpage_splash #frontpage_right_to_know p {line-height:11px}
 #frontpage_right_to_know {width:120px;float:right}
-#frontpage_examples2 div#examples_1{width:96%;}
-#frontpage_splash #frontpage_search_box{margin-top:220px;}
+#frontpage_examples2 div#examples_1{width:90%;}
+#frontpage_splash #frontpage_search_box{margin-top:180px;}
 #frontpage_examples2 {margin-top:60px;}
 #ui-datepicker-div.ui-widget{font-family:Arial, sans-serif;color:#299fcc;}
 #ui-datepicker-div .ui-datepicker-header,#ui-datepicker-div .ui-widget-header{color:#299fcc;font-family:'DeliciousRoman';}
@@ -117,7 +117,7 @@ color:#299fcc;
 .request_listing span.bottomline{font-size:1.4em;}
 
 #user_profile_search{margin-top:30px;}
-.controller_user{min-height:320px;}
+
 #left_column_flip h2{color:#666666;font-size:18px;}
 #left_column_flip_search{margin:25px 0 50px 0;}
 #left_column_flip_search form input[type=text]{width:500px;font-size:1em;}
@@ -196,7 +196,6 @@ height: 120px;
 clear:both;
 height:40px;
 background:#000000;
-position:absolute;
 bottom:0;
 }
 
