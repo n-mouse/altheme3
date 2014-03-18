@@ -79,10 +79,10 @@ div.outgoing.correspondence{background:#ffffff;}
 .steps li img#but{margin-top:5px;cursor:pointer;}
 .steps li a{text-decoration:none;color:#666666;}
 .steps li a:hover{text-decoration:none;color:#666666;cursor:auto;}
-#frontpage_splash #frontpage_right_to_know{margin-top:30px;font-size:10px;}
+#frontpage_splash #frontpage_right_to_know{margin-top:50px;font-size:10px;}
 #frontpage_splash #frontpage_right_to_know p {line-height:11px}
 #frontpage_right_to_know {width:120px;float:right}
-#frontpage_examples2 div#examples_1{width:90%;}
+#frontpage_examples2 div#examples_1{width:96%;}
 #frontpage_splash #frontpage_search_box{margin-top:220px;}
 #frontpage_examples2 {margin-top:60px;}
 #ui-datepicker-div.ui-widget{font-family:Arial, sans-serif;color:#299fcc;}

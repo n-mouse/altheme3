@@ -1,8 +1,4 @@
-<p>9 травня 2011 року набув 
-чинності Закон України
-"Про доступ до публічної
-інформації", що визначає
-механізми реалізації одного з 
-основоположних прав людини —
-права знати <br />
-<a style="color:#F08143;text-decoration:none" href="<%= help_about_path %>">Дізнайся більше....</a></p>
+<p>
+  <span class="ohr"'>Зараз на сайті</span><br/><strong>Запитів:   <%= link_to InfoRequest.visible.count.to_s, request_list_all_path, :style=>"color:#ffffff;text-decoration:none;font-size:14px" %><br/>
+  Розпорядників<br/>інформації: <%= link_to PublicBody.visible.count.to_s, list_public_bodies_default_path, :style=>"color:#ffffff;text-decoration:none;font-size:14px" %></strong>
+</p>
