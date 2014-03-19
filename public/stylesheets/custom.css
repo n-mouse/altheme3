@@ -254,3 +254,5 @@ div#signin form input[type=text], form input[type=password] {width:200px}
 #examples_1 p a {color:white}
 
 #left_column {width:580px}
+
+div.correspondence,div.comment_in_request {width:500px;}

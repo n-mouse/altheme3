@@ -11,8 +11,8 @@
 
 <%= foi_error_messages_for :comment %>
 
-<h1><%= _('Add an annotation')%></h1>
-<h2>до запиту &ldquo;<%=request_link(@info_request)%>&rdquo;</h2>
+<h3 class="ohr"><%= _('Add an annotation')%></h3>
+<p>до запиту "<%=request_link(@info_request)%>"</p>
 
 <p>
 <%= _('Annotations are so anyone, including you, can help the requester with their request. For example:')%>
@@ -67,10 +67,10 @@
 </ul>
 
 <p>
-    <span class="big"><%= _('Annotations will be posted publicly here, and are
+    <span><%= _('Annotations will be posted publicly here, and are
         <strong>not</strong> sent to {{public_body_name}}.',:public_body_name=>h(@info_request.public_body.name)) %></span>
     <% if @info_request.is_external? %>
-    <span class="big"><%= _('Note that the requester will not be notified about your annotation, because the request was published by {{public_body_name}} on their behalf.', :public_body_name => @info_request.public_body.name) %></span>
+    <span><%= _('Note that the requester will not be notified about your annotation, because the request was published by {{public_body_name}} on their behalf.', :public_body_name => @info_request.public_body.name) %></span>
     <% end %>
 </p>
 
