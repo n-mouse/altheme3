@@ -13,11 +13,11 @@
         <h1><%= _('Request an internal review from {{person_or_body}}', :person_or_body => name_for_followup) %>
         </h1>
     <% elsif incoming_message.nil? || !incoming_message.valid_to_reply_to? %>
-        <h2><%= _('Send a public follow up message to {{person_or_body}}', :person_or_body => name_for_followup) %>
-        </h2>
+        <h3 class="ohr"><%= _('Send a public follow up message to {{person_or_body}}', :person_or_body => name_for_followup) %>
+        </h3>
     <% else %>
-        <h2><%= _('Send a public reply to {{person_or_body}}', :person_or_body => name_for_followup) %>
-        </h2>
+        <h3 class="ohr"><%= _('Send a public reply to {{person_or_body}}', :person_or_body => name_for_followup) %>
+        </h3>
     <% end %>
     <% if @info_request.allow_new_responses_from == 'nobody' %>
         <p><%= _('Follow ups and new responses to this request have been stopped to prevent spam. Please <a href="{{url}}">contact us</a> if you are {{user_link}} and need to send a follow up.',:user_link=>user_link(@info_request.user), :url=>help_contact_path) %></p>
