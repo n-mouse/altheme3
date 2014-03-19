@@ -256,3 +256,5 @@ div#signin form input[type=text], form input[type=password] {width:200px}
 #left_column {width:580px}
 
 div.correspondence,div.comment_in_request {width:500px;}
+
+.describe_state_form,.undescribed_requests,.gone_postal_help {width:37em;}
