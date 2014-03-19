@@ -53,7 +53,7 @@
     <p id="request_status" class="request_icon_line icon_<%= @info_request.calculate_status %>">
     <% if @info_request.awaiting_description %>
         <% if @is_owning_user && !@info_request.is_external? %>
-            <%= _('Please <strong>answer the question above</strong> so we know whether the ')%>
+            <%= _('Будь ласка, дайте відповідь на питання вгорі, щоб визначити статус цього запиту')%>
             
         <% else %>
             <%= _('This request has an <strong>unknown status</strong>.') %>
