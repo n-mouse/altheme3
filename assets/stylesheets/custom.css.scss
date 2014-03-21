@@ -1,0 +1,268 @@
+body{background:#000000;color:#666666;font-family:Arial, sans-serif;font-size:14px}
+.entirebody{background:#000000;color:#444;font-family:Arial, sans-serif;}
+li{list-style-type:none;}
+#banner{background-repeat:no-repeat;background-position:center top;background-color:#000000;}
+#shmanner{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+border:none;
+height:260px;
+border:none;
+margin:0;
+}
+#banner_inner a#logo{display:block;margin-left:290px;top:90px;z-index:100;}
+#banner_inner a#logogo{display:block;margin-right:888px;top:50px;z-index:100;}
+#topnav{font-family:'DeliciousRoman', Arial, sans-serif;position:relative;left:0;height:auto;overflow:auto;z-index:100;background-color:#000;background:transparent;top:120px;margin-left:0px;width:auto;font-size:16px;padding:0;}
+#dammit{margin-top:130px;}
+ul#rozdily {float:left;left:0;padding-left:0;width:auto;}
+#rozdily li {float:left;padding-right:5px;font-size:10px;display:inline;color:#666666}
+#rozdily li a{text-decoration:none;color:#666666}
+#rozdily li a:hover{color:#299fcc}
+#topnav ul li.signed{font-style:italic;text-decoration:underline;float:right;right:0;color:#6D839B;}
+#topnav ul li{padding:10px 5px;}
+#topnav ul li.signed a{color:#6D839B;}
+#topnav ul li.signed a:hover{color:#6D839B;font-weight:bold;}
+#topnav li a,#topnav li a:visited{color:white;}
+#topnav li a:hover, a:hover{color:#white;}
+#topnav ul#navigation li a:hover{color:#white;}
+#topnav2 ul li a{color:#ffffff;font-size:14px;text-decoration:none}
+#topnav2 ul li {color:#666666}
+#topnav2 ul li a:hover{color:#666666;font-size:14px}
+#topnav ul li a{color:#white;}
+#logged_in_bar{color:#444;}
+#logged_in_bar a,#logged_in_bar a:visited{color:#92B3FF;}
+h1,h2,h3{font-family:Trebuchet, Trebuchet MS, Helvetica, sans-serif;color:#555;}
+h4{font-size:18px;color:#299FCC}
+h1{color:#299fcc;font-size:42px;font-family:'DeliciousBold', Arial, sans-serif;}
+h2{font-size:1.4em;}
+h2,dt{color:#299fcc;font-family:'DeliciousBold', Arial, sans-serif;font-weight:400;}
+h3{color:#299fcc;font-family:'DeliciousRoman', Arial, sans-serif;font-weight:400;}
+a{color:#6E829B;}
+p.subtitle{font-family:'DeliciousRoman';color:#666666;}
+.request_listing span.head a,.user_listing span.head a,.body_listing span.head a{color:#299fcc;font-family:'DeliciousRoman', Arial, sans-serif;font-weight:400;font-style:normal;}
+.feed_link a,.act_link a,#header_right > a{color:#5C6F8A;}
+.feed_link,.act_link{margin-bottom:0;padding:0;}
+#request_form label,label.form_label{color:#666666;}
+span#to_public_body{color:#ffffff;}
+#request_form label,label.form_label{margin:0;padding:0}
+span#to_public_body{font-family:'DeliciousBold', Arial, sans-serif;}
+#middle_strip{color:#299fcc;}
+#stepwise_make_request{background-color:#d0d0d0;background:image-url('stripes.png');border:1px solid #DEBEDD;font-family:'DeliciousRoman', Arial, sans-serif;color:#5C6F8A;}
+#request_form label,label.form_label{font-family:'DeliciousRoman', Arial, sans-serif;}
+#navigation_search input[type=text]{border-color:#BE7DBC;}
+form input[type=submit],a.link_button_green,a.link_button_green_large{background-color:#299fcc;font-family:'DeliciousRoman', Arial, sans-serif;background-image:none;border:none;text-shadow:none;font-size:14px;color:#000000}
+div.correspondence,div.comment_in_request{background:#ffffff;}
+div.outgoing.correspondence{background:#ffffff;}
+#frontpage_splash{background:none;height:320px;}
+#frontpage_splash #left_column{line-height:20px;margin-top:40px;}
+#frontpage_splash h1{font-family:'DeliciousRoman', Arial, sans-serif;font-size:20px;color:#299fcc;font-weight:400;margin:0 0 20px;}
+#frontpage_splash h1 strong{font-family:'DeliciousHeavyRegular', Arial, sans-serif;font-size:34px;color:#299fcc;font-weight:400;}
+#frontpage_splash h1 span{font-family:Georgia;font-style:italic;font-weight:400;font-size:25px;color:#5C6F8A;}
+#frontpage_splash h2{font-size:16px;font-weight:400;color:#666666;font-family:'DeliciousRoman', Arial, sans-serif;}
+#frontpage_splash h2 strong{font-size:22px;color:#299fcc;font-family:'DeliciousBold', Arial, sans-serif;}
+#frontpage_splash h2 span{color:#5C6F8A;font-style:italic;font-size:19px;font-family:Georgia;}splash
+#stepwise{height:130px;margin:0;padding:0;}
+.steps{margin:0;padding:0;font-size:16px;}
+.steps-in{font-size:14px;margin:0;padding:0;}
+.steps-in li{float:left;margin:1px;padding:0;}
+.steps-in li p.small{margin-top:30px;}
+.steps-in li img.pic{display:block;margin:10px auto 30px;}
+.steps li{float:left;margin:0 5px;padding:0;}
+.steps li img.pic{display:block;margin-left:auto;margin-right:auto;}
+.steps li img#folks{margin-top:18px;}
+.steps li img#quest{margin-top:5px;}
+.steps li img#dots{margin-top:24px;}
+.steps li img#but{margin-top:5px;cursor:pointer;}
+.steps li a{text-decoration:none;color:#666666;}
+.steps li a:hover{text-decoration:none;color:#666666;cursor:auto;}
+#frontpage_splash #frontpage_right_to_know{margin-top:35px}
+#frontpage_right_to_know {width:120px;float:right}
+#frontpage_examples2 div#examples_1{width:90%;}
+#frontpage_splash #frontpage_search_box{margin-top:180px;}
+#frontpage_examples2 {margin-top:60px;}
+#ui-datepicker-div.ui-widget{font-family:Arial, sans-serif;color:#299fcc;}
+#ui-datepicker-div .ui-datepicker-header,#ui-datepicker-div .ui-widget-header{color:#299fcc;font-family:'DeliciousRoman';}
+#ui-datepicker-div .ui-state-default:hover{background:#DEB4D8;color:#FFF;}
+#ui-datepicker-div .ui-state-active{background:#D093C7;color:#FFF;}
+#other-country-notice{background:#299fcc;color:#FFF;}
+p.public-body-name-prefix{color:#DEB4D8;}
+#other-country-notice a{color:#FFF;}
+#link_box{position:absolute;text-align:left;background-color:#FFF;z-index:999;border-radius:6px;-moz-border-radius:6px;border:1px solid #299fcc;display:none;padding:5px;}
+#link_box .close-button{background-color:#299fcc;margin-left:15px;padding:0;}
+div.controller_help h1 a,#logged_in_bar a,#logged_in_bar a:visited,#stepwise_make_request strong{color:#299fcc;}
+
+#content{background:#000000;padding-bottom:80px}
+#follow_count {
+color:#299fcc;
+  float: left;
+    font-family: 'DeliciousBold',Arial,sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 16px;
+    margin-right: 4px;
+    margin-top: 0;
+    text-align: right;
+    }
+.tip{position:relative !important;}
+.tip > .tooltipB{display:none;}
+.tip:hover > .tooltipB{display:block;}
+.tooltipB{background:#5C6F8A;-moz-box-shadow:0 0 6px 1px #666666;-webkit-box-shadow:0 0 6px 1px #666666;box-shadow:0 0 6px 1px #666666;border:solid #FFFFFF;color:#E7E7E7;min-width:200px;padding:5px;position:absolute;text-align:center;z-index:10;}
+.request_listing span.bottomline{font-size:1.4em;}
+
+#user_profile_search{margin-top:30px;}
+
+#left_column_flip h2{color:#666666;font-size:18px;}
+#left_column_flip_search{margin:25px 0 50px 0;}
+#left_column_flip_search form input[type=text]{width:500px;font-size:1em;}
+.bottomline a{font-size:14px;text-decoration:underline;margin-left:15px;}
+.request_listing,.user_listing,.body_listing{border-bottom:none;}
+#contact_preamble{margin:40px 0 30px 240px;font-size:18px;}
+#contact_preamble ul li{list-style-image:image-url('lil-blu.png');margin-top:10px;}
+#contact-form{margin-left:60px;min-height:600px;}
+.form_button{margin:0 0 0 7.9em;}
+#left_column_flip{margin-top:30px;}
+#foi_results_section{margin-top:10px;}
+#filter_requests_form label.title,h3.title{display:inline-block;float:none;width:120px;margin-left:-130px;}
+.list-filter-item{margin-left:100px;}
+#request_header{background:none;}
+.steps-in li.blu{list-style-image:image-url('lil-blu.png');width:540px;margin-top:40px;margin-left:60px;font-size:18px;font-style:italic;}
+#request_list{margin-top:15px;}
+#request_list h1{font-size:1.7em;}
+#signin{font-size:16px;}
+#signup .form_item_note {
+margin-left:0em;
+}
+#right_half {
+width:50%;десь
+}
+#request_form label,label.form_label,span#to_public_body {
+font-size: 1em;
+}
+
+#logged_in_bar2 {
+clear:none;
+font-size:12px;
+top:70px;
+right:0;
+float:right;
+position:absolute;
+}
+
+#logged_in_bar2 a {text-decoration:none;color:#666666}
+
+#topnav2 {
+clear:none;
+font-size:12px;
+top:160px;
+right:0;
+float:left;
+position:absolute;
+}
+
+#topnav2 li {display:inline}
+
+
+#wrapper {
+    clear: both;
+    margin: 0 auto 1.2em;
+    overflow: visible;
+    padding-top: 0;
+    position: relative;
+    text-align: left;
+    top: 0;
+    width: 900px;
+}
+
+.ohr{color:#F08143;font-size:16px;}
+#topnav2 li.signed a{color:#ffffff;font-style:italic}
+
+.request_listing span.head a, .user_listing span.head a, .body_listing span.head a {font-size:1em;color:#299fcc}
+
+h3.smaller{font-size:1em}
+
+.infoot {width:900px;margin:auto;padding-top:10px;}
+.push {
+height: 120px;
+}
+.footer {
+clear:both;
+height:40px;
+background:#000000;
+bottom:0;
+}
+
+form input[type="text"]#public_body_query {width:500px}
+form input[type="text"]#typeahead_search {width:400px}
+
+.icon_waiting_response,.icon_waiting_classification,.icon_waiting_clarification {
+background-image:image-url('status-pending.png');
+}
+
+#request_form label, label.form_label{text-align:right;padding-right:5px}
+#frontpage_splash #right_column {
+width:290px;
+}
+
+
+.describe_state_form,#other_recipients {
+background:#ffffff !important;
+}
+
+.icon_successful,.icon_partially_successful {
+background-image:image-url('status-complete.png');
+}
+
+.icon_requires_admin,.icon_waiting_response_overdue,.icon_waiting_response_very_overdue {
+background-image:image-url('status-overdue.png');
+}
+
+p.subtitle{font-size:1em}
+
+.abme{color:#666666;text-decoration:none;font-size:14px;margin-left:-7px}
+
+.header_left{margin-top:66px}
+#header_right{margin-top:-15px;padding-top:0}
+
+#topnav li a:hover, a:hover {
+color:#299fcc;
+}
+
+
+#user_profile_search form input[type=text]{
+font-size:0.8em;
+width:400px;
+color:#555;
+padding:5px;
+}
+
+.feed_link a.link_button_green {
+ color:black;
+}
+
+form input[type=text] {width:295px}
+div#signin form input[type=text], form input[type=password] {width:200px}
+
+#examples_1 p a {color:white}
+
+#left_column {width:580px}
+
+div.correspondence,div.comment_in_request {width:500px;}
+
+.describe_state_form,.undescribed_requests,.gone_postal_help {width:37em;}
+
+.request_listing span.head a, .user_listing span.head a, .body_listing span.head a {
+  color: #299FCC;
+  font-size: 0.9em;
+  font-weight: normal
+}
+
+.body_listing span.head /* full page request list only */ {min-height:0;}
+
+div#notice{
+font-size:18px;
+color:#299FCC;
+background:#ffffff !important;
+border:none}
+
