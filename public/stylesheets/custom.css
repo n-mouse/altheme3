@@ -27,13 +27,14 @@ ul#rozdily {float:left;left:0;padding-left:0;width:auto;}
 #topnav li a,#topnav li a:visited{color:white;}
 #topnav li a:hover, a:hover{color:#white;}
 #topnav ul#navigation li a:hover{color:#white;}
-#topnav2 ul li, #topnav2 ul li a{color:#ffffff;font-size:14px}
+#topnav2 ul li a{color:#ffffff;font-size:14px;text-decoration:none}
+#topnav2 ul li {color:#666666}
 #topnav2 ul li a:hover{color:#666666;font-size:14px}
 #topnav ul li a{color:#white;}
 #logged_in_bar{color:#444;}
 #logged_in_bar a,#logged_in_bar a:visited{color:#92B3FF;}
 h1,h2,h3{font-family:Trebuchet, Trebuchet MS, Helvetica, sans-serif;color:#555;}
-h4{font-size:16px;color:#299FCC}
+h4{font-size:18px;color:#299FCC}
 h1{color:#299fcc;font-size:42px;font-family:'DeliciousBold', Arial, sans-serif;}
 h2{font-size:1.4em;}
 h2,dt{color:#299fcc;font-family:'DeliciousBold', Arial, sans-serif;font-weight:400;}
@@ -120,12 +121,12 @@ color:#299fcc;
 #left_column_flip h2{color:#666666;font-size:18px;}
 #left_column_flip_search{margin:25px 0 50px 0;}
 #left_column_flip_search form input[type=text]{width:500px;font-size:1em;}
-.bottomline a{font-size:16px;text-decoration:underline;margin-left:15px;}
+.bottomline a{font-size:14px;text-decoration:underline;margin-left:15px;}
 .request_listing,.user_listing,.body_listing{border-bottom:none;}
 #contact_preamble{margin:40px 0 30px 240px;font-size:18px;}
 #contact_preamble ul li{list-style-image:url(../images/lil-blu.png);margin-top:10px;}
 #contact-form{margin-left:60px;min-height:600px;}
-.form_button{margin:0 0 0 12em;}
+.form_button{margin:0 0 0 7.9em;}
 #left_column_flip{margin-top:30px;}
 #foi_results_section{margin-top:10px;}
 #filter_requests_form label.title,h3.title{display:inline-block;float:none;width:120px;margin-left:-130px;}
@@ -180,7 +181,6 @@ position:absolute;
 }
 
 .ohr{color:#F08143;font-size:16px;}
-#topnav2 li a{text-decoration:none;color:#666666}
 #topnav2 li.signed a{color:#ffffff;font-style:italic}
 
 .request_listing span.head a, .user_listing span.head a, .body_listing span.head a {font-size:1em;color:#299fcc}
@@ -211,9 +211,8 @@ width:290px;
 }
 
 
-#notice,.describe_state_form,#other_recipients {
+.describe_state_form,#other_recipients {
 background:#ffffff !important;
-color:#299fcc;
 }
 
 .icon_successful,.icon_partially_successful {
@@ -257,3 +256,18 @@ div#signin form input[type=text], form input[type=password] {width:200px}
 div.correspondence,div.comment_in_request {width:500px;}
 
 .describe_state_form,.undescribed_requests,.gone_postal_help {width:37em;}
+
+.request_listing span.head a, .user_listing span.head a, .body_listing span.head a {
+  color: #299FCC;
+  font-size: 0.9em;
+  font-weight: normal
+}
+
+.body_listing span.head /* full page request list only */ {min-height:0;}
+
+div#notice{
+font-size:18px;
+color:#299FCC;
+background:#ffffff !important;
+border:none}
+
