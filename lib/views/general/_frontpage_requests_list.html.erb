@@ -1,15 +1,17 @@
+<%- @request_events, @request_events_all_successful = InfoRequest.recent_requests %>
 <div id="examples_1">
-  <p class="ohr">
+  <p class = "ohr">
     <% if @request_events_all_successful %>
       <%= _("What information has been released?") %>
     <% else %>
-      <%= _("Приклади надісланих запитів") %>
+      <%= _("What information has been requested?") %>
     <% end %>
   </p>
-   
-
+   <%= _("{{site_name}} users have made {{number_of_requests}} requests, including:",
+    :site_name => site_name, :number_of_requests => InfoRequest.visible.count) %>
+    <ul>
       <% for event in @request_events %>
-        <p>
+        <li>
           <% if @request_events_all_successful %>
             <%= _("{{public_body_link}} answered a request about",
                 :public_body_link => public_body_link(event.info_request.public_body)) %>
@@ -21,17 +23,14 @@
            <%=link_to h(event.info_request.title), request_path(event.info_request)%>
            <%= _('{{length_of_time}} ago', :length_of_time => time_ago_in_words(event.described_at)) %>
            
-        </p>
+        </li>
       <% end %>
-
+    </ul>
     <p><strong>
       <% if @request_events_all_successful %>
-        <%=link_to _('More successful requests...'), request_list_successful_path, :style=>"color:#299fcc;text-decoration:none" %>
+        <%=link_to _('More successful requests...'), request_list_successful_path %>
       <% else %>
-        <%=link_to _('More requests...'), request_list_all_path, :style=>"color:#299fcc;text-decoration:none" %>
+        <%=link_to _('More requests...'), request_list_all_path %>
       <% end %>
     </strong></p>
-  
 </div>
-
-
