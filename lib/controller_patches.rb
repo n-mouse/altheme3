@@ -8,9 +8,9 @@
 Rails.configuration.to_prepare do
 
   RequestController.class_eval do
-     def new
-     
-        if AlaveteliConfiguration::force_registration_on_new_request && !authenticated?(
+   def new
+   
+         if AlaveteliConfiguration::force_registration_on_new_request && !authenticated?(
                 :web => _("To send your FOI request"),
                 :email => _("Then you'll be allowed to send FOI requests."),
                 :email_subject => _("Confirm your email address")
@@ -60,69 +60,19 @@ Rails.configuration.to_prepare do
                 render :template => 'user/rate_limited'
                 return
             end
-
-            params[:info_request] = { } if !params[:info_request]
-
-            # Read parameters in - first the public body (by URL name or id)
-            if params[:url_name]
-                if params[:url_name].match(/^[0-9]+$/)
-                    params[:info_request][:public_body_id] = params[:url_name]
-                else
-                    public_body = PublicBody.find_by_url_name_with_historic(params[:url_name])
-                    raise ActiveRecord::RecordNotFound.new("None found") if public_body.nil? # XXX proper 404
-                    params[:info_request][:public_body_id] = public_body.id
-                end
-            elsif params[:public_body_id]
-                params[:info_request][:public_body_id] = params[:public_body_id]
-            end
-            if !params[:info_request][:public_body_id]
-                # compulsory to have a body by here, or go to front page which is start of process
-                redirect_to frontpage_url
-                return
-            end
-
-            # ... next any tags or other things
-            params[:info_request][:title] = params[:title] if params[:title]
-            params[:info_request][:tag_string] = params[:tags] if params[:tags]
-
-            @info_request = InfoRequest.new(params[:info_request])
-            params[:info_request_id] = @info_request.id
-            params[:outgoing_message] = {} if !params[:outgoing_message]
-            params[:outgoing_message][:body] = params[:body] if params[:body]
-            params[:outgoing_message][:default_letter] = params[:default_letter] if params[:default_letter]
-            params[:outgoing_message][:info_request] = @info_request              
-            
-            @outgoing_message = OutgoingMessage.new(params[:outgoing_message])
-            @outgoing_message.set_signature_name(@user.name) if !@user.nil?
-           
-	        if @info_request.public_body.is_requestable?
-                render :action => 'new'
-            else
-                if @info_request.public_body.not_requestable_reason == 'bad_contact'
-                    render :action => 'new_bad_contact'
-                else
-                    # if not requestable because defunct or not_apply, redirect to main page
-                    # (which doesn't link to the /new/ URL)
-                    redirect_to public_body_url(@info_request.public_body)
-                end
-            end
-            return
+            return render_new_compose(batch=false)
         end
 
         # See if the exact same request has already been submitted
         # XXX this check should theoretically be a validation rule in the
         # model, except we really want to pass @existing_request to the view so
         # it can link to it.
-        @existing_request = InfoRequest.find_by_existing_request(params[:info_request][:title], params[:info_request][:public_body_id], params[:outgoing_message][:body])
+        @existing_request = InfoRequest.find_existing(params[:info_request][:title], params[:info_request][:public_body_id], params[:outgoing_message][:body])
 
         # Create both FOI request and the first request message
-        @info_request = InfoRequest.new(params[:info_request])
-        @outgoing_message = OutgoingMessage.new(params[:outgoing_message].merge({
-            :status => 'ready',
-            :message_type => 'initial_request'
-        }))
-        @info_request.outgoing_messages << @outgoing_message
-        @outgoing_message.info_request = @info_request
+        @info_request = InfoRequest.create_from_attributes(params[:info_request],
+                                                           params[:outgoing_message])
+        @outgoing_message = @info_request.outgoing_messages.first
 
         # Maybe we lost the address while they're writing it
         if !@info_request.public_body.is_requestable?
@@ -135,7 +85,7 @@ Rails.configuration.to_prepare do
             # We don't want the error "Outgoing messages is invalid", as in this
             # case the list of errors will also contain a more specific error
             # describing the reason it is invalid.
-            @info_request.errors.delete("outgoing_messages")
+            @info_request.errors.delete(:outgoing_messages)
 
             render :action => 'new'
             return
@@ -143,25 +93,7 @@ Rails.configuration.to_prepare do
 
         # Show preview page, if it is a preview
         if params[:preview].to_i == 1
-            message = ""
-            if @outgoing_message.contains_email?
-                if @user.nil?
-                    message += (_("<p>You do not need to include your email in the request in order to get a reply, as we will ask for it on the next screen (<a href=\"%s\">details</a>).</p>") % [help_privacy_path+"#email_address"]).html_safe;
-                else
-                    message += (_("<p>You do not need to include your email in the request in order to get a reply (<a href=\"%s\">details</a>).</p>") % [help_privacy_path+"#email_address"]).html_safe;
-                end
-                message += _("<p>We recommend that you edit your request and remove the email address.
-                If you leave it, the email address will be sent to the authority, but will not be displayed on the site.</p>")
-            end
-            if @outgoing_message.contains_postcode?
-                message += _("<p>Your request contains a <strong>postcode</strong>. Unless it directly relates to the subject of your request, please remove any address as it will <strong>appear publicly on the Internet</strong>.</p>");
-            end
-            if not message.empty?
-                flash.now[:error] = message.html_safe
-            end
-            
-            render :action => 'preview'
-            return
+            return render_new_preview
         end
 
         if user_exceeded_limit
@@ -170,9 +102,9 @@ Rails.configuration.to_prepare do
         end
 
         if !authenticated?(
-                :web => _("To send your FOI request"),
+                :web => _("To send your FOI request").to_str,
                 :email => _("Then your FOI request to {{public_body_name}} will be sent.",:public_body_name=>@info_request.public_body.name),
-                :email_subject => _("Confirm your FOI request to ") + @info_request.public_body.name
+                :email_subject => _("Confirm your FOI request to {{public_body_name}}",:public_body_name=>@info_request.public_body.name)
             )
             # do nothing - as "authenticated?" has done the redirect to signin page for us
             return
@@ -195,7 +127,7 @@ Rails.configuration.to_prepare do
             <p>If you write about this request (for example in a forum or a blog) please link to this page, and add an
             annotation below telling people about your writing.</p>",:law_used_full=>@info_request.law_used_full,
             :late_number_of_days => AlaveteliConfiguration::reply_late_after_days)
-        redirect_to show_new_request_url(:url_title => @info_request.url_title)
+        redirect_to show_new_request_path(:url_title => @info_request.url_title)
     end
       
         def describe_state
