@@ -12,11 +12,11 @@
 </div>
 <% end %>
 <div id="user_profile_search">
-    <% if !@feed_results.nil? %>
-            <% for result in @feed_results %>
-                <%= render :partial => 'request/wall_listing', :locals => { :event => result, :info_request => result.info_request } %>
-        <% end %>
-    <% end %> 
-
-
+ <% if !@feed_results.nil? and !@feed_results.empty? %>
+  <% for result in @feed_results %>
+   <%= render :partial => 'request/wall_listing', :locals => { :event => result, :info_request => result.info_request } %>
+  <% end %>
+ <% else %>
+  <p><%= _("Нічого немає.") %></p>
+ <% end %>
 </div>
