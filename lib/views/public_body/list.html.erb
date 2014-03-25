@@ -27,7 +27,7 @@
 </h3>
 <%= render :partial => 'body_listing', :locals => { :public_bodies => @public_bodies } %>
 
-  <%= will_paginate(@public_bodies) %>
+  <%= will_paginate @public_bodies, :previous_label => t("Попередні"), :next_label => t("Наступні") %>
 
     </div>
  <div id="right_column">
