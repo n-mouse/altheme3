@@ -196,7 +196,17 @@ form input[type="text"]#public_body_query {width:500px}
 form input[type="text"]#typeahead_search {width:400px}
 
 .icon_waiting_response,.icon_waiting_classification,.icon_waiting_clarification {
-background-image:image-url('status-pending.png');
+background-image:image-url('st-pending.png');
+color:#f5c60a;
+}
+
+.icon_not_held, .icon_attention_requested {
+background-image:url(/images/st-not-held.png);
+color:#f5c60a;
+}
+.icon_user_withdrawn {
+background-image:url(/images/st-withdrawn.png);
+color:#f5c60a;
 }
 
 #request_form label, label.form_label{text-align:right;padding-right:5px}
@@ -210,11 +220,18 @@ background:#ffffff !important;
 }
 
 .icon_successful,.icon_partially_successful {
-background-image:image-url('status-complete.png');
+background-image:image-url('st-complete.png');
+color:#299fcc;
 }
 
 .icon_requires_admin,.icon_waiting_response_overdue,.icon_waiting_response_very_overdue {
-background-image:image-url('status-overdue.png');
+background-image:image-url('st-overdue.png');
+color:#eb5f3f;
+}
+
+.icon_failed,.icon_rejected {
+background-image:url(/images/st-denied.png);
+color:#eb5f3f;
 }
 
 p.subtitle{font-size:1em}
