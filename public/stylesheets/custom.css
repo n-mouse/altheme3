@@ -196,7 +196,7 @@ form input[type="text"]#public_body_query {width:500px}
 form input[type="text"]#typeahead_search {width:400px}
 
 .icon_waiting_response,.icon_waiting_classification,.icon_waiting_clarification {
-background-image:image-url('st-pending.png');
+background-image:url('/images/st-pending.png');
 color:#f5c60a;
 }
 
@@ -220,12 +220,12 @@ background:#ffffff !important;
 }
 
 .icon_successful,.icon_partially_successful {
-background-image:image-url('st-complete.png');
+background-image:url('/images/st-complete.png');
 color:#299fcc;
 }
 
 .icon_requires_admin,.icon_waiting_response_overdue,.icon_waiting_response_very_overdue {
-background-image:image-url('st-overdue.png');
+background-image:url('/images/st-overdue.png');
 color:#eb5f3f;
 }
 
