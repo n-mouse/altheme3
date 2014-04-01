@@ -116,7 +116,7 @@ color:#299fcc;
 #left_column_flip_search{margin:25px 0 50px 0;}
 #left_column_flip_search form input[type=text]{width:500px;font-size:1em;}
 .bottomline a{font-size:14px;text-decoration:underline;margin-left:15px;}
-.request_listing,.user_listing,.body_listing{border-bottom:none;}
+.user_listing,.body_listing{border-bottom:none;}
 #contact_preamble{margin:40px 0 30px 240px;font-size:18px;}
 #contact_preamble ul li{list-style-image:image-url('lil-blu.png');margin-top:10px;}
 #contact-form{margin-left:60px;min-height:600px;}
@@ -282,3 +282,4 @@ color:#299FCC;
 background:#ffffff !important;
 border:none}
 
+.request_listing span.head /* full page request list only */ {min-height:20px;}

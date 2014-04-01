@@ -33,7 +33,10 @@ end %>
             <!-- Event of type '<%= event.event_type %>', id=<%= event.id %> -->
         <% end %>
       </div>
-      
+       <span class="bottomline icon_<%= info_request.calculate_status %>">
+        <%= info_request.display_status(cached_value_ok=true) %>
+        <br>
+      </span>
   </div>
  
 </div>
