@@ -5,7 +5,7 @@ main_app_path = Rails.root.join('public', 'alavetelitheme')
 
 # If the symlink to be created exists, warn the user and do nothing
 #if File.exists?(main_app_path)
-<<<<<<< HEAD
+
 #	puts "WARNING: #{main_app_path} already exists, the symbolic link won't be created"
 #else # Create symlink
 #	begin
@@ -15,7 +15,7 @@ main_app_path = Rails.root.join('public', 'alavetelitheme')
 #	rescue NotImplementedError
 #		puts "failed: symbolic links not supported"	
 #	end
-=======
+
 	#puts "WARNING: #{main_app_path} already exists, the symbolic link won't be created"
 #else # Create symlink
 	#begin
@@ -25,5 +25,5 @@ main_app_path = Rails.root.join('public', 'alavetelitheme')
 	#rescue NotImplementedError
 	#	puts "failed: symbolic links not supported"	
 	#end
->>>>>>> a7897e82ee56b8f7994c93326e4443086aae583f
+
 #end
