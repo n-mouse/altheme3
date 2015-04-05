@@ -72,13 +72,11 @@
         <%= _('Currently <strong>waiting for a response</strong> from {{public_body_link}}, they must respond promptly and', :public_body_link=> public_body_link(@info_request.public_body)) %>
         <% if @info_request.public_body.is_school? %>
         <%= _('in term time') %>
-        <% else %>
-        <%= _('normally') %>
         <% end %>
         <%= _('no later than') %> <strong><%= simple_date(@info_request.date_response_required_by) %></strong>.
     <% elsif @status == 'waiting_response_overdue' %>
         <%= _('Response to this request is <strong>delayed</strong>.') %>
-        <%= _('By law, {{public_body_link}} should normally have responded <strong>promptly</strong> and',:public_body_link=>public_body_link(@info_request.public_body)) %>
+        <%= _('За законом, {{public_body_link}} мали відповісти',:public_body_link=>public_body_link(@info_request.public_body)) %>
             <% if @info_request.public_body.is_school? %>
             <%= _('in term time') %>
             <% end %>

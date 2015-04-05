@@ -28,13 +28,13 @@ Rails.configuration.to_prepare do
         # margin of 1 undescribed so it isn't too annoying - the function
         # get_undescribed_requests also allows one day since the response
         # arrived.
-        if !@user.nil? && params[:submitted_new_request].nil? && !@user.can_leave_requests_undescribed?
-            @undescribed_requests = @user.get_undescribed_requests
-            if @undescribed_requests.size > 1
-                render :action => 'new_please_describe'
-                return
-            end
-        end
+       # if !@user.nil? && params[:submitted_new_request].nil? && !@user.can_leave_requests_undescribed?
+        #    @undescribed_requests = @user.get_undescribed_requests
+         #   if @undescribed_requests.size > 1
+          #      render :action => 'new_please_describe'
+           #     return
+            #end
+        #end
 
         # Banned from making new requests?
         user_exceeded_limit = false
@@ -239,16 +239,16 @@ Rails.configuration.to_prepare do
             _("Oh no! Sorry to hear that your request was refused. Here is what to do now.")
         when 'successful'
             if AlaveteliConfiguration::donation_url.blank?
-                _("<p>We're glad you got all the information that you wanted. If you write about or make use of the information, please come back and add an annotation below saying what you did.</p>")
+                _(" ")
             else
-                _("<p>We're glad you got all the information that you wanted. If you write about or make use of the information, please come back and add an annotation below saying what you did.</p><p>If you found {{site_name}} useful, <a href=\"{{donation_url}}\">make a donation</a> to the charity which runs it.</p>",
+                _(" ",
                     :site_name => site_name, :donation_url => AlaveteliConfiguration::donation_url)
             end
         when 'partially_successful'
             if AlaveteliConfiguration::donation_url.blank?
-                _("<p>We're glad you got some of the information that you wanted.</p><p>If you want to try and get the rest of the information, here's what to do now.</p>")
+                _(" ")
             else
-                _("<p>We're glad you got some of the information that you wanted. If you found {{site_name}} useful, <a href=\"{{donation_url}}\">make a donation</a> to the charity which runs it.</p><p>If you want to try and get the rest of the information, here's what to do now.</p>",
+                _(" ",
                     :site_name => site_name, :donation_url => AlaveteliConfiguration::donation_url)
             end
         when 'waiting_clarification'
@@ -316,61 +316,5 @@ Rails.configuration.to_prepare do
       end
     end
 
-    PublicBodyController.class_eval do
-      def list
-        long_cache
-        # XXX move some of these tag SQL queries into has_tag_string.rb
-        @query = "%#{params[:public_body_query].nil? ? "" : params[:public_body_query]}%"
-        @tag = params[:tag]
-        @locale = self.locale_from_params()
-        default_locale = I18n.default_locale.to_s
-        locale_condition = "(upper(public_body_translations.name) LIKE upper(?)
-                            OR upper(public_body_translations.notes) LIKE upper (?))
-                            AND public_body_translations.locale = ?
-                            AND public_bodies.id <> #{PublicBody.internal_admin_body.id}"
-        if @tag.nil? or @tag == "all"
-            @tag = "all"
-            conditions = [locale_condition, @query, @query, default_locale]
-        elsif @tag == 'other'
-            category_list = PublicBodyCategories::get().tags().map{|c| "'"+c+"'"}.join(",")
-            conditions = [locale_condition + ' AND (select count(*) from has_tag_string_tags where has_tag_string_tags.model_id = public_bodies.id
-                and has_tag_string_tags.model = \'PublicBody\'
-                and has_tag_string_tags.name in (' + category_list + ')) = 0', @query, @query, default_locale]
-        elsif @tag.size == 2
-            @tag.upcase!
-            conditions = [locale_condition + ' AND public_body_translations.first_letter = ?', @query, @query, default_locale, @tag]
-        elsif @tag.include?(":")
-            name, value = HasTagString::HasTagStringTag.split_tag_into_name_value(@tag)
-            conditions = [locale_condition + ' AND (select count(*) from has_tag_string_tags where has_tag_string_tags.model_id = public_bodies.id
-                and has_tag_string_tags.model = \'PublicBody\'
-                and has_tag_string_tags.name = ? and has_tag_string_tags.value = ?) > 0', @query, @query, default_locale, name, value]
-        else
-            conditions = [locale_condition + ' AND (select count(*) from has_tag_string_tags where has_tag_string_tags.model_id = public_bodies.id
-                and has_tag_string_tags.model = \'PublicBody\'
-                and has_tag_string_tags.name = ?) > 0', @query, @query, default_locale, @tag]
-        end
-
-        if @tag == "all"
-            @description = ""
-        elsif @tag.size == 2
-            @description = _("ті, що починаються з ‘{{first_letter}}’", :first_letter=>@tag)
-        else
-            category_name = PublicBodyCategories::get().by_tag()[@tag]
-            if category_name.nil?
-                @description = _("matching the tag ‘{{tag_name}}’", :tag_name=>@tag)
-            else
-                @description = _(" у категорії ‘{{category_name}}’", :category_name=>category_name)
-            end
-        end
-         I18n.with_locale(@locale) do
-            @public_bodies = PublicBody.where(conditions).joins(:translations).order("public_body_translations.name").paginate(
-              :page => params[:page], :per_page => 100
-            )
-            respond_to do |format|
-                format.html { render :template => "public_body/list" }
-            end
-        end
-      end
-    end
 end
 

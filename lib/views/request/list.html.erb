@@ -18,9 +18,15 @@
     <% cache_if_caching_fragments(key, :expires_in => 5.minutes) do %>
     <%= render :partial => 'list_results' %>
     <% end %>
+<<<<<<< HEAD
   <% else %>
     <%= render :partial => 'list_results' %>
   <% end %>
+=======
+
+  <%= will_paginate WillPaginate::Collection.new(@page, @per_page, @show_no_more_than) %>
+
+>>>>>>> a7897e82ee56b8f7994c93326e4443086aae583f
 </div>
 </div>
  <div id="right_column">

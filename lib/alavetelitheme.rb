@@ -1,5 +1,14 @@
 THEME_NAME = File.split(File.expand_path("../..", __FILE__))[1]
 
+# Prepend the asset directories in this theme to the asset path:
+['stylesheets', 'images', 'javascripts'].each do |asset_type|
+    theme_asset_path = File.join(File.dirname(__FILE__),
+                                 '..',
+                                 'assets',
+                                 asset_type)
+    Rails.application.config.assets.paths.unshift theme_asset_path
+end
+
 class ActionController::Base
     # The following prepends the path of the current theme's views to
     # the "filter_path" that Rails searches when deciding which
@@ -33,11 +42,3 @@ end
 # something unique (e.g. yourtheme-custom-routes.rb":
 $alaveteli_route_extensions << 'custom-routes.rb'
 
-# Prepend the asset directories in this theme to the asset path:
-['stylesheets', 'images', 'javascripts'].each do |asset_type|
-    theme_asset_path = File.join(File.dirname(__FILE__),
-                                 '..',
-                                 'assets',
-                                 asset_type)
-    Rails.application.config.assets.paths.unshift theme_asset_path
-end

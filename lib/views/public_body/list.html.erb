@@ -10,7 +10,7 @@
 </div>
 <div style="margin-top:40px">
 <h3 class="ohr">Оберіть розпорядника інформації</h3>
-  <%= form_tag(list_public_bodies_default_url, :method => "get", :id=>"search_form") do %>
+  <%= form_tag(list_public_bodies_default_path, :method => "get", :id=>"search_form") do %>
   <div>
   <%= text_field_tag(:public_body_query, params[:public_body_query]) %> 
   <%= submit_tag(_("Search")) %>
@@ -27,7 +27,7 @@
 </h3>
 <%= render :partial => 'body_listing', :locals => { :public_bodies => @public_bodies } %>
 
-  <%= will_paginate(@public_bodies) %>
+  <%= will_paginate @public_bodies, :previous_label => t("Попередні"), :next_label => t("Наступні") %>
 
     </div>
  <div id="right_column">

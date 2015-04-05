@@ -1,6 +1,6 @@
 <div id="right_column">
  <div id="right_column">
-      <div id="frontpage_right_to_know" style="margin-top:30px;margin-bottom:30px">
+      <div id="frontpage_right_to_know" style="margin-top:10px;margin-bottom:30px">
         <%= render :partial => 'general/frontpage_intro_sentence'  %>
       </div>
    </div>  
@@ -54,18 +54,5 @@
     </div>
 
     <%= render :partial => 'request/next_actions' %>
-
-    <% # TODO: Cache for 1 day %>
-      <% if !@xapian_similar.nil? && @xapian_similar.results.size > 0 %>
-        <h4><%= _('Similar requests')%></h4>
-        <% for result in @xapian_similar.results %>
-            <%= render :partial => 'request/request_listing_short_via_event', :locals => { :event => result[:model], :info_request => result[:model].info_request } %>
-        <% end %>
-        <% if @xapian_similar_more %>
-            <p><%= link_to _("More similar requests"), similar_request_path(@info_request) %></p>
-        <% end %>
-        <!-- Important terms: <%= @xapian_similar.important_terms.join(" ") %>  -->
-      <% end %>
- 
 
 </div>
