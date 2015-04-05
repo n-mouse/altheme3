@@ -15,15 +15,3 @@ main_app_path = Rails.root.join('public', 'alavetelitheme')
 #	rescue NotImplementedError
 #		puts "failed: symbolic links not supported"	
 #	end
-
-	#puts "WARNING: #{main_app_path} already exists, the symbolic link won't be created"
-#else # Create symlink
-	#begin
-	#	print "Creating symbolic link from #{main_app_path} to #{plugin_path}... "
-	#	File.symlink(plugin_path, main_app_path)
-	#	puts "done"
-	#rescue NotImplementedError
-	#	puts "failed: symbolic links not supported"	
-	#end
-
-#end
