@@ -194,7 +194,7 @@ span#to_public_body{color:#ffffff;}
 #request_form label,label.form_label{margin:0;padding:0}
 span#to_public_body{font-family:'DeliciousBold', Arial, sans-serif;}
 #middle_strip{color:#299fcc;}
-#stepwise_make_request{background-color:#d0d0d0;background:url('stripes.png');border:1px solid #DEBEDD;font-family:'DeliciousRoman', Arial, sans-serif;color:#5C6F8A;}
+#stepwise_make_request{background-color:#d0d0d0;background:image-url('stripes.png');border:1px solid #DEBEDD;font-family:'DeliciousRoman', Arial, sans-serif;color:#5C6F8A;}
 #request_form label,label.form_label{font-family:'DeliciousRoman', Arial, sans-serif;}
 #navigation_search input[type=text]{border-color:#BE7DBC;}
 form input[type=submit],a.link_button_green,a.link_button_green_large{background-color:#299fcc;font-family:'DeliciousRoman', Arial, sans-serif;background-image:none;border:none;text-shadow:none;font-size:14px;color:#000000}
@@ -266,7 +266,7 @@ color:#299fcc;
 #contact_preamble{margin:40px 0 30px 166px;font-size:18px;}
 
 #contact_preamble ul li {
-	list-style-image: url('lil-blu.png');
+	list-style-image: image-url('lil-blu.png');
 	margin-top: 10px;
 }
 
@@ -293,7 +293,7 @@ color:#299fcc;
 #request_header { background: none; }
 
 .steps-in li.blu {
-	list-style-image: url('lil-blu.png');
+	list-style-image: image-url('lil-blu.png');
 	width: 540px;
 	margin-top: 40px;
 	margin-left: 60px;
@@ -391,7 +391,7 @@ form input[type="text"]#public_body_query { width: 500px }
 form input[type="text"]#typeahead_search { width: 400px }
 
 .icon_waiting_response,.icon_waiting_classification,.icon_waiting_clarification {
-    background-image: url('status-pending.png');
+    background-image: image-url('status-pending.png');
 }
 
 #request_form label, label.form_label {
@@ -406,11 +406,11 @@ form input[type="text"]#typeahead_search { width: 400px }
 .describe_state_form,#other_recipients { background:#ffffff !important; }
 
 .icon_successful,.icon_partially_successful {
-    background-image: url('status-complete.png');
+    background-image: image-url('status-complete.png');
 }
 
 .icon_requires_admin,.icon_waiting_response_overdue,.icon_waiting_response_very_overdue {
-    background-image: url('status-overdue.png');
+    background-image: image-url('status-overdue.png');
 }
 
 p.subtitle { font-size: 1em }
