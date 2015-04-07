@@ -30,12 +30,18 @@
 
 
     <p class="subtitle">
-       <%= _('Joined {{site_name}} in', :site_name=>site_name) %> <%= @display_user.created_at.year %>
         <% if !@user.nil? && @user.admin_page_links? %>
-        (<%= link_to "admin", admin_user_path(@display_user) %>)
+            <%= _('{{user}} ({{user_admin_link}}) made this {{law_used_full}} request to {{public_body_link}} (<a href="{{public_body_admin_url}}">admin</a>)',
+                    :user => @info_request.is_external? ? (@info_request.user_name || _('An anonymous user')) : user_link(@info_request.user),
+                    :law_used_full => h(@info_request.law_used_full),
+                    :user_admin_link => user_admin_link_for_request(@info_request, _('external'), _('admin')),
+                    :public_body_link => public_body_link(@info_request.public_body),
+                    :public_body_admin_url => admin_body_show_url(@info_request.public_body)) %>
+        <% else %>
+            <%= _('{{user}} made this {{law_used_full}} request',:user=>@info_request.is_external? ? (@info_request.user_name || _('An anonymous user')) : user_link(@info_request.user), :law_used_full=>h(@info_request.law_used_full)) %>
+            <%= _('to {{public_body}}',:public_body=>public_body_link(@info_request.public_body)) %>
         <% end %>
     </p>
-
 <% if ( @update_status || @info_request.awaiting_description ) && ! @info_request.is_external? %>
     <div class="describe_state_form" id="describe_state_form_1">
     <%= render :partial => 'describe_state', :locals => { :id_suffix => "1" } %>
