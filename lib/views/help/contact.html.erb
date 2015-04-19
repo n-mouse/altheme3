@@ -3,7 +3,7 @@
 <%= foi_error_messages_for :contact %>
 
 
-<div id="contact_preamble">
+<div id="econtact_preamble">
 
 <p>Ознайомтесь з інформацією, яку містить розділ <%= link_to "Як це працює", help_about_path %></p>
 <p>Якщо ви не знайшли відповідь на своє запитання, звертайтесь, заповнивши форму нижче:</p>
@@ -34,6 +34,10 @@
         <%= f.text_area :message, :rows => 10, :cols => 60 %>
     </p>
 
+    <p style="display:none;">
+        <%= f.label :comment, 'Do not fill in this field' %>
+        <%= f.text_field :comment %>
+    </p>
 
 
     <p class="form_note">
