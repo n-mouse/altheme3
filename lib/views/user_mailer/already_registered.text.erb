@@ -1,4 +1,4 @@
-<%= @name %>,
+<%= @name.encode!('UTF-8', 'UTF-8', :invalid => :replace) %>,
 
 <%= _('You just tried to sign up to {{site_name}}, when you
 already have an account. Your name and password have been
