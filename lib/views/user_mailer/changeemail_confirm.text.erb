@@ -1,4 +1,4 @@
-<%= @name %>,
+<%= @name.encode!('UTF-8', 'UTF-8', :invalid => :replace)  %>,
 
 <%= _('Please click on the link below to confirm that you want to 
 change the email address that you use for {{site_name}}
