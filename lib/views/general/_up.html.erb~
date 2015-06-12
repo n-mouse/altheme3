@@ -15,6 +15,6 @@
     </ul>
 <div style="padding-top:15px;float:right">
 <%= link_to image_tag('fb.png'), 'https://www.facebook.com/pages/%D0%94%D0%BE%D1%81%D1%82%D1%83%D0%BF-%D0%B4%D0%BE-%D0%9F%D1%80%D0%B0%D0%B2%D0%B4%D0%B8/699190593466761', :class=>'fbtw' %>
-<%= link_to image_tag('tw.png'), "https://twitter.com/DostupPravda", :class=>'fbtw' %>
+<%= link_to image_tag('tw.png'), frontpage_url, :class=>'fbtw' %>
 </div>
 </div>

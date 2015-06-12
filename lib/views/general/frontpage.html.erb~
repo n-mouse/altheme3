@@ -13,6 +13,9 @@
       <div id="frontpage_search_box">
         <%= render :partial => "frontpage_search_box" %>
       </div> 
+      <div id="feedback" >
+        <button class="feedback-button">Що варто змінити в роботі сайту?</button>
+      </div>     
     </div>
     <div style="clear:both"></div>
   </div>
