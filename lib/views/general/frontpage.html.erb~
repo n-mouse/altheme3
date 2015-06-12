@@ -1,6 +1,6 @@
 <%# TODO: Cache for 5 minutes %>
   <div id="frontpage_splash">
-  <p style="color:red;font-size:18px;margin-bottom:-20px">З технічних причин ми тимчасово припинимо роботу сьогодні в проміжку між 22:30 і 23:00</p>
+  <p style="color:red;font-size:18px;margin-bottom:-20px">З технічних причин ми тимчасово припинимо роботу сьогодні в проміжку між 22:45 і 23:15</p>
 
     <div id="left_column">
       <%= render :partial => "frontpage_new_request" %>
