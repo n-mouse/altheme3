@@ -49,6 +49,15 @@
 
 </div>
 
+    <% if AlaveteliConfiguration.allow_batch_requests && @user && @user.can_make_batch_requests? %>
+      <div id="batch_request_link">
+        <p>
+          <%= _(' Ви можете зробити <a href="{{url}}">груповий запит</a> до <strong>кількох розпорядників</strong> одночасно.',
+                :url => select_authorities_path) %>
+        </p>
+      </div>
+    <% end %>
+  <% end %>
 
  <% if @existing_request %>
       <div class="errorExplanation" id="errorExplanation"><ul>

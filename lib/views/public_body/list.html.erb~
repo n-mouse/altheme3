@@ -31,8 +31,8 @@
 <h3 class="ohr">
   <%= n_('Found {{count}} public authority {{description}}',
         'Found {{count}} public authorities {{description}}',
-        @public_bodies.total_entries,
-        :count => @public_bodies.total_entries,
+        @public_bodies.count,
+        :count => @public_bodies.count,
         :description => @description) %>
 </h3>
 <%= render :partial => 'body_listing', :locals => { :public_bodies => @public_bodies } %>

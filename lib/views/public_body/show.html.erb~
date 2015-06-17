@@ -1,0 +1,77 @@
+
+<% @title = h(@public_body.name) + _(" - view and make Freedom of Information requests") %>
+
+<div id="frontpage_splash">
+  <div id="left_column">
+
+    <span class="ohr">
+      <%= _("Реалізуй своє право на доступ до публічної інформації") %>
+    </span>
+
+    <div id="stepwise" style="padding-top:20px">
+      <%= image_tag('step1.png')%>
+    </div>
+
+    <div style="margin-top:40px">
+    <h3 class="ohr"><%=h(@public_body.name)%></h3>
+          <% if @public_body.is_requestable? || @public_body.not_requestable_reason == 'bad_contact' %>
+                <%= link_to _("Зробити запит"), new_request_to_body_path(:url_name => @public_body.url_name), :class => "link_button_green" %>
+           
+            <% elsif @public_body.not_requestable_reason == 'not_apply' %>
+                <%= _('Freedom of Information law does not apply to this authority, so you cannot make
+                a request to it.')%>
+            <% elsif @public_body.not_requestable_reason == 'defunct' %>
+                <%= _('This authority no longer exists, so you cannot make a request to it.')%>
+            <% else %>
+                <%= _('For an unknown reason, it is not possible to make a request to this authority.')%>
+            <% end %>
+
+
+     
+        
+    </div>
+    <div id="foi_results_section" style="margin-top:25px">
+     
+
+
+        <% if !@xapian_requests.nil? %>
+
+            <% for result in @xapian_requests.results %>
+                <%= render :partial => 'request/request_listing_via_event', :locals => { :event => result[:model], :info_request => result[:model].info_request } %>
+            <% end %>
+
+            <%= will_paginate WillPaginate::Collection.new(@page, @per_page, @xapian_requests.matches_estimated) %>
+
+            <% if @xapian_requests.results.empty? %>
+                <p><% _('There were no requests matching your query.') %></p>
+            <% else %>
+                  <p> <%= _('Only requests made using {{site_name}} are shown.', :site_name => site_name) %></p>
+            <% end %>
+
+        <% else %>
+            <% if @public_body.eir_only? %>
+                <h2><%= _('Environmental Information Regulations requests made') %></h2>
+            <% else %>
+                <h2> <%= _('Freedom of Information requests made')%></h2>
+            <% end %>
+            <p> <%= _('The search index is currently offline, so we can\'t show the Freedom of Information requests that have been made to this authority.')%></p>
+        <% end %>
+      </div>
+  </div>
+ <div id="right_column">
+      <div id="frontpage_right_to_know">
+        <%= render :partial => 'general/frontpage_intro_sentence'  %>
+      </div>
+      <div id="frontpage_search_box">
+<% follower_count = TrackThing.count(:all, :conditions => ["public_body_id = ?", @public_body.id]) %>
+        <p>
+        <%= n_("{{count}} person is following this authority",
+                "{{count}} people are following this authority",
+                follower_count,
+                :count => content_tag(:span, follower_count, :id => "follow_count")) %>
+        </p>
+        <%= render :partial => 'track/tracking_links', :locals => { :track_thing => @track_thing, :own_request => false, :location => 'sidebar' } %>
+       </div>
+  </div>
+</div>
+
