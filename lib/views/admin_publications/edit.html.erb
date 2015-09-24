@@ -1,0 +1,44 @@
+<h1>Редагування публікації</h1>
+ 
+<%= form_for @publication, :url => admin_publication_path(@publication), method: :put do |f| %>
+ 
+  <% if @publication.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@publication.errors.count, "error") %> помилок не дають зберегти цю публікацію:
+      </h2>
+      <ul>
+        <% @publication.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+ <p>
+    <%= f.label "Назва" %><br>
+    <%= f.text_field :title %>
+  </p>
+ 
+  <p>
+    <%= f.label "Текст" %><br>
+    <%= f.text_area :body  %>
+  </p>
+
+  <p>
+    <%= f.label "Тип" %><br>
+    <%= f.select :category, options_for_select([['новина','news'],['історія','story']]) %>
+  </p>
+
+  <p>
+    <%= f.label "Опубліковано?" %><br>
+    <%= f.check_box :published %>
+  </p>
+ 
+  <p>
+    <%= f.submit "Зберегти", class: 'btn btn-success' %>
+  </p>
+ 
+<% end %>
+ 
+<%= link_to 'Назад', admin_publication_path %>

@@ -2,5 +2,5 @@
 <%= @aaaa %>
 <a class="btn btn-primary" href="/admin/publications/new">Додати публікацію</a>
 <% @publications.each do |p| %>
-<h3> <%= p.title %> </h3>
+<h3> <%= link_to p.title, admin_publication_path(p.id) %> </h3>
 <% end %>
