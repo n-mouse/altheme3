@@ -1,0 +1,28 @@
+<h1>Нова публікація</h1>
+<div class="add_article">
+<%= form_for @publication, :as => :publication, :url => admin_publications_path do |f| %>
+  <p>
+    <%= f.label "Назва" %><br>
+    <%= f.text_field :title %>
+  </p>
+ 
+  <p>
+    <%= f.label "Текст" %><br>
+    <%= f.text_area :body  %>
+  </p>
+
+  <p>
+    <%= f.label "Тип" %><br>
+    <%= f.select :category, options_for_select([['новина','news'],['історія','story']]) %>
+  </p>
+
+  <p>
+    <%= f.label "Опубліковано?" %><br>
+    <%= f.check_box :published %>
+  </p>
+ 
+  <p>
+    <%= f.submit "Зберегти" %>
+  </p>
+<% end %>
+</div>
