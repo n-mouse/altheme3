@@ -42,6 +42,34 @@
         <%= render :partial => 'general/before_head_end' %>
     </head>
     <body class="<%= 'front' if params[:action] == 'frontpage' %>">
+    	<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.4&appId=622186147839366";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+
+window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+ 
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+ 
+  return t;
+}(document, "script", "twitter-wjs"));
+
+</script>
     <% if AlaveteliConfiguration::force_registration_on_new_request && !@user %>
     <%= javascript_include_tag 'fancybox.js' %>
     <script type="text/javascript">
@@ -75,40 +103,41 @@
 </div>
 <% end %>
 	
-      <div id="banner_inner">
-         <% if not (controller.action_name == 'signin' or controller.action_name == 'signup') %>
-          <div id="logged_in_bar2">
-            <% if @user %>
-              <%= _('Вітаємо, <span style="color:#ffffff">{{username}}</span>!', :username => h(@user.name))%>
+<div id="banner_inner">
+  <div class="top-section">
+	<section class="fillin wrapper"> </section>
+    <%= render :partial => 'general/up' %>
+   
+  </div>
+	<div class="header wrapper">
+		<section class="socials">
+			<%= link_to image_tag('fb.png'), 'https://www.facebook.com/pages/%D0%94%D0%BE%D1%81%D1%82%D1%83%D0%BF-%D0%B4%D0%BE-%D0%9F%D1%80%D0%B0%D0%B2%D0%B4%D0%B8/699190593466761', :class=>'fbtw' %>
+            <%= link_to image_tag('tw.png'), "https://twitter.com/DostupPravda", :class=>'fbtw' %>
+		</section>
+		<section class="title">
+			<%= link_to image_tag("logo.png"), frontpage_url, class: "logo-img" %>
+			<%= link_to image_tag("logo_title.png"), frontpage_url %>
+		</section>
+		<section class="search">
+			<%= link_to image_tag("search.png"), request_list_all_url, class: "search-icon"  %>
+	   </section>
+	   <section class="login">
+			<%= link_to "#{image_tag('login-head.png')} <span>Авторизуватись</span>".html_safe, signin_path(:r => request.fullpath), class: "login-button" %>
+		</section>
+	</div>
+  <div class="bottom-section">
+    <nav class="main-nav">
 
-               
-                    <%=link_to _("Мої запити |"), show_user_requests_path(:url_name => @user.url_name) %>
-                    <%=link_to _("Мій профіль |"), show_user_profile_path(:url_name => @user.url_name) %>
-                    <%=link_to _("Моя стіна"), show_user_wall_path(:url_name => @user.url_name) %>
-                       <% end %>
-          </div>
-        <% end %>
-        <div id="topnav2">
-        <ul style="float:right;">
-        <li class="<%= 'selected' if params[:controller] == 'help' %>"><%= link_to _("Як це працює "), help_about_path %>|</li>
-        <li class="<%= 'selected' if params[:controller] == 'request' and !['new', 'select_authority'].include?(params[:action]) %>"><%= link_to _("Переглянути запити "), request_list_all_url %>|</li>
-        <li class="<%= 'selected' if params[:controller] == 'public_body' %>"><%= link_to _("Зробити запит "), list_public_bodies_default_path %>|</li>
-        <li class="<%= 'selected' if params[:controller] == 'help' and params[:action] == 'contact' %>"><%= link_to _("Зворотній зв’язок"), help_contact_url %></li>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<% if @user %>
-         <li class="signed"><%= link_to _("Вийти"), signout_path(:r => request.fullpath) %>
-          <% else %>
-              <li class="signed"><%= link_to _("Авторизуватись"), signin_path(:r => request.fullpath) %>
-          <% end %>     
-         </ul>
-    
+    <ul class="rozdily site-parts">
+        <li><%= link_to _("ЯК ПРАЦЮЄ САЙТ"), help_about_path %></li>
+        <li><%= link_to _("ПУБЛІКАЦІЇ"), publications_path %></li>
+        <li><%= link_to _("ЗВОРОТНІЙ ЗВ’ЯЗОК"), help_contact_url %></li>
+    </ul>
+    </nav>
+  </div>
 </div>
-        <%= render :partial => 'general/up' %>
-        <%= render :partial => 'general/orglink' %>
-      </div>
 
 <div id="wrapper">
-        <div id="content">
             <% if flash[:notice] %>
                 <div id="notice"><%= flash[:notice] %></div>
             <% end %>
@@ -120,13 +149,12 @@
             <%= yield :layout %>
             </div>
             <div style="clear:both"></div>
-        </div>
-   <div class="footer">
-  <div class="infoot">
-   <%= render :partial => 'general/before_body_end' %>
- </div>
-
+          </div>
+  <div class="footer">
+    <div class="infoot">
+     <%= render :partial => 'general/before_body_end' %>
     </div>
+
 
     
 

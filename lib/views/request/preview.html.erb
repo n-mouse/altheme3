@@ -5,17 +5,10 @@
 <% end %>
 <%= form_for(@info_request, :url => (@batch ? new_batch_path : new_request_path), :html => { :id => 'preview_form' }  ) do |f| %>
 
-<div id="frontpage_splash">
-  <div id="left_column">
-     <span class="ohr">
-       <%= _("Реалізуй своє право на доступ до публічної інформації") %>
-     </span>
-     <div id="stepwise" style="padding-top:20px">
-        <%= image_tag('step3.png')%>
-     </div>
-<div style="margin-top:40px">
-    <h3 class="ohr"><%= _('Перегляньте свій запит') %></h3>
-     <p><%= _('Check you haven\'t included any <strong>personal information</strong>.') %></p>
+
+<div class="main-part-left" style="margin-top:20px">
+
+    <p>Перегляньте свій запит та перевірте, чи не включили ви в нього особистої інформації</p>
 
     <%= fields_for :outgoing_message do |o| %>
 
@@ -57,8 +50,8 @@
     <%= f.hidden_field(:tag_string) %>
     <%= hidden_field_tag(:submitted_new_request, 1) %>
     <%= hidden_field_tag(:preview, 0 ) %>
-    <%= submit_tag _("Edit this request"), :name => 'reedit', :id => 'reedit_button' %>&nbsp;
-    <%= submit_tag _("Send request"), :name => 'submit', :id => 'submit_button' %>    
+    <%= submit_tag _("Редагувати"), :name => 'reedit', :id => 'reedit_button' %>&nbsp;
+    <%= submit_tag _("Відправити"), :name => 'submit', :id => 'submit_button' %>    
     </p>
 
     <% if !@info_request.tag_string.empty? %>
@@ -66,13 +59,20 @@
     <% end %>
 
 <% end %>
-</div>
+
   </div>
-<div id="right_column">
-      <div id="frontpage_right_to_know">
-        <%= render :partial => 'general/frontpage_intro_sentence'  %>
-      </div>
-   </div> 
-    
-    
+<div column="right_column" style="float: right; width:30%;">
+  <div class="steps-sidebar">
+  	<%= image_tag("choose-icon.png") %>
+  </div>
+  <div style="display:table" class="here-now">
+	<%= render :partial => 'general/zaraz_na_sajti' %>
 </div>
+<div class="choice">
+	<%= render :partial => 'general/vybir_red' %>
+</div>
+<div class="toz">
+	<%= render :partial => 'general/top_zapyty' %>
+</div>
+</div>
+

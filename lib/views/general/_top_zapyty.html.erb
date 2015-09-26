@@ -1,0 +1,8 @@
+<p class="part-title">ТОП ЗАПИТИ</p>
+		<% tops.each do |ir| %>
+		<section class="topzap">  
+			<p><strong><%= ir.title %></strong></p> 
+			<p><span class="tt-count"><%= ir.track_things.count %></span> слідкують за цим запитом</p>
+			<%= link_to "ДІЗНАТИСЬ БІЛЬШЕ", show_request_path(ir), :class=>"read-more-top" %>
+		</section>
+		<% end %>

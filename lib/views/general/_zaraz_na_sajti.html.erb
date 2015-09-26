@@ -1,0 +1,7 @@
+<p class="part-title ">ЗАРАЗ НА САЙТІ</p>
+<div>
+<span class="sidebar-count"><%= link_to PublicBody.visible.count.to_s, list_public_bodies_default_path %></span> <span class="sidebar-count-text">РОЗПОРЯДНИКІВ ІНФОРМАЦІЇ</span>
+</div>
+<div style="margin-top:10px">
+<span class="sidebar-count"><%=link_to InfoRequest.visible.count.to_s, request_list_all_path %></span> <span class="sidebar-count-text">ЗАПИТІВ</span>
+</div>

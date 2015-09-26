@@ -4,7 +4,7 @@ end %>
 
 <div class="request_listing">
   <div class="request_left">
-      <span class="head">
+      <p class="req-title">
         <% if event.is_incoming_message? %>
             <%= link_to highlight_words(info_request.title, @highlight_words), incoming_message_path(event.incoming_message_selective_columns("incoming_messages.id")) %>
         <% elsif event.is_outgoing_message? and event.event_type == 'followup_sent' %>
@@ -14,18 +14,27 @@ end %>
         <% else %>
             <%= link_to highlight_words(info_request.title, @highlight_words), request_path(info_request) %>
         <% end %>
-      </span>
+      </p>
       <div class="requester">
         <% if event.event_type == 'sent' %>
-            <%= _('Request sent to {{public_body_name}} by {{info_request_user}} on {{date}}.',:public_body_name=>public_body_link_absolute(info_request.public_body),:info_request_user=>request_user_link_absolute(info_request),:date=>simple_date(event.created_at )) %>
+            <p><%= _('Від:  {{info_request_user}}',:info_request_user=>request_user_link_absolute(info_request)) %></p>
+           <p> <%= _('До:  {{public_body_name}}',:public_body_name=>public_body_link_absolute(info_request.public_body)) %></p>
+           <p> <%= _('Дата:  {{date}}',:date=>simple_date(event.created_at )) %></p>
+
         <% elsif event.event_type == 'followup_sent' %>
             <%=event.display_status %>
-            <%= _('sent to {{public_body_name}} by {{info_request_user}} on {{date}}.',:public_body_name=>public_body_link_absolute(info_request.public_body),:info_request_user=>request_user_link_absolute(info_request),:date=>simple_date(event.created_at )) %>
+            <p><%= _('Від:  {{info_request_user}}',:info_request_user=>request_user_link_absolute(info_request)) %></p>
+           <p> <%= _('До:  {{public_body_name}}',:public_body_name=>public_body_link_absolute(info_request.public_body)) %></p>
+           <p> <%= _('Дата:  {{date}}',:date=>simple_date(event.created_at )) %></p>
         <% elsif event.event_type == 'response' %>
             <%=event.display_status %>
-            <%= _('by {{public_body_name}} to {{info_request_user}} on {{date}}.',:public_body_name=>public_body_link_absolute(info_request.public_body),:info_request_user=>request_user_link_absolute(info_request),:date=>simple_date(event.created_at )) %>
+           <p> <%= _('Від:  {{public_body_name}}',:public_body_name=>public_body_link_absolute(info_request.public_body)) %></p>
+           <p><%= _('До:  {{info_request_user}}',:info_request_user=>request_user_link_absolute(info_request)) %></p>
+           <p> <%= _('Дата:  {{date}}',:date=>simple_date(event.created_at )) %></p>
         <% elsif event.event_type == 'comment' %>
-            <%= _('Request to {{public_body_name}} by {{info_request_user}}. Annotated by {{event_comment_user}} on {{date}}.',:public_body_name=>public_body_link_absolute(info_request.public_body),:info_request_user=>request_user_link_absolute(info_request),:event_comment_user=>user_link_absolute(event.comment.user),:date=>simple_date(event.created_at)) %>
+            <p><%= _('Від:  {{info_request_user}}',:info_request_user=>request_user_link_absolute(info_request)) %></p>
+           <p> <%= _('До:  {{public_body_name}}',:public_body_name=>public_body_link_absolute(info_request.public_body)) %></p>        
+            <%= _('Користувач {{event_comment_user}} залишив коментар {{date}}.',:public_body_name=>public_body_link_absolute(info_request.public_body),:info_request_user=>request_user_link_absolute(info_request),:event_comment_user=>user_link_absolute(event.comment.user),:date=>simple_date(event.created_at)) %>
         <% else %>
             <%# Events of other types will not be indexed: see InfoRequestEvent#indexed_by_search?
                 However, it can happen that we see other types of event transiently here in the period

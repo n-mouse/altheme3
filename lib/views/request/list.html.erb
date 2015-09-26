@@ -1,15 +1,6 @@
-<div id="frontpage_splash">
-<div id="left_column">
-<span class="ohr">
-  <%= _("Реалізуй своє право на доступ до публічної інформації") %>
-</span>
-
-<div id="stepwise" style="padding-top:20px">
-  <%= image_tag('step4.png')%>
-
-</div>
-<div style="margin-top:40px">
-  <h3 class="ohr"><%=@title%></h3>
+<div class="main-part-left">
+	
+<div>
   <%= render :partial => 'request/request_filter_form' %>
 </div>
 
@@ -17,9 +8,15 @@
     <%= render :partial => 'list_results' %>
 </div>
 </div>
- <div id="right_column">
-      <div id="frontpage_right_to_know">
-        <%= render :partial => 'general/frontpage_intro_sentence'  %>
-      </div>
-      
+<div column="right_column" style="float: right; width:30%;">
+
+  <div style="display:table" class="here-now">
+	<%= render :partial => 'general/zaraz_na_sajti' %>
+</div>
+<div class="choice">
+	<%= render :partial => 'general/vybir_red' %>
+</div>
+<div class="toz">
+	<%= render :partial => 'general/top_zapyty' %>
+</div>
 </div>

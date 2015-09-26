@@ -22,7 +22,7 @@
  
   <p>
     <%= f.label "Текст" %><br>
-    <%= f.text_area :body  %>
+    <%= f.text_area :body, :class => "tinymce"   %>
   </p>
 
   <p>
@@ -42,3 +42,4 @@
 <% end %>
  
 <%= link_to 'Назад', admin_publication_path %>
+<%= tinymce %>

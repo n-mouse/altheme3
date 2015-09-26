@@ -1,5 +1,5 @@
 <% @title = "Додайте коментар до запиту '" + h(@info_request.title) + "'" %>
-
+<div class="main-part-left comment_new">
 <% if @existing_comment %>
     <div class="errorExplanation" id="errorExplanation"><ul>
     <li>
@@ -11,7 +11,7 @@
 
 <%= foi_error_messages_for :comment %>
 
-<h3 class="ohr"><%= _('Add an annotation')%></h3>
+<h3 class="request-title"><%= _('Add an annotation')%></h3>
 <p>до запиту "<%=request_link(@info_request)%>"</p>
 
 <p>
@@ -75,3 +75,16 @@
 </p>
 
 <%= render :partial => 'comment/comment_form', :locals => { :track_thing => @track_thing } %>
+</div>
+
+<div column="right_column" style="float: right; width:30%;margin-top:20px">
+         <div style="display:table" class="here-now">
+	<%= render :partial => 'general/zaraz_na_sajti' %>
+</div>
+<div class="choice">
+	<%= render :partial => 'general/vybir_red' %>
+</div>
+<div class="toz">
+	<%= render :partial => 'general/top_zapyty' %>
+</div>
+  </div>

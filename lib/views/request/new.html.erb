@@ -39,25 +39,17 @@
 <% end %>
 
 
-<div id="frontpage_splash">
-<div id="left_column">
-<span class="ohr">
-  <%= _("Реалізуй своє право на доступ до публічної інформації") %>
-</span>
-<div id="stepwise" style="padding-top:20px">
-  <%= image_tag('step2.png')%>
-
-</div>
-
+<div class="main-part-left" style="margin-top:20px">
 
  <% if @existing_request %>
-      <div class="errorExplanation" id="errorExplanation"><ul>
+    <div class="errorExplanation" id="errorExplanation"><ul>
       <li>
        <%= _('{{existing_request_user}} already
       created the same request on {{date}}. You can either view the <a href="{{existing_request}}">existing request</a>,
       or edit the details below to make a new but similar request.',:existing_request_user=>user_or_you_capital_link(@existing_request.user), :date=>simple_date(@existing_request.created_at), :existing_request=>request_path(@existing_request)) %>
       </li>
-      </ul></div>
+      </ul>
+    </div>
     <% end %>
 
       <% if @existing_batch %>
@@ -72,14 +64,9 @@
 
     <%= foi_error_messages_for :info_request, :outgoing_message %>
 
-
-
-
-<div class="forma" >
-<%= form_for(@info_request, :url => (@batch ? new_batch_path : new_request_path), :html => { :id => 'write_form' }  ) do |f| %>
-
-      <% if @batch %>
-          <label class="form_label"><%= _('To:') %></label>
+  <%= form_for(@info_request, :url => (@batch ? new_batch_path : new_request_path), :html => { :id => 'write_form' }  ) do |f| %>
+    <% if @batch %>
+       <label class="form_label"><%= _('Кому:') %></label>
           <span id="to_public_body">
             <%= _("Обрані вами розпорядники") %>
             <span class="batch_public_body_toggle" data-hidetext="<%= _("(сховати)") %>" data-showtext="<%= _("(показати)") %>"><a class="toggle-message"></a></span>
@@ -92,13 +79,8 @@
             <% end %>
             </ul>
           </div>
-      <% else %>
-        <p id="to_public_body"><span class="to_public_body_label">To:</span>
-          <%=h(@info_request.public_body.name)%>
-        </p>
       <% end %>
      <% unless @batch %>
-      <div id="request_header">
         <div id="request_header_body">
             <label class="form_label"><%= _('Розпорядник:') %></label>
             <span id="to_public_body"><%=h(@info_request.public_body.name)%></span>
@@ -110,28 +92,23 @@
                 <% end %>
             </div>
         </div>
-     </div>
      <% end %>
 
- <div id="request_header_subject">
+        <div id="request_header_subject">
             <p>
                 <label class="form_label" for="typeahead_search"><%= _('Summary:') %></label>
                 <%= f.text_field :title, :size => 50, :id =>"typeahead_search" %>
             </p>
-            <div class="form_item_note">
-                тема запиту - одним рядком
-            </div>
         </div>
- <div id="request_form">
       <div id="typeahead_response">
       </div>
         <%= fields_for :outgoing_message do |o| %>
         
-            <label class="form_label" for="outgoing_message_body"><%= _('Your request:') %></label>
-            <%= o.text_area :body, :rows => 20, :cols => 60 %>
+            <label style="float: left;display:block;width:20%" class="form_label" for="outgoing_message_body"><%= _('Your request:') %></label>
+            <%= o.text_area :body, id: "request-body" %>
         
         <% end %>
-
+<div style="clear:both;margin-left:128px;padding-top:5px">
 <% if !@user %>
             <p class="form_note">
                 <%= _("Зазначені вами ім'я та прізвище повідомляються розпоряднику інформації, до якого ви адресуєте свій запит, а також оприлюднюються на сайті. Так само автоматично оприлюднюється повний текст вашого запиту і повний текст відповіді на нього.<br/>
@@ -170,16 +147,24 @@
             </p>
         <% end %>
 
-        </div>
 <% end %>
 </div>
- </div>
- <div id="right_column">
-      <div id="frontpage_right_to_know">
-        <%= render :partial => 'general/frontpage_intro_sentence'  %>
-      </div>
-   </div>   
+</div>
 
+<div column="right_column" style="float: right; width:30%;">
+  <div class="steps-sidebar">
+  	<%= image_tag("choose-icon.png") %>
+  </div>
+  <div style="display:table" class="here-now">
+	<%= render :partial => 'general/zaraz_na_sajti' %>
+</div>
+<div class="choice">
+	<%= render :partial => 'general/vybir_red' %>
+</div>
+<div class="toz">
+	<%= render :partial => 'general/top_zapyty' %>
+</div>
+</div>
 
 
 <% if @batch %>

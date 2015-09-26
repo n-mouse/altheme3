@@ -1,11 +1,6 @@
-<div id="right_column">
- <div id="right_column">
-      <div id="frontpage_right_to_know" style="margin-top:10px;margin-bottom:30px">
-        <%= render :partial => 'general/frontpage_intro_sentence'  %>
-      </div>
-   </div>  
+<div class="single-req">
   <div id="follow_box">
-    <h4><%= _('Follow this request') %></h4>
+    <h4><%= _('Відслідковування запиту') %></h4>
 
     <% follower_count = TrackThing.count(:all, :conditions => ["info_request_id = ?", @info_request.id]) + 1 %>
     <p><%= n_("There is {{count}} person following this request",
@@ -31,7 +26,7 @@
           <p><%= raw(_('This request has been marked for review by the site administrators, who have not hidden it at this time. If you believe it should be hidden, please <a href="%s">contact us</a>.') % [help_requesting_path]) %></p>
         <% end %>
      <% else %>
-      <p><%= _('Requests for personal information and vexatious requests are not considered valid for FOI purposes (<a href="/help/about">read more</a>).') %></p>
+      <p><%= _('Запити про особисту інформацію або беззмістовні запити не відповідають принципам цього сайту') %></p>
        <p><%= _('If you believe this request is not suitable, you can report it for attention by the site administrators') %></p>
        <%= link_to _("Report this request"), new_request_report_path(:request_id => @info_request.url_title) %>
       <% end %>
@@ -43,16 +38,15 @@
           # interact badly with ':' character. Go figure! Might go away in rails 3
         %><p>
         <%= link_to "https://twitter.com/share?" + {:url => request.url, :via => AlaveteliConfiguration::twitter_username, :text => @info_request.title, :related => _('alaveteli_foi:The software that runs {{site_name}}', :site_name => "Доступ до правди").to_str}.to_query do %>
-          <%= image_tag "twitter-16.png", :alt => "twitter icon" %>
+          <%= image_tag "tw.png", :alt => "twitter icon", :size=> "16x16" %>
           <%= _("Tweet this request") %>
         <% end %></p><p>
          <%= link_to "http://www.facebook.com/sharer/sharer.php?" + {:u => request.url}.to_query do %>
-          <%= image_tag "fb-16.png", :alt => "facebook icon" %>
+          <%= image_tag "fb.png", :alt => "facebook icon", :size=> "16x16" %>
           <%= _("Поширте через Facebook") %>
         <% end %>
         </p>
     </div>
 
     <%= render :partial => 'request/next_actions' %>
-
 </div>

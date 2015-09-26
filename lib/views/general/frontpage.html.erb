@@ -1,19 +1,23 @@
-<%# TODO: Cache for 5 minutes %>
-  <div id="frontpage_splash">
-    <div id="left_column">
-      <%= render :partial => "frontpage_new_request" %>
-        <div id="frontpage_examples2">
-      <%= render :partial => "frontpage_requests_list" %>
-  </div>
-    </div>
-    <div id="right_column">
-      <div id="frontpage_right_to_know">
-        <%= render :partial => 'frontpage_intro_sentence'  %>
-      </div>
-      <div id="frontpage_search_box">
-        <%= render :partial => "frontpage_search_box" %>
-      </div> 
-    </div>
-    <div style="clear:both"></div>
-  </div>
+<div class="choice-title">ВИБІР РЕДАКЦІЇ</div>
+<div class="ed-choice"></div>
+<div class="how-to-title">
+	ЯК НАДІСЛАТИ ЗАПИТ
+</div>
+<div class="how-to-steps">
+	<%= image_tag("13-layers.png")%>
+	<section class="count1"><%= link_to PublicBody.visible.count.to_s, list_public_bodies_default_path, class: "fp-count" %> <br />розпорядників </section>
+    <section class="count2"><%= link_to InfoRequest.visible.count.to_s, request_list_all_path, class: "fp-count" %> <br />запитів </section>
+	<%= link_to "Запитати #{image_tag('arr.png')}".html_safe, list_public_bodies_default_path, :class=>"orange-button" %>
+	<div style="width:640px; height: 65px; background-color:#d8d8d8; margin-top:7px"></div>
+</div>
+
+<div style="clear: both">
+	<section class="fp pub1">ПУБЛІКАЦІЇ</section>
+	<section class="fp pub2">ПУБЛІКАЦІЇ</section>
+	<section class="righties">
+		<%= render :partial => 'general/top_zapyty' %>
+		<p class="part-title">FACEBOOK</p>
+<div class="fb-page" data-href="https://www.facebook.com/dostupdopravdy" data-height="460" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/dostupdopravdy"><a href="https://www.facebook.com/dostupdopravdy">Доступ до Правди</a></blockquote></div></div>
+	</section>
+</div>
 

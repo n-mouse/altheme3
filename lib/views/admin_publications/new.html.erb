@@ -1,23 +1,27 @@
 <h1>Нова публікація</h1>
 <div class="add_article">
-<%= form_for @publication, :as => :publication, :url => admin_publications_path do |f| %>
+<%= form_for @publication, :as => :publication, :url => admin_publications_path, html: { multipart: true } do |f| %>
   <p>
-    <%= f.label "Назва" %><br>
+    <%= f.label "Назва" %>
     <%= f.text_field :title %>
   </p>
  
   <p>
-    <%= f.label "Текст" %><br>
-    <%= f.text_area :body  %>
+    <%= f.label "Текст" %>
+    <%= f.text_area :body, :class => "tinymce"  %>
+
   </p>
 
   <p>
-    <%= f.label "Тип" %><br>
+    <%= f.label "Тип" %> 
     <%= f.select :category, options_for_select([['новина','news'],['історія','story']]) %>
   </p>
-
   <p>
-    <%= f.label "Опубліковано?" %><br>
+   <%= f.label "Зображення (645x295)" %> 
+    <%= f.file_field :image %>
+  </p>
+  <p>
+    <%= f.label "Опубліковано?" %>
     <%= f.check_box :published %>
   </p>
  
@@ -26,3 +30,5 @@
   </p>
 <% end %>
 </div>
+
+<%= tinymce %>

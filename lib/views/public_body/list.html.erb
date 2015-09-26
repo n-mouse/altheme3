@@ -1,55 +1,6 @@
-<div id="frontpage_splash">
-<div id="left_column">
-<span class="ohr">
-  <%= _("Реалізуй своє право на доступ до публічної інформації") %>
-</span>
-
-<div id="stepwise" style="padding-top:20px">
-  <%= image_tag('step1.png')%>
-
-</div>
-<div style="margin-top:40px">
-<h3 class="ohr">Оберіть розпорядника інформації</h3>
-  <%= form_tag(list_public_bodies_default_path, :method => "get", :id=>"search_form") do %>
-  <div>
-  <%= text_field_tag(:public_body_query, params[:public_body_query]) %> 
-  <%= submit_tag(_("Search")) %>
-  </div>
-
-  <% end %>
-</div>
-
-    <% if AlaveteliConfiguration.allow_batch_requests && @user && @user.can_make_batch_requests? %>
-      <div id="batch_request_link">
-        <p>
-          <%= _(' Ви можете зробити <a href="{{url}}">груповий запит</a> до <strong>кількох розпорядників</strong> одночасно.',
-                :url => select_authorities_path) %>
-        </p>
-      </div>
-    <% end %>
-
-<h3 class="ohr">
-  <%= n_('Found {{count}} public authority {{description}}',
-        'Found {{count}} public authorities {{description}}',
-        @public_bodies.total_entries,
-        :count => @public_bodies.total_entries,
-        :description => @description) %>
-</h3>
-<%= render :partial => 'body_listing', :locals => { :public_bodies => @public_bodies } %>
-
-  <%= will_paginate @public_bodies, :previous_label => t("Попередні"), :next_label => t("Наступні") %>
-
-    </div>
- <div id="right_column">
-      <div id="frontpage_right_to_know">
-        <%= render :partial => 'general/frontpage_intro_sentence'  %>
-      </div>
-      <div id="frontpage_search_box">
-      <h3 class="ohr"><%=_('Пошук за алфавітом') %></h3>
-    <ul><li>
+<div class="left_column pb-categories" style="width: 27%; float: left; padding-right:7px">
+      <p><strong>За алфавітом</strong></p>
         <%= render :partial => 'alphabet' %>
-    </li>
-    </ul>
     <% first_row = true %>
     <% for row in PublicBodyCategory.get().with_headings() %>
         <% if row.instance_of?(Array) %>
@@ -62,15 +13,63 @@
             <% else %>
                 <% first_row = false %>
             <% end %>
-            <h3 class="ohr"><%=h row%></h3>
-            <ul>
+            <p><strong><%=h row%></strong></p>
+            <ul class="pb-list">
         <% end %>
     <% end %>
     <% if not first_row %>
 	    </ul>
     <% end %>
-    <%= render :partial => "list_sidebar_extra" %>
-      </div>
+<p >
+  <%= link_to "Ми когось забули? Напишіть нам, якщо хочете додати розпорядника", help_contact_path, :style=>"color:#E15F42; font-weight:500" %>
+</p>
 </div>
+
+
+<div class="middle_column" style="float: left; width:42%; padding-left:5px;padding-right:5px">
+<p><strong>Оберіть розпорядника інформації</strong></p>
+  <%= form_tag(list_public_bodies_default_path, :method => "get", :id=>"pb-search-form") do %>
+  <%= text_field_tag(:public_body_query, params[:public_body_query], :id=>"pb-input") %> 
+  <%= submit_tag "Пошук", :id=>"pb-submit" %>
+
+  <% end %>
+
+    <% if AlaveteliConfiguration.allow_batch_requests && @user && @user.can_make_batch_requests? %>
+      <div id="batch_request_link">
+        <p>
+          <%= _(' Ви можете зробити <a href="{{url}}">груповий запит</a> до <strong>кількох розпорядників</strong> одночасно.',
+                :url => select_authorities_path) %>
+        </p>
+      </div>
+    <% end %>
+
+<p><strong>
+  <%= n_('Знайдено розпорядників: {{count}}',
+        'Знайдено розпорядників: {{count}}',
+        @public_bodies.total_entries,
+        :count => @public_bodies.total_entries) %>
+</strong></p>
+<%= render :partial => 'body_listing', :locals => { :public_bodies => @public_bodies } %>
+
+  <%= will_paginate @public_bodies, :previous_label => t("Попередні"), :next_label => t("Наступні") %>
+
+    </div>
+<div column="right_column" style="float: right; width:30%;">
+  <div class="steps-sidebar">
+  	<%= image_tag("choose-icon.png") %>
   </div>
+  <div style="display:table" class="here-now">
+	<%= render :partial => 'general/zaraz_na_sajti' %>
+</div>
+<div class="choice">
+	<%= render :partial => 'general/vybir_red' %>
+</div>
+<div class="toz">
+	<%= render :partial => 'general/top_zapyty' %>
+</div>
+</div>
+
+
+
+
 
