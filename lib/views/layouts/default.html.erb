@@ -41,7 +41,8 @@
 
         <%= render :partial => 'general/before_head_end' %>
     </head>
-    <body class="<%= 'front' if params[:action] == 'frontpage' %>">
+    <body class="<%= 'front' if params[:action] == 'frontpage' %>"
+    	
     	<div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -152,6 +153,7 @@ window.twttr = (function(d, s, id) {
         <li><%= link_to _("ЯК ПРАЦЮЄ САЙТ"), help_about_path %></li>
         <li><%= link_to _("ПУБЛІКАЦІЇ"), publications_path %></li>
         <li><%= link_to _("ЗВОРОТНІЙ ЗВ’ЯЗОК"), help_contact_url %></li>
+        <li><%= link_to _("СТАТИСТИКА"), public_bodies_statistics_url %></li>
     </ul>
     </nav>
   </div>

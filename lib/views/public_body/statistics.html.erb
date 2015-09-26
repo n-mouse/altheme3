@@ -1,0 +1,43 @@
+<% @title = _("Public Body Statistics") %>
+<div class="main-part-left">
+  <p class="part-title">СТАТИСТИКА</p>
+
+<p>Ця сторінка статистики є експериментальною, тому є деякі застереження, які слід мати на увазі.</p>
+<p>Відсотки розраховуються по відношенню до загального числа запитів, яке включає також невірні запити; це буде виправлено ​​в пізнішій версії.</p>
+<p>Класифікація запитів робиться вручну користувачами та адміністраторами сайту, що означає, що вони можуть бути помилковими.</p>
+<p>Запит вважається успішним, якщо його були класифіковано як "усіпішний" або «частково успішний".</p>
+<p>Запити вважається простроченим, якщо його віднесено до "прострочених" або "дуже прострочених".</p>
+<p>Некласифіковані або приховані запити не рахуються.</p>
+  <% @graph_list.each do |graph_data| %>
+    <h3 class="public-body-ranking-title"><%= graph_data['title']%></h3>
+    <div class="public-body-ranking" id="<%= graph_data['id'] %>">
+      <% if graph_data['x_values'] %>
+        <table border=0>
+          <thead>
+            <tr>
+              <th><%= _('Public Body') %></th>
+              <th><%= graph_data['y_axis'] %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% graph_data['public_bodies'].each_with_index do |pb, i| %>
+              <tr>
+                <td><%= link_to pb['name'], pb['url'] %></td>
+                <td class="statistic"><%= graph_data['y_values'][i].round %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+          <%= _("There was no data calculated for this graph yet.") %>
+      <% end %>
+    </div>
+  <% end %>
+
+<script type="text/javascript">
+  var graphs_data = <%= @graph_list.to_json.html_safe %>;
+</script>
+<!--[if lte IE 8]><%= javascript_include_tag "excanvas.min.js" %><![endif]-->
+<%= javascript_include_tag "stats" %>
+
+</div>

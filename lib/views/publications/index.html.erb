@@ -1,0 +1,24 @@
+<div class="main-part-left pub-index">
+	
+<% @publications.each do |pub| %>
+<div style="float:left;width:50%">
+  <% if pub.image %>
+    <%= image_tag pub.image_url.to_s, size: "300x185" %>
+  <% end %>
+  <h4 class="pub-title-index"><%= pub.title %></h4>
+  </div>
+<% end %>
+</div>
+
+<div class="right_column" style="float: right; width:30%;">
+
+  <div style="display:table" class="here-now">
+	<%= render :partial => 'general/zaraz_na_sajti' %>
+</div>
+<div class="choice">
+	<%= render :partial => 'general/vybir_red' %>
+</div>
+<div class="toz">
+	<%= render :partial => 'general/top_zapyty' %>
+</div>
+</div>

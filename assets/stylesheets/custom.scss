@@ -169,7 +169,7 @@ body {
 }
 
 .main-nav {
-  width: 440px;
+  width: 510px; /* 440 */
 margin: auto
 }
 
@@ -364,7 +364,7 @@ li { list-style-type: none; }
 }
 
 .main-part-left {
-  width: 66%;
+  width: 69%;
   float: left;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -618,9 +618,9 @@ h2.foi_results {
 }
 
 #notice {
-  background-color: white !important;
+  background-color: #CEE4EA !important;
   color: black;
-  border: 1px solid $blue
+  border: 2px solid $blue
   a {
     color: $blue;
   }
@@ -673,15 +673,25 @@ p#request_status {
 }
 
 div.outgoing.correspondence {
+  clear: both;
   background-color: whitesmoke;
-  border: none
+  border: none;
+  width:80%;
+  float: left;
+}
+div.incoming.correspondence {
+  clear: both;
+  background-color: whitesmoke;
+  border: none;
+  width:80%;
+  float: right;
 }
 
-.single-req a {
+.act_link a {
   color: black;
 }
 
-.single-req a:hover{
+.act_link a:hover{
   color: $blue;
   text-decoration: none;
 }
@@ -729,11 +739,37 @@ div.comment_in_request {
   color: #227791;
 }
 
-#user_show .header_left a {
+#user_show .header_left a, #user_wall .main-part-left a, .blinks, .main-part-left.single-req a {
   color: black
 }
 
-#user_show .header_left a:hover {
+#user_show .header_left a:hover, #user_wall .main-part-left a:hover, .blinks:hover, .main-part-left.single-req a:hover {
   color: $blue;
 }
 
+#describe_state_form_1 {
+  background-color: #CEE4EA !important;
+  border: 2px solid $blue
+}
+
+.public-body-ranking-title {
+  color: $orange;
+  font-size:16px;
+}
+
+.left-col {
+  float: left
+}
+
+.right-col {
+  float: right
+}
+
+
+.pub-title-index {
+padding: 0;
+margin: 0;
+font-size: 20px;
+font-weight: 700;
+line-height: 25px;
+}

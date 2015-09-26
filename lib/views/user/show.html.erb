@@ -1,3 +1,4 @@
+
 <% if @show_requests %>
   <% @title =  _("{{user_name}} - Freedom of Information requests", :user_name => h(@display_user.name)) %>
 <% else %>
@@ -10,7 +11,7 @@
     <% end %>
 <% end%>
 
-
+<div class="main-part-left">
 <div id="user_profile_header">
 <% if @show_profile %>
      <% if !@track_thing.nil? %>
@@ -68,7 +69,7 @@
         </p>
     <% end %>
   </div>
-</div>
+
 
 <% end %>
 
@@ -196,4 +197,17 @@
         <% end %>
     <% end %>
 <% end %>
+</div>
+</div>
+<div column="right_column" style="float: right; width:30%;">
+
+  <div style="display:table" class="here-now">
+	<%= render :partial => 'general/zaraz_na_sajti' %>
+</div>
+<div class="choice">
+	<%= render :partial => 'general/vybir_red' %>
+</div>
+<div class="toz">
+	<%= render :partial => 'general/top_zapyty' %>
+</div>
 </div>

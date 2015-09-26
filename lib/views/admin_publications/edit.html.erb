@@ -29,7 +29,10 @@
     <%= f.label "Тип" %><br>
     <%= f.select :category, options_for_select([['новина','news'],['історія','story']]) %>
   </p>
-
+  <p>
+   <%= f.label "Зображення (645x295)" %> 
+    <%= f.file_field :image %>
+  </p>
   <p>
     <%= f.label "Опубліковано?" %><br>
     <%= f.check_box :published %>

@@ -43,12 +43,4 @@
       </div>
     <% end %>
 
-    <div id="public_body_actions">
-    <strong><%= _('{{public_body_name}} only:',:public_body_name=>h(@info_request.public_body.name) ) %> </strong>
-      <ul>
-      <li>
-          <%= link_to _("Respond to request"), upload_response_path(:url_title => @info_request.url_title) %>
-      </li>
-      </ul>
-    </div>
 </div>

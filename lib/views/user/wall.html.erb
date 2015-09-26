@@ -1,10 +1,6 @@
 <% @title = h(@display_user.name) + _(" - wall") %>
-<div id="header_right">
-           <div id="frontpage_search_box">
-        <%= render :partial => "general/frontpage_search_box" %>
-      </div>  
-</div>  
 
+<div class="main-part-left">
 <% if @is_you %>
 <div class="medium_column">
  <p><%= _('You can change the requests and users you are following on <a href="{{profile_url}}">your profile page</a>.', :profile_url => show_user_profile_path) %>
@@ -19,4 +15,17 @@
  <% else %>
   <p><%= _("Нічого немає.") %></p>
  <% end %>
+</div>
+</div>
+<div column="right_column" style="float: right; width:30%;">
+
+  <div style="display:table" class="here-now">
+	<%= render :partial => 'general/zaraz_na_sajti' %>
+</div>
+<div class="choice">
+	<%= render :partial => 'general/vybir_red' %>
+</div>
+<div class="toz">
+	<%= render :partial => 'general/top_zapyty' %>
+</div>
 </div>

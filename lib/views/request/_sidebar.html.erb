@@ -28,7 +28,7 @@
      <% else %>
       <p><%= _('Запити про особисту інформацію або беззмістовні запити не відповідають принципам цього сайту') %></p>
        <p><%= _('If you believe this request is not suitable, you can report it for attention by the site administrators') %></p>
-       <%= link_to _("Report this request"), new_request_report_path(:request_id => @info_request.url_title) %>
+       <%= link_to _("Report this request"), new_request_report_path(:request_id => @info_request.url_title), class: "blinks" %>
       <% end %>
     <% end %>
 
