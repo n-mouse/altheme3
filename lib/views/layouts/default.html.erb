@@ -122,7 +122,27 @@ window.twttr = (function(d, s, id) {
 			<%= link_to image_tag("search.png"), request_list_all_url, class: "search-icon"  %>
 	   </section>
 	   <section class="login">
-			<%= link_to "#{image_tag('login-head.png')} <span>Авторизуватись</span>".html_safe, signin_path(:r => request.fullpath), class: "login-button" %>
+	   	<% if @user %>
+	   	<p>
+	   	  <%= _('Вітаємо, <span style="font-weight:700; color: black">{{username}}</span>!', :username => h(@user.name))%>
+          <%= link_to _("Sign out"), signout_path(:r => request.fullpath), :class=> "username "%>
+          
+	   	</p>
+        <p>
+            <% if @user %>
+                <%=link_to _("My requests"), show_user_requests_path(:url_name => @user.url_name) , :class=>"mys" %>
+                <%=link_to _("Профіль"), show_user_profile_path(:url_name => @user.url_name), :class=>"mys" %>
+                <%=link_to _("Стіна"), show_user_wall_path(:url_name => @user.url_name), :class=>"mys" %>
+            <% end %>
+</p>
+          
+      <% else %>
+          <div style="height:17px"></div>
+          <%= link_to "#{image_tag('login-head.png')} <span>Авторизуватись</span>".html_safe, signin_path(:r => request.fullpath), class: "login-button" %>
+      <% end %>
+	   	
+	   	
+			
 		</section>
 	</div>
   <div class="bottom-section">
