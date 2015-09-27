@@ -14,7 +14,7 @@ html {
 
 body {
   background: white;
-  font-family: Arial, sans-serif;
+  font-family: "Helvetica Neue";
   font-size: 14px
 }
 
@@ -23,15 +23,21 @@ body {
   padding-bottom: 80px
 }
 
-#wrapper { width: 980px; }
+#wrapper { 
+  width: 980px; 
+  font-size: 14px;
+  line-height: 16px
+}
 
 .right_column {
-  margin-bottom: 20px
+  margin-bottom: 20px;
+  margin-top: 10px;
+  float: right; 
+  width:30%;
 }
 
 #banner_inner {
   position: relative;
-  font-family: "Helvetica Neue";
   font-size: 11px;
   font-weight: 400;
   line-height: 12px;
@@ -168,7 +174,7 @@ body {
   margin-top: 65px
 }
 
-.main-nav {
+.mainmenu {
   width: 510px; /* 440 */
 margin: auto
 }
@@ -192,7 +198,8 @@ margin: auto
   color: white;
   font-size: 12px;
   display: inline-block;
-  margin-left: 20px
+  margin-left: 20px;
+  margin-top: 0;
 }
 
 .infoot a {
@@ -237,6 +244,9 @@ li { list-style-type: none; }
   width: 33%;
   height: 510px;
   background-color: #f2f2f2;
+    -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
 }
 
 .choice-title {
@@ -313,6 +323,10 @@ li { list-style-type: none; }
   font-size: 30px;
   font-weight: 700;
   line-height: 37px;
+}
+
+.fp-count:hover {
+  color: $blue
 }
 
 .fp {
@@ -409,10 +423,6 @@ form input[type="submit"]:hover {
   background-color:#AA2C12
 }
 
-.part-right {
-  float: right;
-  width: 32%
-}
 
 .how-works h3 {
   font-size: 18px;
@@ -767,9 +777,97 @@ div.comment_in_request {
 
 
 .pub-title-index {
-padding: 0;
+padding: 4px 0;
 margin: 0;
-font-size: 20px;
+font-size: 18px;
 font-weight: 700;
-line-height: 25px;
+line-height: 22px;
+a {
+  color: black;
+text-decoration: none;
+  
+}
+
+}
+
+.pub-title-index a:hover {
+  color: $orange;
+}
+
+#masonry-container {
+  padding: 5px;
+  margin-bottom: 20px;
+  clear: both;
+}
+
+.pub-date {
+  color: #ce0000;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.pub-title-single {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 32px;
+  max-width: 95%
+}
+
+#sign_together #left_half, #sign_together #right_half {
+  width: 48.5%
+}
+
+.pagination .current {
+  color:$orange;
+  text-style:normal
+}
+.pagination a {
+  color: black
+}
+
+.sbox {
+  position: relative;
+}
+
+.pb-cat {
+  background-color: $orange;
+  color: white;
+  padding:5px;
+  position: absolute;
+  left:10px;
+  top: 130px;
+}
+
+
+.bottom-section {
+  border-bottom: 1px solid #bfbfbf;
+  border-top: 1px solid #bfbfbf;
+  margin-top: 65px
+}
+
+.main-nav {
+  width: 510px; /* 440 */
+margin: auto
+}
+
+.main-nav ul li {
+  padding: 10px;
+  font-size: 12px;
+}
+
+.main-nav ul li a {
+  color: black
+}
+
+.pubs {
+  float: left;
+  width: 66.5%
+}
+
+#selected a {
+  color: $orange
+}
+
+.flot-base {
+  width: 670px !important;
 }

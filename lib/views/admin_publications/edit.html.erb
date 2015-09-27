@@ -27,7 +27,7 @@
 
   <p>
     <%= f.label "Тип" %><br>
-    <%= f.select :category, options_for_select([['новина','news'],['історія','story']]) %>
+    <%= f.select :category, options_for_select([['новина','новина'],['історія','історія'],['відео','відео']]) %>
   </p>
   <p>
    <%= f.label "Зображення (645x295)" %> 
@@ -37,7 +37,10 @@
     <%= f.label "Опубліковано?" %><br>
     <%= f.check_box :published %>
   </p>
- 
+    <p>
+    <%= f.label "Вибір редакції" %>
+    <%= f.check_box :edchoice %>
+  </p>
   <p>
     <%= f.submit "Зберегти", class: 'btn btn-success' %>
   </p>

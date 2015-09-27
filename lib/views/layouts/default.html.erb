@@ -1,56 +1,102 @@
 <!DOCTYPE html>
 <html lang="<%= I18n.locale %>">
-    <head>
-        <meta charset="utf-8">
-        <title>
-        <% if @title %>
-            <%=@title%> 
-        <% else %>
-            <%= _('Make and browse Freedom of Information (FOI) requests') %>
-        <% end %>
-        </title>
+  <head>
+    <meta charset="utf-8">
+    <title>
+      <% if @title %>
+        <%=@title%> 
+      <% else %>
+        <%= _('Make and browse Freedom of Information (FOI) requests') %>
+      <% end %>
+    </title>
 
-        <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="shortcut icon" href="/favicon.ico">
 
-        <%= render :partial => 'general/stylesheet_includes' %>
-        <% if is_admin? %>
-          <%= stylesheet_link_tag "admin", :title => "Main", :rel => "stylesheet" %>
-        <% end %>
+    <%= render :partial => 'general/stylesheet_includes' %>
+    <% if is_admin? %>
+      <%= stylesheet_link_tag "admin", :title => "Main", :rel => "stylesheet" %>
+    <% end %>
 
- <%= javascript_include_tag "application" %>
-        <% if @profile_photo_javascript %>
-            <%= javascript_include_tag "profile-photos" %>
-            <%= stylesheet_link_tag "jquery.Jcrop.css" %>
-        <% end %>
+    <%= javascript_include_tag "application" %>
+     
+    <% if @profile_photo_javascript %>
+      <%= javascript_include_tag "profile-photos" %>
+      <%= stylesheet_link_tag "jquery.Jcrop.min.css" %>
+    <% end %>
+    <% if is_admin? %>
+      <%= javascript_include_tag "bootstrap-dropdown" %>
+    <% end %>
 
-        <% if @feed_autodetect %>
-            <% for feed in @feed_autodetect %>
-                <link rel="alternate" type="application/atom+xml" title="<%=h feed[:title] %>" href="<%=h feed[:url]%>">
-                <% if feed[:has_json] %>
-                    <link rel="alternate" type="application/json" title="JSON version of <%=h feed[:title] %>" href="<%=h feed[:url]%>.json">
-                <% end %>
-            <% end %>
-        <% end %>
-        <% if @has_json %>
-            <link rel="alternate" type="application/json" title="JSON version of this page" href="<%=h url_for(request.query_parameters.merge(:format => 'json')) %>">
-        <% end %>
+    <% if @feed_autodetect %>
+      <% for feed in @feed_autodetect %>
+        <link rel="alternate" type="application/atom+xml" title="<%=h feed[:title] %>" href="<%=h feed[:url]%>">
+        <% if feed[:has_json] %>
+          <link rel="alternate" type="application/json" title="JSON version of <%=h feed[:title] %>" href="<%=h feed[:url]%>.json">
+         <% end %>
+      <% end %>
+    <% end %>
+    <% if @has_json %>
+      <link rel="alternate" type="application/json" title="JSON version of this page" href="<%=h url_for(request.query_parameters.merge(:format => 'json')) %>">
+    <% end %>
 
-        <% if @no_crawl %>
-            <meta name="robots" content="noindex, nofollow">
-        <% end %>
+    <% if @no_crawl %>
+      <meta name="robots" content="noindex, nofollow">
+    <% end %>
+    <% if @title %>
+      <meta property="og:title" content="<%= @title %>" />
+      <meta property="og:type" content="article" />
+    <% else %>
+      <meta property="og:title" content="<%= _('Make and browse Freedom of Information (FOI) requests') %>" />
+      <meta property="og:type" content="website" />
+    <% end %>
+    <%= content_for :open_graph_tags %>
+    <meta property="og:site_name" content="<%= site_name %>" />
+    <meta property="og:url" content="<%= request.original_url %>" />
+    <meta property="og:image" content="<%= "#{request.protocol}#{request.host_with_port}#{asset_path('logo.png')}" %>" />
+    <%= render :partial => 'general/before_head_end' %>
+  </head>
+    
+ <body class="<%= 'front' if params[:action] == 'frontpage' %>"
+ 
+  <% if AlaveteliConfiguration::force_registration_on_new_request && !@user %>
+      <%= javascript_include_tag 'fancybox.js' %>
+      <script type="text/javascript">
+        $(document).ready(function() {
+          $("#make-request-link").fancybox({
+            'modal': false,
+            'width': 950,
+            'height': 400,
+            'type': 'iframe',
+            'href': '/<%= FastGettext.locale %>/profile/sign_in?modal=1',
+            'onClosed': function() {
+              // modal_signin_successful variable set by modal dialog box
+              if (typeof modal_signin_successful != 'undefined' ) {
+                window.location.href = '<%= select_authority_url %>';
+              }
+            }
+          });
+        });
+      </script>
+    <% end %>
+    
+    
+<div id="fb-root"></div>
+<script>  
+window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1497998170494004',
+      xfbml      : true,
+      version    : 'v2.4'
+    });
+  };
 
-        <%= render :partial => 'general/before_head_end' %>
-    </head>
-    <body class="<%= 'front' if params[:action] == 'frontpage' %>"
-    	
-    	<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.4&appId=622186147839366";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
 
 
 window.twttr = (function(d, s, id) {
@@ -70,10 +116,6 @@ window.twttr = (function(d, s, id) {
   return t;
 }(document, "script", "twitter-wjs"));
 
-</script>
-    <% if AlaveteliConfiguration::force_registration_on_new_request && !@user %>
-    <%= javascript_include_tag 'fancybox.js' %>
-    <script type="text/javascript">
         $(document).ready(function() {
             $("#make-request-link").fancybox({
                 'modal': false,
@@ -90,7 +132,7 @@ window.twttr = (function(d, s, id) {
             });
         });
     </script>
-    <% end %>
+
 
 <% if is_admin? %>
   <%= render :partial => 'admin_general/admin_navbar' %>
@@ -150,14 +192,15 @@ window.twttr = (function(d, s, id) {
     <nav class="main-nav">
 
     <ul class="rozdily site-parts">
-        <li><%= link_to _("ЯК ПРАЦЮЄ САЙТ"), help_about_path %></li>
-        <li><%= link_to _("ПУБЛІКАЦІЇ"), publications_path %></li>
-        <li><%= link_to _("ЗВОРОТНІЙ ЗВ’ЯЗОК"), help_contact_url %></li>
-        <li><%= link_to _("СТАТИСТИКА"), public_bodies_statistics_url %></li>
+        <li id="<%= 'selected' if params[:controller] == 'help' and params[:action] == 'about' %>"><%= link_to _("ЯК ПРАЦЮЄ САЙТ"), help_about_path %></li>
+        <li id="<%= 'selected' if params[:controller] == 'publications' and params[:action] == 'index' %>"><%= link_to _("ПУБЛІКАЦІЇ"), publications_path %> </li>
+        <li id="<%= 'selected' if params[:controller] == 'help' and params[:action] == 'contact' %>"><%= link_to _("ЗВОРОТНІЙ ЗВ’ЯЗОК"), help_contact_path %></li>
+        <li id="<%= 'selected' if params[:controller] == 'public_body' and params[:action] == 'statistics' %>"><%= link_to _("СТАТИСТИКА"), public_bodies_statistics_path %></li>
     </ul>
     </nav>
   </div>
 </div>
+
 
 <div id="wrapper">
             <% if flash[:notice] %>
@@ -201,8 +244,12 @@ window.twttr = (function(d, s, id) {
 </script>
 
       <% end %>
-
-
   </div>
+  <script>
+
+
+
+  </script>
+
     </body>
 </html>

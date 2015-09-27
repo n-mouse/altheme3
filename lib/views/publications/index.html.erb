@@ -1,15 +1,19 @@
+<% @title = "Публікації" %>
 <div class="main-part-left pub-index">
-	
+<div id="masonry-container" class="rtl">	
 <% @publications.each do |pub| %>
-<div style="float:left;width:50%">
+<div class="sbox" style="width:47%">
   <% if pub.image %>
-    <%= image_tag pub.image_url.to_s, size: "300x185" %>
+    <%= link_to (image_tag pub.image_url.to_s, size: "300x185"), publication_path(pub) %>
   <% end %>
-  <h4 class="pub-title-index"><%= pub.title %></h4>
+  <h4 class="pub-title-index"><%= link_to pub.title, publication_path(pub) %></h4>
+  <p class="pub-date"><%= UnicodeUtils.upcase(l pub.created_at, :format => '%e %B %Y %H:%M') %></p>
   </div>
 <% end %>
-</div>
 
+</div>
+<div style="clear:both"><%= will_paginate @publications, :previous_label => "", :next_label => "" %></div>
+</div>
 <div class="right_column" style="float: right; width:30%;">
 
   <div style="display:table" class="here-now">
@@ -22,3 +26,13 @@
 	<%= render :partial => 'general/top_zapyty' %>
 </div>
 </div>
+<script>
+$(function(){
+
+  $('#masonry-container').masonry({
+    itemSelector: '.sbox',
+    isRTL: true
+  });
+
+});
+</script>
