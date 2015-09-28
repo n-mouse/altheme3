@@ -19,7 +19,7 @@
 	<div id="masonry-container" class="rtl">	
 <% @publications.each do |pub| %>
 <div class="mbox" style="width:49%">
-  <% if pub.image %>
+  <% if pub.image.url %>
     <%= link_to (image_tag pub.image.url, size: "300x185"), publication_path(pub) %>
   <% end %>
   <h4 class="pub-title-index"><%= link_to pub.title, publication_path(pub) %></h4>
