@@ -54,27 +54,7 @@
   </head>
     
  <body class="<%= 'front' if params[:action] == 'frontpage' %>"
- 
-  <% if AlaveteliConfiguration::force_registration_on_new_request && !@user %>
-      <%= javascript_include_tag 'fancybox.js' %>
-      <script type="text/javascript">
-        $(document).ready(function() {
-          $("#make-request-link").fancybox({
-            'modal': false,
-            'width': 950,
-            'height': 400,
-            'type': 'iframe',
-            'href': '/<%= FastGettext.locale %>/profile/sign_in?modal=1',
-            'onClosed': function() {
-              // modal_signin_successful variable set by modal dialog box
-              if (typeof modal_signin_successful != 'undefined' ) {
-                window.location.href = '<%= select_authority_url %>';
-              }
-            }
-          });
-        });
-      </script>
-    <% end %>
+
     
     
 <div id="fb-root"></div>
