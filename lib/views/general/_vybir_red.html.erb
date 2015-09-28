@@ -1,6 +1,8 @@
 
   <% Publication.chosen.published.order('created_at DESC').limit(6).each do |p| %>
-<p><%= p.title %></p>
+<section class="chosen-pub">
+<p><%= link_to p.title, publication_path(p) %></p>
 <p><%= UnicodeUtils.upcase(l p.created_at, :format => '%e %B %Y %H:%M') %></p>
+</section>
  <% end %>
 

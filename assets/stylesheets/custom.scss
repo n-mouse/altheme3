@@ -241,12 +241,17 @@ li { list-style-type: none; }
 
 .ed-choice {
   float: left;
-  width: 33%;
+
   height: 510px;
   background-color: #f2f2f2;
     -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
+  overflow: hidden;
+}
+
+.ed-choice-constrain {
+    width: 33%;
 }
 
 .choice-title {
@@ -375,6 +380,7 @@ li { list-style-type: none; }
 
 .righties {
   float: right;
+  width:33%
 }
 
 .main-part-left {
@@ -870,4 +876,24 @@ margin: auto
 
 .flot-base {
   width: 670px !important;
+}
+
+.chosen-pub {
+  border-bottom: 4px solid white;
+  padding:5px 7px;
+}
+
+.chosen-pub p {
+  font-size: 12px;
+  color: #505050;
+}
+
+.chosen-pub p a {
+        font-size: 14px;
+      color: black;
+      text-decoration:none;
+}
+
+.chosen-pub p a:hover {
+  color: $blue;
 }
