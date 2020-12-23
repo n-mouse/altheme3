@@ -1,0 +1,17 @@
+<% @title = "Додати юридичний коментар" %>
+<div class="commentary-container" style="margin-bottom: 30px;">
+<%= foi_error_messages_for :commentary %>
+
+    <div id="commentary-form">
+      <%= form_for @commentary do |f| %>
+        <p>
+          <label class="form_label"  style="font-size:20px;padding: 10px 0 20px 0;" for="commentary_content">Тема коментаря</label>
+          <%= f.text_field :subject, style: "width: 100%" %>
+          <label class="form_label"  style="font-size:20px;padding: 10px 0 20px 0;" for="commentary_content">Текст коментаря</label>
+          <%= f.text_area :content, :rows => 30, style: "width: 100%" %>
+          <%= hidden_field_tag 'info_request_id', @ir %>
+        </p>
+          <%= submit_tag "Надіслати"  %>
+      <% end %>
+     </div>
+</div>

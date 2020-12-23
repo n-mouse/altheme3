@@ -1,0 +1,28 @@
+<% @title = "Юридичні коментарі" %>
+<div class="main-part-left" style="overflow:hidden; padding-right:25px">
+  <h4 class="part-title">Юридичні коментарі</h4>
+  <% if @commentaries.blank? %>
+    <p>Поки що коментарів немає</p>
+  <% else %>
+
+    <% @commentaries.each do |c| %>
+      <div class="commentary-single">
+      	<p>Запит: <strong><%= link_to c.info_request.title, show_request_path(c.info_request.url_title, anchor: "commentary-"+c.id.to_s) %></strong></p>
+      	<p><%= c.subject unless c.subject.blank? %></p>
+      	<div class="commentary-content">
+      		<%= strip_tags(c.content).scan(/([[a-z]\d«»№а-яіїє"\-–,\.:;!?]+)/ui)[0..30].flatten.join(" ") %>...
+      		<%= link_to "Читати коментар", request_path(c.info_request, anchor: "commentary-"+c.id.to_s ) %>
+      	</div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<div class="right_column">
+  <div class="here-now sidebar-section">
+    <%= render :partial => 'general/zaraz_na_sajti' %>
+  </div>
+  <div class="sidebar-section">
+    <h4 class="part-title">Вибір редакції<h4>
+     <%= render :partial => 'general/vybir_red' %>
+  </div>
+</div>

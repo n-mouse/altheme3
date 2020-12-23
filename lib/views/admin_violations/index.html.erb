@@ -1,0 +1,47 @@
+<h1>Порушення</h1>
+<p>
+  <%= link_to "насудзадоступ - адмін", admin_nasud_path %>
+</p>
+<p>
+  <%= link_to "насудзадоступ", nasud_path %>
+</p>
+
+<table class="all-publications" style="clear:both;margin-top:60px;width: 100%;">
+<% @violations.each do |v| %>
+  <tr>
+    <td><%= link_to v.name, admin_violation_path(v) %> </td>
+    <td><%= link_to v.organization, admin_violation_path(v) %> </td>
+    <td style="width:40%"><%= link_to v.description[0...15]+"...", admin_violation_path(v) %></td>
+		<td><%= link_to ("<i class='fa fa-pencil-square-o fa-lg'></i>").html_safe, edit_admin_violation_path(v.id) %> </td>
+		<td><%= link_to ("<i class='fa fa-times fa-lg'></i>").html_safe, admin_violation_path(v),
+		              method: :delete,
+		              data: { confirm: 'Ви впевнені?' } %>
+		</td>
+  </tr>
+<% end %>
+</table>
+
+<style>
+	td {
+		padding: 5px 7px
+	}
+
+	tr {
+		border-bottom: 1px solid #ccc;
+	}
+
+	ul.types li {
+		float: left;
+		list-style:none;
+		padding:3px 6px;
+		font-size:16px;
+	}
+
+	.fa-times {
+		color: red
+	}
+</style>
+
+<script>
+
+</script>

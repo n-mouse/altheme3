@@ -1,0 +1,16 @@
+<% provide(:title, @case.title) %>
+<div class="case-single wrapper">
+  <div class="main-part-left">
+    <h3 class="pub-title-single"> <%= @case.title %> </h3>
+    <p><em><%= l @case.created_at, :format => '%e %B %Y %H:%M' %></em></p>
+    <% if @case.image_file_name %>
+      <%= image_tag @case.image.url %>
+    <% end %>
+    <div class="text" id="text" style="width:97%">
+	  <%= raw @case.body %>
+    </div>
+    <div class="fb-share-button" data-href="<%= (case_url(@case)) %>/" data-layout="button_count"></div>
+    <a style="vertical-align:-2px" href="https://twitter.com/share" class="twitter-share-button"{count} data-url="<%= (case_url(@case)) %>">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  </div>
+</div>

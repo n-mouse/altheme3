@@ -1,0 +1,47 @@
+<h1>Пропозиції фінансової допомоги</h1>
+
+<p>
+  <%= link_to "насудзадоступ - адмін", admin_nasud_path %>
+</p>
+<p>
+  <%= link_to "насудзадоступ", nasud_path %>
+</p>
+
+<table class="all-publications" style="clear:both;margin-top:60px;width: 100%;">
+<% @donations.each do |d| %>
+  <tr>
+    <td><%= link_to d.id, admin_donation_path(d) %> </td>
+    <td><%= link_to d.name, admin_donation_path(d) %> </td>
+    <td><%= link_to d.sum, admin_donation_path(d) %> </td>
+		<td><%= link_to ("<i class='fa fa-times fa-lg'></i>").html_safe, admin_donation_path(d),
+		              method: :delete,
+		              data: { confirm: 'Ви впевнені?' } %>
+		</td>
+  </tr>
+<% end %>
+</table>
+
+<style>
+	td {
+		padding: 5px 7px
+	}
+
+	tr {
+		border-bottom: 1px solid #ccc;
+	}
+
+	ul.types li {
+		float: left;
+		list-style:none;
+		padding:3px 6px;
+		font-size:16px;
+	}
+
+	.fa-times {
+		color: red
+	}
+</style>
+
+<script>
+
+</script>

@@ -1,0 +1,17 @@
+<h1>Юридичні коментарі</h1>
+
+<table class="all-publications" style="clear:both">
+<% @commentaries.each do |c| %>
+  <p>Запит <%= link_to c.info_request.title, request_path(c.info_request) %>, прокоментований користувачем <%= c.user.name %></p>
+<% end %>
+
+<style>
+	p {
+		padding: 10px 0;
+		border-bottom: 1px solid #ccc;
+		margin: 20px 0;
+	}
+</style>
+
+
+

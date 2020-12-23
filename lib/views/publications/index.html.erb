@@ -1,0 +1,62 @@
+<% @title = "Публікації" %>
+<div class="publication-list">
+  <div class="main-part-left pub-index" id="publication-list" style="position:relative">
+    <% if @intro %>
+      <h2 style="margin: 0 0 1em 0"><%= @intro %></h2>
+    <% else %>
+      <p style="font-weight:600;font-size:1.2em;margin: 0 0 1.5em 0"><%= link_to "Публікації на тему COVID19", publications_path(tag: "covid") %></p>
+    <% end %>
+    <div id="masonry-container">
+    <% @publications.each do |pub| %>
+      <div class="sbox">
+          <% if pub.image_file_name %>
+            <%= link_to (image_tag pub.image.url, size: "310x200"), category_publication_path(pub.category, pub) %>
+          <% end %>
+          <h4 class="pub-title-index"><%= link_to pub.title, category_publication_path(pub.category, pub) %></h4>
+          <p class="pub-date">
+  	        <%= (l pub.created_at, :format => '%e %B %Y %H:%M').upcase %>
+  	        <% if pub.author %>
+  	          <span><%= pub.author %></span>
+  	        <% end %>
+  	      </p>
+      </div>
+    <% end %>
+    </div>
+    <div style="clear:both"><%= will_paginate @publications %></div>
+  </div>
+  <div class="right_column" style="float: right;">
+    <div class="here-now  sidebar-section">
+	  <%= render :partial => 'general/zaraz_na_sajti' %>
+    </div>
+    <div class="sidebar-section">
+	    <h4 class="part-title">Вибір редакції</h4>
+      <div class="ed-choice">
+        <%= render :partial => 'general/vybir_red' %>
+	    </div>
+    </div>
+  </div>
+</div>
+<% content_for :javascript do %>
+  <script>
+    $(document).ready(function() {
+      $("#publication-list").imagesLoaded(function(){
+    	 $('#masonry-container').masonry({
+    							 itemSelector: '.sbox',
+    							 percentPosition: true,
+    							 isAnimated: true,
+                   gutter: 25,
+    							 animationOptions: {
+    									 duration: 700,
+    									 easing:'linear',
+    									 queue: false
+    							}
+    				});
+      })
+
+      if ($("#mob").css("display")=="block"){
+      	console.log("ff")
+      	$(".masonry").masonry("reload");
+      }
+    });
+  </script>
+<% end %>

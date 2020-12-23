@@ -1,0 +1,52 @@
+<style>
+	#case_title {
+		width: 60%
+	}
+</style>
+
+<h1>Редагування кейсу</h1>
+
+<%= form_for @case, :url => admin_case_path(@case), method: :put do |f| %>
+
+<% if @case.errors.any? %>
+  <div id="error_explanation">
+    <p>
+      Такі помилки не дають зберегти публікацію:
+    </p>
+    <ul>
+      <% @case.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<p>
+  <%= f.label "Назва" %>
+  <%= f.text_field :title %>
+</p>
+<p>
+  <%= f.label "Текст" %>
+  <%= f.text_area :body, :rel => "tinymce"   %>
+</p>
+<p style="margin:20px 0">
+ <%= f.label "Зображення (300x185)" %>
+  <%= f.file_field :image, style:"line-height: 10px;" %>
+</p>
+<% if @case.image_file_name %>
+<p style="margin:20px 0">
+ <%= image_tag @case.image.url(:thumb)%>
+ <%= f.label "Видалити?", style: "display: inline" %>
+ <%= f.check_box :remove_image %>
+</p>
+<% end %>
+<p style="margin:20px 0">
+  <%= f.label "Опубліковано?", style: "display: inline" %>
+  <%= f.check_box :published %>
+</p>
+<p>
+  <%= f.submit "Зберегти", class: 'btn btn-success' %>
+</p>
+
+<% end %>
+
+<%= link_to 'Назад', admin_case_path %>

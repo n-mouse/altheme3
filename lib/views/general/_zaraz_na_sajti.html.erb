@@ -1,0 +1,14 @@
+<h4 class="part-title">Зараз на сайті</h4>
+<div>
+  <%= link_to list_public_bodies_default_path, style: "text-decoration:none" do %>
+  	<span class="sidebar-count"><%=  PublicBody.visible.count %></span>
+  	<span class="sidebar-count-text">розпорядників<br/>інформації</span>
+  <% end %>
+
+</div>
+<div style="margin-top:10px">
+  <%= link_to request_list_all_path, style: "text-decoration:none" do %>
+  	<span class="sidebar-count"><%=  InfoRequest.is_searchable.count %></span>
+  	<span class="sidebar-count-text">запитів</span>
+  <% end %>
+</div>

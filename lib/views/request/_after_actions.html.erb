@@ -1,0 +1,78 @@
+<div id="after_actions" class="after-actions">
+  <ul>
+    <li>
+      <ul class="action-menu__menu action-menu__menu--left">
+        <% unless @info_request.is_external? %>
+          <li class="action-menu__menu__item">
+            <span class="action-menu__menu__heading">
+              <%= _("Якщо ви {{info_request_user_name}}:",
+                    :info_request_user_name => h(@info_request.user_name)) %>
+            </span>
+
+            <ul class="action-menu__menu__submenu owner_actions">
+              <li>
+                <% if @last_response.nil? %>
+                  <%= link_to _("Send a followup"), new_request_followup_path(:request_id => @info_request.id, :anchor => 'followup') %>
+                <% else %>
+                  <%= link_to _("Write a reply"), new_request_incoming_followup_path(:request_id => @info_request.id, :incoming_message_id => @last_response.id, :anchor => 'followup') %>
+                <% end %>
+              </li>
+
+              <% if @show_owner_update_status_action %>
+                <li>
+                  <%= link_to _("Update the status of this request"), request_path(@info_request, :update_status => 1) %>
+                </li>
+              <% end %>
+
+            </ul>
+          </li>
+        <% end %>
+
+        <li class="action-menu__menu__item">
+          <ul class="action-menu__menu__submenu anyone_actions">
+
+            <% if @info_request.attention_requested %>
+              <li>
+                Про цей запит було повідомлено адміністрацію сайту
+              </li>
+            <% else %>
+              <li>
+               <%= link_to _("Report this request"), new_request_report_path(:request_id => @info_request.url_title) %><span class="action-menu__info-link">
+              </span>
+              </li>
+            <% end %>
+
+            <% if feature_enabled?(:annotations) && @info_request.comments_allowed? %>
+              <li>
+                <%= link_to "Додати коментар (лише зареєстровані користувачі)", new_comment_path(:url_title => @info_request.url_title) %>
+              </li>
+            <% end %>
+
+            <% if @show_other_user_update_status_action %>
+              <li>
+                <%= link_to _('Update the status of this request'), '#describe_state_form_1' %>
+              </li>
+            <% end %>
+
+            <li>
+              <%= link_to _("Download a zip file of all correspondence"), download_entire_request_path(:url_title => @info_request.url_title) %>
+            </li>
+
+            <li>
+              <%= render :partial => 'track/rss_feed',
+                         :locals => { :track_thing => @track_thing,
+                                      :location => 'action-menu' } %>
+            </li>
+          </ul>
+        </li>
+        <li>
+	        <% if !@user.nil? && @user.legal_comment? %>
+		        <div id="lawyer_actions">
+		      	  <p> <%= link_to "Додати юридичний коментар", new_commentary_path(:ir_id => @info_request.id).html_safe %> </p>
+		        </div>
+	       <% end %>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>

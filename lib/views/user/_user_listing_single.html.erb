@@ -1,0 +1,7 @@
+<div class="user_listing">
+  <%= link_to highlight_words(display_user.name, @highlight_words), user_path(display_user) %>
+  <p class="bottomline">
+    запитів: <%= display_user.info_requests.size %>, коментарів: <%= display_user.comments.visible.size %>.
+    На сайті з <%= display_user.created_at.year %>.
+  </p>
+</div>

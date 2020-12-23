@@ -1,0 +1,30 @@
+<% @title = h(@display_user.name) + _(" - wall") %>
+
+<div class="user-container">
+  <div class="main-part-left">
+    <% if @is_you %>
+      <div class="medium_column">
+        <p><%= _('You can change the requests and users you are following on <a href="{{profile_url}}">your profile page</a>.', :profile_url => show_user_profile_path) %>
+          <%= render :partial => 'change_receive_email' %>
+      </div>
+    <% end %>
+    <div id="user_profile_search">
+      <% if !@feed_results.nil? and !@feed_results.empty? %>
+        <% for result in @feed_results %>
+          <%= render :partial => 'request/wall_listing', :locals => { :event => result, :info_request => result.info_request } %>
+        <% end %>
+      <% else %>
+        <p><%= _("Нічого немає.") %></p>
+      <% end %>
+    </div>
+  </div>
+  <div class="right_column">
+    <div class="here-now sidebar-section">
+	  <%= render :partial => 'general/zaraz_na_sajti' %>
+  </div>
+  <div class="sidebar-section">
+    <h4 class="part-title">Вибір редакції</h4>
+	  <%= render :partial => 'general/vybir_red' %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="signup-container">
+
+  <%= form_tag(signup_path, {:id => "signup_form"}) do %>
+      <%= foi_error_messages_for :user_signup %>
+
+      <p>
+        <label class="form_label" for="user_signup_email">Електронна пошта:</label>
+        <%= text_field 'user_signup', 'email', { :size => 20, :tabindex => 60 } %>
+      </p>
+      <p class="form_item_note">
+          Адреса вашої електронної пошти не повідомляється розпоряднику інформації та не оприлюднюється на сайті
+          (розпорядник отримує електронний лист з адреси сайту
+      </p>
+
+      <p>
+          <label class="form_label" for="user_signup_name"> <%= _('Your name:')%></label>
+          <%= text_field 'user_signup', 'name', { :size => 20, :tabindex => 70, :autocomplete => "off" } %>
+      </p>
+      <p class="form_item_note">
+           Зазначені вами ім'я та прізвище повідомляються розпоряднику інформації, до якого ви адресуєте свій запит, а також оприлюднюються на сайті
+          <p>
+
+  	<p class="form_item_note">
+  		<%= check_box_tag("name_public_ok",1, false, class: 'css-checkbox') %>
+  						<label for="name_public_ok" name="checkbox2_lbl" class="css-label lite-red-check"></label>
+
+  		<strong>Даю згоду</strong>, відповідно до Закону України "Про захист персональних даних",
+  	  на обробку своїх персональних даних, а саме імені, прізвища, адреси електронної пошти та інших даних,
+  	  які я добровільно повідомляю про себе при реєстрації та складанні запиту, з метою забезпечення функціонування сайту
+  	  "Доступ до Правди", що передбачає надсилання та оприлюднення запиту на інформацію і відповіді на нього.
+  	  Така обробка здійснюється в базах даних та інформаційно комунікаційних системах адміністратора сайту "Доступ до Правди"
+  	  і включає оприлюднення на зазначеному сайті повідомлених мною персональних даних.
+
+      <p>
+        <label class="form_label" for="user_signup_password">Пароль:</label>
+  	    <%= password_field 'user_signup', 'password', { :size => 15, :tabindex => 80, :autocomplete => "off", :placeholder => "Не менше 12 символів" } %>
+      </p>
+
+      <p>
+          <label class="form_label" for="user_signup_password_confirmation"> Пароль<br />(ще раз)</label>
+          <%= password_field 'user_signup', 'password_confirmation', { :size => 15, :tabindex => 90, :autocomplete => "off" } %>
+      </p>
+
+      <div class="signup-button">
+          <%= hidden_field_tag 'token', params[:token], {:id => 'signup_token' } %>
+          <%= hidden_field_tag :modal, params[:modal], {:id => 'signup_modal' } %>
+          <%= submit_tag _('Sign up') %>
+      </div>
+
+  <% end %>
+
+</div>

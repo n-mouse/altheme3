@@ -1,0 +1,101 @@
+<% @title = _("{{title}} - a Freedom of Information request to {{public_body}}",
+                :title => h(@info_request.title),
+                :public_body => (@info_request.public_body.name)) %>
+
+<% if flash[:request_sent] %><%= render :partial => 'request_sent' %><% end %>
+
+<% if @info_request.prominence == 'hidden' %>
+    <p id="hidden_request">
+    <%= _('This request has prominence \'hidden\'. You can only see it because you are logged
+    in as a super user.') %>
+    </p>
+<% end %>
+<% if @info_request.prominence == 'requester_only' %>
+    <p id="hidden_request">
+    <%= _('This request is hidden, so that only you the requester can see it. Please
+    <a href="{{url}}">contact us</a> if you are not sure why.', :url => help_requesting_path.html_safe) %>
+    </p>
+<% end %>
+<div class="request-header">
+<h1 class="request-title"><%=h(@info_request.title)%></h1>
+</div>
+<div class="request-container">
+  <div class="main-part-left single-req">
+
+
+    <% if @info_request.commentaries.count > 0 %>
+    <p>До цього запиту є юридичний коментар. <a href="#commentary">Перейти до коментаря</a></p>
+    <% end %>
+    <% if ( @update_status || @info_request.awaiting_description ) && ! @info_request.is_external? %>
+      <div class="describe_state_form" id="describe_state_form_1">
+        <%= render :partial => 'describe_state', :locals => { :id_suffix => "1" } %>
+      </div>
+    <% end %>
+    <ul style="clear:both" class="wtf">
+	  <li>
+        <p class="subtitle">
+        <% if !@user.nil? && @user.admin_page_links? %>
+          <%= _('Від:  {{user}} ({{user_admin_link}})',
+                    :user => request_user_link(@info_request, _('An anonymous user')),
+                    :user_admin_link => user_admin_link_for_request(@info_request, _('external'), _('admin'))) %><br />
+          <%= _('До:  {{public_body_link}} (<a href="{{public_body_admin_url}}">admin</a>)',
+                    :public_body_link => public_body_link(@info_request.public_body),
+                    :public_body_admin_url => admin_body_url(@info_request.public_body)) %>  <br />
+          <%= _('<a href="{{request_admin_url}}">запит в адмінці</a>',
+                    :request_admin_url => admin_request_url(@info_request)) %>
+        <% else %>
+          <%= _('Від: {{user}}',
+            :user=>request_user_link(@info_request, _('An anonymous user'))) %><br />
+          <%= _('До: {{public_body}}',:public_body=>public_body_link(@info_request.public_body)) %>
+        <% end %>
+        </p>
+      </li>
+      <li>
+        <div class="request-status">
+          <div id="request_status" class="request-status-message request-status-message--<%= @info_request.calculate_status %>">
+            <i class="icon-standalone icon_<%= @info_request.calculate_status %>"></i>
+            <p><%= status_text(@info_request,
+                            :new_responses_count => @new_responses_count,
+                            :is_owning_user => @is_owning_user,
+                            :render_to_file => @render_to_file,
+                            :old_unclassified => @old_unclassified,
+                            :redirect_to => request.fullpath) %>
+            </p>
+          </div>
+        </div>
+     </li>
+     </ul>
+     <% if @info_request_events.count > 30 %>
+       <p class='request-page-warning'>У цього запиту дуже багато відповідей, тому вони розміщені на кількох сторінках:</p>
+     <% end %>
+     <%= will_paginate @info_request_events %>
+     <% for info_request_event in @info_request_events %>
+
+        <% if info_request_event.visible %>
+            <%= render :partial => 'correspondence', :locals => { :info_request_event => info_request_event } %>
+        <% end %>
+      <% end %>
+      <% if !@info_request.commentaries.blank? %>
+        <% if @info_request.commentaries.count == 1 %>
+          <h3 class="ohr" id="commentary" style="clear:both">Юридичний коментар</h3>
+        <% else %>
+          <h3 class="ohr commentary-title" id="commentary">Юридичні коментарі</h3>
+        <% end %>
+        <% @info_request.commentaries.each do |com| %>
+          <%= render :partial => 'commentaries/single_commentary', :locals => { :com => com } %>
+        <% end %>
+      <% end %>
+      <%= will_paginate @info_request_events %>
+      <%= render :partial => 'after_actions' %>
+
+  </div>
+  <div class="right_column">
+    <div class="here-now sidebar-section">
+	    <%= render :partial => 'general/zaraz_na_sajti' %>
+    </div>
+    <div class="sidebar-section">
+	    <h4 class="part-title">Вибір редакції<h4>
+	     <%= render :partial => 'general/vybir_red' %>
+    </div>
+  </div>
+</div>

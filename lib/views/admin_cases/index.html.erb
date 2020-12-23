@@ -1,0 +1,45 @@
+<h1>Кейси "На суд за доступ"</h1>
+<p>
+  <%= link_to "насудзадоступ - адмін", admin_nasud_path %>
+</p>
+<p>
+  <%= link_to "насудзадоступ", nasud_path %>
+</p>
+
+<a class="btn btn-primary" href="/admin/nasud/cases/new">Додати кейс</a>
+
+<table class="all-publications" style="clear:both;margin-top:60px;width: 100%;">
+<% @cases.each do |p| %>
+<tr>
+<td> <%= link_to p.title, admin_case_path(p.id) %> </td>
+<td><%= p.published ? "Опубліковано" : "Драфт" %></td>
+<td><%= link_to ("<i class='fa fa-pencil-square-o fa-lg'></i>").html_safe, edit_admin_case_path(p.id) %> </td>
+<td><%= link_to ("<i class='fa fa-times fa-lg'></i>").html_safe, admin_case_path(p),
+              method: :delete,
+              data: { confirm: 'Ви впевнені?' } %>
+</td>
+<td><%= l p.created_at, :format => '%e %B %Y %H:%M' %></td>
+</tr>
+<% end %>
+</table>
+
+<style>
+	td {
+		padding: 5px 7px
+	}
+
+	tr {
+		border-bottom: 1px solid #ccc;
+	}
+
+	ul.types li {
+		float: left;
+		list-style:none;
+		padding:3px 6px;
+		font-size:16px;
+	}
+
+	.fa-times {
+		color: red
+	}
+</style>

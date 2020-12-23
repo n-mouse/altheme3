@@ -1,0 +1,116 @@
+<style>
+	#publication_title {
+		width: 60%
+	}
+
+	p {
+		padding: 10px 0
+	}
+
+    .admin .new_publication input[type="file"] {
+      line-height: 10px;
+    }
+
+    .gallery-inputs a {
+    	padding-left: 15px;
+    	vertical-align: 5px
+    }
+
+		.admin input.caption-input {
+	  	width: 40%;
+			display: block;
+			margin-top: 20px;
+	  }
+
+		.admin label {
+			font-weight: 700
+		}
+</style>
+
+<h1>Нова публікація</h1>
+<div class="add_article">
+<%= form_for @publication, :as => :publication, :url => admin_publications_path, html: { multipart: true } do |f| %>
+  <% if @publication.errors.any? %>
+    <div id="error_explanation">
+      <p>
+        Такі помилки не дають зберегти публікацію:
+      </p>
+      <ul>
+        <% @publication.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>
+    <%= f.label "Назва" %>
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label "Автор" %>
+    <%= f.text_field :author %>
+  </p>
+  <p>
+    <%= f.label "Короткий опис для rss-стрічки" %>
+    <%= f.text_field :summary %>
+  </p>
+  <p>
+    <%= f.label "Текст" %>
+    <%= f.text_area :body, :rel => "tinymce", :rows => 30  %>
+  </p>
+  <p>
+  	<%= f.label "Галерея" %>
+  </p>
+       <%= f.fields_for :images do |builder| %>
+         <%= render "image_fields", :f => builder %>
+      <% end %>
+      <p><%= link_to_add_fields "Додати зображення", f, :images %></p>
+   <p>
+    <%= f.label "Тип" %>
+    <%= f.collection_select(:category_id, Category.all, :id, :name, {:include_blank => true})  %>
+  </p>
+  <p>
+   <%= f.label "Зображення (300x185)" %>
+    <%= f.file_field :image %>
+  </p>
+  <p>
+    <%= f.label "Опубліковано?" %>
+    <%= f.check_box :published %>
+  </p>
+
+   <p>
+    <%= f.label "Вибір редакції" %>
+    <%= f.check_box :edchoice %>
+  </p>
+
+   <p>
+    <%= f.label "Спецпроект" %>
+    <%= f.select :project, Publication::PROJECTS, {include_blank: true, selected: @publication.project} %>
+  </p>
+
+    <p>
+    <%= f.label "Дата створення" %>
+    <%= f.text_field :created_at, class: "use-datepicker" %>
+  </p>
+
+  <p>
+    <%= f.submit "Зберегти", class: 'btn btn-success' %>
+  </p>
+<% end %>
+</div>
+
+<script>
+  $(".use-datepicker").datepicker(
+	{closeText: '<%= _("Done") %>',
+    prevText: '<%= _("Prev") %>',
+	nextText: '<%= _("Next") %>',
+	currentText: '<%= _("Today") %>',
+	monthNames: <%= raw I18n.translate('date.fullmonth_names')[1..-1].to_json %>,
+	monthNamesShort: <%= raw I18n.translate('date.abbr_month_names')[1..-1].to_json %>,
+	dayNames: <%= raw I18n.translate('date.day_names').to_json %>,
+	dayNamesShort: <%= raw I18n.translate('date.abbr_day_names').to_json %>,
+	dayNamesMin: <%= raw I18n.translate('date.abbr_day_names').collect{|x| x[0..0]}.to_json %>,
+	weekHeader: '<%= _("Wk") %>',
+	dateFormat: '<%= I18n.translate('date.formats.default').sub("%Y", "yy").sub("%m", "mm").sub("%d", "dd").gsub("-", "/") %>'}
+  );
+</script>

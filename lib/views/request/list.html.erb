@@ -1,0 +1,33 @@
+<% @title = "Пошук запитів" %>
+
+<div class="request-container"></div>
+  <div class="main-part-left">
+    <% if params[:tag] == 'covid' %>
+        <p style="font-size:18px"><strong><%= link_to "Усі запити", request_list_all_path %></strong></p>
+    <% else %>
+        <div>
+            <p style="font-size:18px"><strong><%= link_to "Запити про COVID19", request_list_all_path(tag: 'covid') %></strong></p>
+
+            <%= render :partial => 'request/request_filter_form' %>
+        </div>
+    <% end %>
+
+    <div class="results_section">
+      <%= render :partial => 'list_results' %>
+    </div>
+  </div>
+  <div class="right_column">
+    <div class="sidebar-section">
+      <a class="covid-btn-2" href="https://dostup.pravda.com.ua/covid">
+        <p>Як отримати інформацію про боротьбу з COVID-19 в Україні?</p>
+      </a>
+    </div>
+    <div class="here-now sidebar-section">
+	    <%= render :partial => 'general/zaraz_na_sajti' %>
+    </div>
+    <div class="sidebar-section">
+	    <h4 class="part-title">Вибір редакції<h4>
+	     <%= render :partial => 'general/vybir_red' %>
+    </div>
+  </div>
+</div>

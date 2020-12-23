@@ -1,0 +1,27 @@
+<% @title = _("Public Body Statistics") %>
+<div class="main-part-left" style="overflow:hidden; padding-right:25px">
+  <p class="part-title">Статистика</p>
+
+<p>Ця сторінка статистики є експериментальною, тому є деякі застереження, які слід мати на увазі.</p>
+<p>Відсотки розраховуються по відношенню до загального числа запитів, яке включає також невірні запити; це буде виправлено ​​в пізнішій версії.</p>
+<p>Класифікація запитів робиться вручну користувачами та адміністраторами сайту, що означає, що вони можуть бути помилковими.</p>
+<p>Запит вважається успішним, якщо його були класифіковано як "усіпішний" або «частково успішний".</p>
+<p>Запити вважається простроченим, якщо його віднесено до "прострочених" або "дуже прострочених".</p>
+<p><strong>Некласифіковані або приховані запити не рахуються.</strong></p>
+<div class="charts"></div>
+<script type="text/javascript">
+  var graphs_data = <%= @graph_list.to_json.html_safe %>;
+</script>
+<!--[if lte IE 8]><%= javascript_include_tag "excanvas.min.js" %><![endif]-->
+<%= javascript_include_tag "stats" %>
+
+</div>
+<div class="right_column">
+    <div class="here-now sidebar-section">
+	    <%= render :partial => 'general/zaraz_na_sajti' %>
+    </div>
+    <div class="sidebar-section">
+	    <h4 class="part-title">Вибір редакції<h4>
+	     <%= render :partial => 'general/vybir_red' %>
+    </div>
+</div>

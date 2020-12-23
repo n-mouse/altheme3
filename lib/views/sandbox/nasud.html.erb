@@ -1,0 +1,35 @@
+<% provide(:title, "Позови з питань доступу до інформації") %>
+<section class="section">
+  <div class="wrapper wrapper--wide">
+    <% flash.each do |key, value| %>
+      <div class="alert alert--<%= key %>"><%= value %></div>
+    <% end %>
+    <h2>Про проект</h2>
+    <p>#насудзадоступ — це ініціатива журналістки та активістки з відкритих даних та доступу до інформації Надії Бабинської (Вірної). Ідея зародилась восени 2016 року, адже 640 грн. судового збору (зараз 720 грн.) за позов щодо захисту права на доступ є непідйомним для багатьох. </p>
+    <p>Збір коштів розпочався 21 березня 2017 року постом на <a target="_blank" href="https://www.facebook.com/photo.php?fbid=10210563224769632&set=a.2257700274783.124521.1016647586&type=3&permPage=1">фб-сторінці</a>. За дві години друзі зголосились надати кошти на 5 судових позовів. Гроші на компенсацію судового збору надають друзі <a href="https://www.facebook.com/nadiia.babynska">Надії Бабинської</a>, юридичну підтримку - <a href="http://www.ppl.org.ua/">Платформа прав людини</a>, інформаційну підтримку - <a target="_blank" href="https://dostup.pravda.com.ua">Доступ до правди.</a></p>
+    <p>
+      Фінансову підтримку для створення сторінки надали
+      <a target="_blank" href="https://www.state.gov/">US Department of State</a>,
+      <a target="_blank" href="http://frsi.org.pl/">Fundacja rozwoju spoleczenstwa informacyjnego</a> та
+      <a target="_blank" href="http://www.digicomnet.org/">Digital Communication Network</a>
+    </p>
+    <p class="nasud-count">Наразі підтримано <span><strong>20 позовів</strong>,</span> зібрано <span><strong>20000 грн</strong></span></p>
+
+
+  </div>
+</section>
+<section class="section">
+  <h2>Кейси</h2>
+  <div class="cases">
+    <% @cases.each do |pub| %>
+    <div class="case">
+      <% if pub.image_file_name %>
+        <%= link_to (image_tag pub.image.url(:medium), size: "300x185"), case_path(pub), target: "_blank" %>
+      <% else %>
+        <%= link_to (image_tag "https://dostup.pravda.com.ua/system/publications/images/000/001/350/original/%D1%81%D0%BD%D1%83.jpg", size: "310x200"), case_path(pub), target: "_blank" %>
+      <% end %>
+      <h4 class="case__title"><%= link_to pub.title, case_path(pub), target: "_blank" %></h4>
+    </div>
+    <% end %>
+  </div>
+</section>

@@ -1,0 +1,24 @@
+<div class="correspondence_text">
+    <%  if not attachments.nil? and attachments.size > 0 %>
+        <div class="attachments">
+          <ul class="list-of-attachments">
+            <% attachments.each do |a| %>
+              <li class="attachment">
+                <%= attachment_link(incoming_message, a) %>
+
+                <p class="attachment__name">
+                  <%= h a.display_filename %>
+                </p>
+
+                <p class="attachment__meta">
+                  <%= a.display_size %>
+                  <%= link_to "Завантажити", attachment_path(incoming_message, a) %>
+                  <%= a.extra_note %>
+                </p>
+              </li>
+            <% end %>
+            </ul>
+        </div>
+    <% end %>
+    <p><%= body %></p>
+</div>

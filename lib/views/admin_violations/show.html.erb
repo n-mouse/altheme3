@@ -1,0 +1,21 @@
+<h3> Повідомлення про порушення права на інформацію </h3>
+<p>Ім'я: <%= @violation.name %></p>
+<p>Організація: <%= @violation.organization %></p>
+<p>Опис:</p>
+<p><%= @violation.description %></p>
+<p>Телефон: <%= @violation.phone %></p>
+<p>Мейл: <%= @violation.email %></p>
+<p>Лінк на соцмережі: <%= @violation.link %></p>
+<p>Лінк на запит: <%= @violation.rlink %> </p>
+<% if @violation.req_file_name %>
+<p>
+  <%= link_to "запит", @violation.req.url  %>
+</p>
+<% end %>
+<% if @violation.resp_file_name %>
+  <p>
+    <%= link_to "відповідь", @violation.resp.url  %>
+  </p>
+<% end %>
+
+<%= link_to _("Редагувати"), edit_admin_violation_path(@violation), :class => "btn btn-primary" %>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>" style="height:100%">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <%= csrf_meta_tag %>
+
+    <title>
+      <% if @title %>
+        <%= @title+" | Доступ до правди" %>
+      <% else %>
+        Доступ до правди
+      <% end %>
+    </title>
+
+    <%= favicon_link_tag asset_path('favicon.ico') %>
+    <link rel="alternate" type="application/rss+xml" title="Доступ до правди" href="https://dostup.pravda.com.ua/feed?format=rss">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700&amp;subset=cyrillic-ext" rel="stylesheet">
+
+    <%= render :partial => 'general/stylesheet_includes' %>
+    <% if is_admin? %>
+      <%= stylesheet_link_tag "admin", :title => "Main", :rel => "stylesheet" %>
+    <% end %>
+
+    <% if @feed_autodetect %>
+      <% for feed in @feed_autodetect %>
+        <link rel="alternate" type="application/atom+xml" title="<%=h feed[:title] %>" href="<%=h feed[:url]%>">
+        <% if feed[:has_json] %>
+          <link rel="alternate" type="application/json" title="JSON version of <%=h feed[:title] %>" href="<%=h feed[:url]%>.json">
+         <% end %>
+      <% end %>
+    <% end %>
+    <% if @has_json %>
+      <link rel="alternate" type="application/json" title="JSON version of this page" href="<%=h url_for(request.query_parameters.merge(:format => 'json')) %>">
+    <% end %>
+
+    <% if @no_crawl %>
+      <meta name="robots" content="noindex, nofollow">
+    <% end %>
+    <% if @title %>
+      <meta property="og:title" content="<%= @title %>" />
+      <meta property="og:type" content="article" />
+    <% else %>
+      <meta property="og:title" content="Доступ до правди" />
+      <meta property="og:type" content="website" />
+    <% end %>
+    <%= content_for :open_graph_tags %>
+    <meta property="og:site_name" content="<%= site_name %>" />
+    <meta property="fb:app_id" content="1497998170494004" />
+    <% if @publication && @publication.image_file_name %>
+      <meta property="og:image"  content="<%= "#{request.protocol}#{request.host_with_port}"+@publication.image.url %>" />
+    <% else %>
+     <meta property="og:image" content="<%= "#{request.protocol}#{request.host_with_port}#{asset_path('mainlogo.png')}" %>" />
+    <% end %>
+    <script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-37877049-2', 'auto');
+	  ga('send', 'pageview');
+  </script>
+
+</head>
+
+  <body class="<%= 'front' if params[:action] == 'frontpage' %> ">
+    <div id="fb-root"></div>
+    <script>
+    	window.fbAsyncInit = function() {
+    	    FB.init({
+    	      appId      : '1497998170494004',
+    	      xfbml      : true,
+    	      version    : 'v2.4'
+    	    });
+    	  };
+
+    	  (function(d, s, id){
+    	     var js, fjs = d.getElementsByTagName(s)[0];
+    	     if (d.getElementById(id)) {return;}
+    	     js = d.createElement(s); js.id = id;
+    	     js.src = "//connect.facebook.net/uk_UA/sdk.js";
+    	     fjs.parentNode.insertBefore(js, fjs);
+    	   }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <% if is_admin? %>
+      <%= render :partial => 'admin_general/admin_navbar' %>
+    <% end %>
+
+    <div id="banner-inner">
+      <div class="top-section">
+        <div class="wrapper">
+            <ul class="rozdily up">
+                <li><%= link_to _("Політика"), "http://www.pravda.com.ua/" %></li>
+                <li><%= link_to _("Економіка"), "http://www.epravda.com.ua/" %></li>
+                <li><%= link_to _("Європа"), "http://www.eurointegration.com.ua/" %></li>
+                <li><%= link_to _("Форум"), "http://forum.pravda.com.ua/" %></li>
+                <li><%= link_to _("Історична правда"), "http://www.istpravda.com.ua/" %></li>
+                <li><%= link_to _("Блоги"), "http://blogs.pravda.com.ua/" %></li>
+                <li><%= link_to _("Життя"), "http://life.pravda.com.ua/" %></li>
+                <li><%= link_to _("Спорт"), "http://www.champion.com.ua/" %></li>
+                <li><%= link_to _("Київ"), "http://kiev.pravda.com.ua/" %></li>
+                <li><%= link_to _("Таблоid"), "http://tabloid.pravda.com.ua/" %></li>
+                <li><span>ДОСТУП</span></li>
+            </ul>
+        </div>
+      </div>
+      <div class="header wrapper">
+        <section class="header__socials" style="flex:2">
+          <%= link_to image_tag('fb.png'), 'https://www.facebook.com/pages/%D0%94%D0%BE%D1%81%D1%82%D1%83%D0%BF-%D0%B4%D0%BE-%D0%9F%D1%80%D0%B0%D0%B2%D0%B4%D0%B8/699190593466761', :class=>'fbtw' %>
+          <%= link_to image_tag('tw.png'), "https://twitter.com/DostupPravda", :class=>'fbtw' %>
+        </section>
+        <section class="header__title">
+          <%= link_to image_tag("mainlogo.png", height:"40"), frontpage_url, alt: "logo" %>
+        </section>
+        <section class="header__title--mob">
+          <%= link_to image_tag("mainlogo-small.png", style: "height: 30px"), frontpage_url %>
+          <%= link_to "Доступ до правди", frontpage_url, class: "logo-text" %>
+        </section>
+        <% if @user %>
+          <section class="header__search-login header__search-login--user" style="text-align:right;flex:2">
+            <svg id="menu-icon" height="32px" viewBox="0 0 32 32" width="32px"><path d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2  S29.104,22,28,22z"/></svg>
+            <%= link_to search_general_path, class: "search-icon" do  %>
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <title>search</title>
+                <path d="M21.7 20.3l-3.7-3.7c1.2-1.5 2-3.5 2-5.6 0-5-4-9-9-9s-9 4-9 9c0 5 4 9 9 9 2.1 0 4.1-0.7 5.6-2l3.7 3.7c0.2 0.2 0.5 0.3 0.7 0.3s0.5-0.1 0.7-0.3c0.4-0.4 0.4-1 0-1.4zM4 11c0-3.9 3.1-7 7-7s7 3.1 7 7c0 1.9-0.8 3.7-2 4.9 0 0 0 0 0 0s0 0 0 0c-1.3 1.3-3 2-4.9 2-4 0.1-7.1-3-7.1-6.9z"></path>
+              </svg>
+            <% end %>
+            <p>
+                <%= _('Вітаємо, <span style="font-weight:700; color: black">{{username}}</span>!', :username => h(@user.name))%>
+                <%= link_to "Вийти", signout_path(:r => request.fullpath), :class=> "username "%>
+            </p>
+            <p>
+                <%=link_to "Мої запити", show_user_requests_path(:url_name => @user.url_name) , :class=>"mys" %>
+                <%=link_to "Профіль", show_user_profile_path(:url_name => @user.url_name), :class=>"mys" %>
+                <%=link_to "Стіна", show_user_wall_path(:url_name => @user.url_name), :class=>"mys" %>
+            </p>
+          </section>
+        <% else %>
+          <section class="header__search-login" style="text-align:right;flex:2">
+            <svg id="menu-icon" height="32px" viewBox="0 0 32 32" width="32px"><path d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2  S29.104,22,28,22z"/></svg>
+            <%= link_to search_general_path, class: "search-icon" do  %>
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <title>пошук</title>
+                <path d="M21.7 20.3l-3.7-3.7c1.2-1.5 2-3.5 2-5.6 0-5-4-9-9-9s-9 4-9 9c0 5 4 9 9 9 2.1 0 4.1-0.7 5.6-2l3.7 3.7c0.2 0.2 0.5 0.3 0.7 0.3s0.5-0.1 0.7-0.3c0.4-0.4 0.4-1 0-1.4zM4 11c0-3.9 3.1-7 7-7s7 3.1 7 7c0 1.9-0.8 3.7-2 4.9 0 0 0 0 0 0s0 0 0 0c-1.3 1.3-3 2-4.9 2-4 0.1-7.1-3-7.1-6.9z"></path>
+              </svg>
+            <% end %>
+            <%= link_to "#{image_tag('login-head.png')} <span>Увійти</span>".html_safe, signin_path(:r => request.fullpath), class: "login-button" %>
+          </section>
+        <% end %>
+      </div>
+      <div class="bottom-section">
+        <ul class="site-parts rozdily main-nav wrapper" id="menu">
+            <li id="<%= 'selected' if params[:controller] == 'help' and params[:action] == 'about' %>"><%= link_to _("Як працює сайт"), help_about_path %></li>
+            <li id="<%= 'selected' if params[:controller] == 'public_body' and params[:action] == 'list' %>"><%= link_to _("Зробити запит"), list_public_bodies_default_path %></li>
+            <li id="<%= 'selected' if params[:controller] == 'publications' and params[:action] == 'index' %>"><%= link_to _("Публікації"), publications_path %> </li>
+            <li id="<%= 'selected' if params[:controller] == 'commentaries' and params[:action] == 'index' %>"><%= link_to _("Юридичні коментарі"), commentaries_path %></li>
+            <li id="<%= 'selected' if params[:controller] == 'help' and params[:action] == 'contact' %>"><%= link_to _("Контакт"), help_contact_path %></li>
+            <li id="<%= 'selected' if params[:controller] == 'public_body' and params[:action] == 'statistics' %>"><%= link_to _("Статистика"), statistics_path %></li>
+            <li><%= link_to _("#насудзадоступ"), nasud_path %></li>
+            <li class="search-mobile"><%= link_to "Пошук", search_general_path %></li>
+        </ul>
+      </div>
+    </div>
+    <% if params[:controller] == 'publications' || params[:controller] == 'categories' %>
+      <div class="bottom-section-sub">
+        <ul class="site-parts rozdily main-nav">
+          <% @categories.each do |category| %>
+            <li id="<%= 'selected' if params[:id] == category.slug || params[:category_id] == category.slug  %>">
+              <%= link_to category.name, category_path(category) %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="wrapper" id="main">
+      <% if flash[:notice] %>
+        <div id="notice"><%= render_flash(flash[:notice]) %></div>
+      <% end %>
+      <% if flash[:error] %>
+        <div id="error"><%= render_flash(flash[:error]) %></div>
+      <% end %>
+      <div id="<%= controller.controller_name + "_" + controller.action_name %>" class="controller_<%= controller.controller_name %>">
+      	<%= yield :layout %>
+      </div>
+      <div style="clear:both"></div>
+      <div id="mob"></div>
+    </div>
+    <div class="footer">
+      <div class="infoot">
+        <div class="footer-l">
+          <%= link_to image_tag('centreua.png'), 'http://uacentre.org.ua', :id=>'centlogo' %>
+        </div>
+        <div class="footer-r">
+        Сайт "Доступ до правди" було створено за ініціативи ГО "Центр UA" на базі програмного забезпечення Alaveteli за підтримки Уряду Швеції, Omidyar Network та проекту "Об'єднуємося заради реформ" (UNITER), який фінансується Агентством США з міжнародного розвитку (USAID) та виконується організацією Pact, Inc. в Україні". У листопаді 2017 року усі права на сайт було передано ГО "Платформа прав людини".
+        </div>
+      </div>
+    </div>
+    <div id="link_box"><span class="close-button">X</span>
+      <%= _("Paste this link into emails, tweets, and anywhere else:") %>
+      <br />
+      <label class="visually-hidden" for="link_box__text">Link</label>
+      <input type="text" id="link_box__text">
+    </div>
+    <%= javascript_include_tag "application" %>
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <%= javascript_include_tag 'fancybox.js' %>
+    <%= content_for :javascript %>
+    <script>
+    	$("#menu-icon").on("click", function() {
+    	  $("#menu").slideToggle();
+    	  if ($(".bottom-section").height()===0){
+    	  	$(".bottom-section").height("auto");
+    	  } else {
+    	  	$(".bottom-section").height(0);
+    	  }
+    	})
+    </script>
+
+  </body>
+</html>

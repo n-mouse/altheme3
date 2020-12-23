@@ -1,0 +1,12 @@
+<div>
+  <% Publication.chosen.published.order('created_at DESC').limit(3).each do |p| %>
+  <section class="chosen-pub">
+	<div>
+      <p><%= link_to p.title, category_publication_path(p.category, p) %></p>
+      <% if p.author %>
+	   <p class="vybir-au">  <%= p.author %></p>
+	  <% end %>
+    </div>
+   </section>
+ <% end %>
+</div>

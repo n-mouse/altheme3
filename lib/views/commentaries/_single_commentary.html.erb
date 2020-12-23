@@ -1,0 +1,11 @@
+<div class="commentary" id="commentary-<%= com.id %>">
+	<p>
+		<% if @user && @user.legal_comment? %>
+		(<%= link_to "редагувати", edit_commentary_path(com, :ir_id => @info_request.id).html_safe %>)
+		<% end %>
+	</p>
+	<div class="commentary-content">
+		<p><strong><%= com.subject unless com.subject.blank? %></strong></p>
+		<%= simple_format (auto_link(com.content)) %>
+	</div>
+</div> 

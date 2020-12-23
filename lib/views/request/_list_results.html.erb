@@ -1,0 +1,20 @@
+<% if params[:tag] == 'covid' %>
+    <% @info_requests1 = InfoRequest.where(["lower(title) like lower('%'||?||'%')", 'covid']) %>
+    <% @info_requests2 = InfoRequest.where(["lower(title) like lower('%'||?||'%')", 'корон_в_рус']) %>
+    
+    <% @results = @info_requests1+@info_requests2 %>
+
+<% else %>
+  <% @results = InfoRequest.request_list(@filters, @page, @per_page, @max_results) %>
+    <% if @results[:results].empty? %>
+        <p> <%= _('No requests of this sort yet.')%></p>
+    <% else %>
+  	 <h2 class="foi_results"><%= _('Знайдено запитів: {{count}}', :count => @results[:matches_estimated]) %></h2>
+        <div class="results_block">
+          <% @results[:results].each do |result| %>
+            <%= render :partial => 'request/request_listing_via_event', :locals => { :event => result, :info_request => result.info_request } %>
+          <% end %>
+        </div>
+    <% end %>
+    <%= will_paginate WillPaginate::Collection.new(@page, @per_page, @results[:show_no_more_than]) %>
+<% end %>

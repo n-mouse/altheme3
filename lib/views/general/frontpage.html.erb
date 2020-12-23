@@ -1,0 +1,126 @@
+<div class="frontpage__top">
+	<div class="frontpage__left" >
+		<div class="frontpage__commentaries">
+			<% unless @commentaries.blank? %>
+			    <h2 class="part-title">Коментує юрист</h2>
+			    <% @commentaries.each do |c| %>
+			      <div class="commentary-frontpage-single">
+			        <div class="commentary-single">
+			          <p><%= c.subject unless c.subject.blank? %></p>
+			  	      <p><%= link_to c.info_request.title, show_request_path(c.info_request.url_title, anchor: "commentary-"+c.id.to_s) %></p>
+			       </div>
+			    </div>
+			    <% end %>
+		    <% end %>
+		</div>
+	</div>
+	<div class="frontpage__right">
+		<h1 class="how-to-title how-to-send">
+			Як надіслати запит
+		</h1>
+		<div class="how-to-steps">
+			<span class="step-inner1 step-inner">
+				<span class="step-number">1</span>
+				<span class="step-text">Оберіть кого<br />запитати</span>
+				<%= link_to list_public_bodies_default_path do %>
+				<span class="orange-button">Запитати</span>
+				<% end %>
+			</span>
+		    <span class="step-inner2 step-inner">
+				<span class="step-number">2</span>
+				<span class="step-text">Напишіть<br />запит</span>
+				<span class="count1">
+					<%= link_to @number_of_authorities, list_public_bodies_default_path, class: "fp-count" %> <br />розпорядників
+			    </span>
+			</span>
+		    <span class="step-inner3 step-inner">
+				<span class="step-number">3</span>
+				<span class="step-text">Відправте<br />запит</span>
+				<span class="count1">
+					<%= link_to @number_of_requests, request_list_all_path, class: "fp-count" %> <br />запитів
+			    </span>
+			</span>
+			    <span class="step-inner4 step-inner">
+				<span class="step-number">4</span>
+				<span class="step-text" style="color: #e15f42;">Отримайте відповідь</span>
+			</span>
+		</div>
+	</div>
+</div>
+<div class="frontpage__banners-container">
+	<h2 class="part-title front-title">Наші партнери</h2>
+	<div class="frontpage__banners">
+		<%= link_to "http://bloggers4gg.org.ua/", class:"banner-link" do %>
+			<%= image_tag "bloggers.jpg" %>
+		<% end %>
+		<%= link_to "http://www.ppl.org.ua/", class:"banner-link" do %>
+			<%= image_tag "platforma.png" %>
+		<% end %>
+		<%= link_to "http://www.cedem.org.ua/", class:"banner-link" do %>
+			<%= image_tag "cedem.png" %>
+		<% end %>
+	</div>
+
+</div>
+<div class="frontpage__bottom">
+  <div class="commentaries--mob">
+    <% unless @commentaries.blank? %>
+     <p class="part-title front-title">Коментує юрист</p>
+     <% @commentaries.each do |c| %>
+       <div class="commentary-frontpage-single">
+         <div class="commentary-single">
+          <p><%= c.subject unless c.subject.blank? %></p>
+         <p><%= link_to c.info_request.title, show_request_path(c.info_request.url_title, anchor: "commentary-"+c.id.to_s) %></p>
+         </div>
+       </div>
+    <% end %>
+   <% end %>
+  </div>
+  <section class="pubs" id="pubs-container">
+		<h2 class="part-title front-title">
+			<%= link_to "Публікації", publications_path %>
+		</h2>
+		<div id="masonry-container" class="pub-container">
+    	<% @publications.each do |pub| %>
+	  	<div class="sbox">
+          <% if pub.image_file_name %>
+            <%= link_to (image_tag pub.image.url, size: "310x200"), category_publication_path(pub.category, pub) %>
+          <% end %>
+          <h4 class="pub-title-index"><%= link_to pub.title, category_publication_path(pub.category, pub) %></h4>
+          <p class="pub-date"><%= (l pub.created_at, :format => '%e.%m.%Y %H:%M').upcase %>
+  	        <% if pub.author %>
+  	          <span style="padding-left: 5px"><%= pub.author %></span>
+  	        <% end %>
+          </p>
+      </div>
+    <% end %>
+    </div>
+    <div class='link-to-all-pubs'><%= link_to "Усі публікації", publications_path, class: "read-more-top" %></div>
+  </section>
+	<section class="righties">
+	  <h2 class="part-title front-title">Проекти</h2>
+	  <%= link_to image_tag("nasudb.jpg"), nasud_path %>
+		<%= link_to image_tag("memo2.jpg"), "https://dostup.pravda.com.ua/news/publications/pidpysano-memorandum-za-znyzhennia-sudovoho-zboru-po-dostupu" %>
+	</section>
+</div>
+
+<% content_for :javascript do %>
+<script>
+
+$('#pubs-container').imagesLoaded( function() {
+
+	var windowsize = $(window).width();
+	if (windowsize < 660) {
+	  $(".pub-container").removeAttr("id");
+	}
+
+  $('#masonry-container').masonry({
+    itemSelector: '.sbox',
+    percentPosition: true,
+		gutter: 25
+  });
+
+});
+
+</script>
+<% end %>

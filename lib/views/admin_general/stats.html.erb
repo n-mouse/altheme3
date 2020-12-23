@@ -1,0 +1,96 @@
+<% @title = "Statistics" %>
+<div class="hero-unit">
+  <h2><%=@public_body_count%> public authorities</h2>
+  <h2><%=@info_request_count%> requests, <%=@outgoing_message_count%> outgoing messages, <%=@incoming_message_count%> incoming messages</h2>
+  <h2><%=@user_count%> users, <%=@track_thing_count%> tracked things</h2>
+  <h2><%=@comment_count%> annotations</h2>
+</div>
+
+<div class="row">
+  <div class="span12">
+    <h1>Statistics</h1>
+    <h2>Chart of requests (excluding backpaged)</h2>
+    <% if File.exists?(File.expand_path("public/foi-live-creation.png", Rails.root)) %>
+      <img src="/foi-live-creation.png" alt="Chart of requests">
+    <% else %>
+      No requests yet (the raw data may include the Holding Pen request)
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="span12">
+    <h2>Порахувати запити</h2>
+      <%= form_tag url_for(:action => :stats), remote: true do %>
+       <%= label_tag(:query,"зроблені між") %>
+       <%= text_field_tag(:date_start, params[:date_start], {:class => "use-datepicker", :id => "ud1", :style=>"float:left"}) %>&nbsp;&nbsp;
+       <%= text_field_tag(:date_end, params[:date_end], {:class => "use-datepicker", :id => "ud2", :style=>"float:left;margin-left:15px"}) %>
+      <p style="clear:both"><%= submit_tag("Порахувати") %></p>
+      <% end %>
+
+      <div style="font-size: 16px" id="req-num"></div>
+   </div>
+</div>
+<div class="row">
+  <div class="span12">
+    <h2>State of requests (includes backpaged)</h2>
+    <div class="container">
+      <% for state, count in @request_by_state %>
+        <div class="row">
+          <div class="span1">
+            <span class="label label-info"><%=count%></span>
+          </div>
+          <div class="span4">
+            <%=state%>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="span12">
+    <h2>Chart of users</h2>
+    <% if File.exists?(File.expand_path("public/foi-user-use.png", Rails.root)) %>
+      <img src="/foi-user-use.png" alt="Chart of users">
+    <% else %>
+      No user data yet
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="span12">
+    <h2>Tracks by type</h2>
+    <div class="container">
+      <% for state, count in @tracks_by_type %>
+        <div class="row">
+          <div class="span1">
+            <span class="label label-info"><%=count%></span>
+          </div>
+          <div class="span4">
+            <%=state%>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $(function() {
+     $(".use-datepicker").datepicker(
+            {closeText: '<%= _("Done") %>',
+             prevText: '<%= _("Prev") %>',
+             nextText: '<%= _("Next") %>',
+             currentText: '<%= _("Today") %>',
+             monthNames: <%= raw I18n.translate('date.fullmonth_names')[1..-1].to_json %>,
+             monthNamesShort: <%= raw I18n.translate('date.abbr_month_names')[1..-1].to_json %>,
+             dayNames: <%= raw I18n.translate('date.day_names').to_json %>,
+             dayNamesShort: <%= raw I18n.translate('date.abbr_day_names').to_json %>,
+             dayNamesMin: <%= raw I18n.translate('date.abbr_day_names').collect{|x| x[0..0]}.to_json %>,
+             weekHeader: '<%= _("Wk") %>',
+             dateFormat: '<%= I18n.translate('date.formats.default').sub("%Y", "yy").sub("%m", "mm").sub("%d", "dd").gsub("-", "/") %>'}
+  );
+  });
+</script>
+

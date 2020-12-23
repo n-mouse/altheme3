@@ -1,0 +1,3 @@
+<h3> <%= @case.title %> </h3>
+<p> <%= raw @case.body %> </p>
+<%= link_to _("Редагувати"), edit_admin_case_path(@case), :class => "btn btn-primary" %>

@@ -1,0 +1,130 @@
+<style>
+	#publication_title {
+		width: 60%
+	}
+
+	p {
+		padding: 10px 0
+	}
+
+  .admin .edit_publication input[type="file"] {
+    line-height: 10px;
+  }
+
+  .gallery-inputs a {
+  	padding-left: 15px;
+  	vertical-align: 5px
+  }
+
+  .admin input.caption-input {
+  	width: 40%;
+		display: block;
+		margin-top: 20px;
+  }
+
+	.admin label {
+		font-weight: 700
+	}
+</style>
+
+<h1>Редагування публікації</h1>
+
+<%= form_for @publication, :url => admin_publication_path(@publication), method: :put do |f| %>
+
+  <% if @publication.errors.any? %>
+    <div id="error_explanation">
+      <p>
+        Такі помилки не дають зберегти публікацію:
+      </p>
+      <ul>
+        <% @publication.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+ <p>
+    <%= f.label "Назва" %>
+    <%= f.text_field :title %>
+  </p>
+
+    <p>
+    <%= f.label "Автор" %>
+    <%= f.text_field :author %>
+  </p>
+  <p>
+    <%= f.label "Короткий опис для rss-стрічки" %>
+    <%= f.text_field :summary %>
+  </p>
+
+  <p>
+    <%= f.label "Текст" %>
+    <%= f.text_area :body, :rel => "tinymce", :rows => 30  %>
+  </p>
+  <p>
+  	<%= f.label "Галерея" %>
+		<%= f.fields_for :images do |builder| %>
+			<p class="gallery-inputs">
+				<%= image_tag builder.object.file.url(:thumb) %>
+				<%= render "image_fields", :f => builder %>
+				<%= link_to_remove_fields "видалити", builder %>
+			</p>
+		<% end %>
+	</p>
+	<p><%= link_to_add_fields "Додати зображення до галереї", f, :images %></p>
+  <p>
+    <%= f.label "Тип" %>
+    <%= f.collection_select(:category_id, Category.all, :id, :name, {:include_blank => true})  %>
+  </p>
+  <p>
+   <%= f.label "Зображення (300x185)" %>
+    <%= f.file_field :image, style:"line-height: 10px;" %>
+  </p>
+  <% if @publication.image_file_name.present? %>
+   <%= image_tag @publication.image.url(:thumb)%>
+   <%= f.label "Видалити?" %>
+   <%= f.check_box :remove_image %>
+
+  <% end %>
+  <p>
+    <%= f.label "Опубліковано?" %>
+    <%= f.check_box :published %>
+  </p>
+    <p>
+    <%= f.label "Вибір редакції" %>
+    <%= f.check_box :edchoice %>
+  </p>
+
+   <p>
+    <%= f.label "Спецпроект" %>
+    <%= f.select :project, Publication::PROJECTS, {include_blank: true, selected: @publication.project} %>
+  </p>
+
+    <p>
+    <%= f.label "Дата створення" %>
+    <%= f.text_field :created_at, :value => @publication.created_at.strftime("%d-%m-%Y %H:%M"), class: "use-datepicker" %>
+  </p>
+  <p>
+    <%= f.submit "Зберегти", class: 'btn btn-success' %>
+  </p>
+
+<% end %>
+
+<%= link_to 'Назад', admin_publication_path %>
+
+<script>
+  $(".use-datepicker").datepicker(
+	{closeText: '<%= _("Done") %>',
+    prevText: '<%= _("Prev") %>',
+	nextText: '<%= _("Next") %>',
+	currentText: '<%= _("Today") %>',
+	monthNames: <%= raw I18n.translate('date.fullmonth_names')[1..-1].to_json %>,
+	monthNamesShort: <%= raw I18n.translate('date.abbr_month_names')[1..-1].to_json %>,
+	dayNames: <%= raw I18n.translate('date.day_names').to_json %>,
+	dayNamesShort: <%= raw I18n.translate('date.abbr_day_names').to_json %>,
+	dayNamesMin: <%= raw I18n.translate('date.abbr_day_names').collect{|x| x[0..0]}.to_json %>,
+	weekHeader: '<%= _("Wk") %>',
+	dateFormat: '<%= I18n.translate('date.formats.default').sub("%Y", "yy").sub("%m", "mm").sub("%d", "dd").gsub("-", "/") %>'}
+  );
+</script>

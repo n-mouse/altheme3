@@ -1,0 +1,54 @@
+<% @title = "Зворотній зв’язок" %>
+
+<%= foi_error_messages_for :contact %>
+
+<div class="help-container">
+  <div class="main-part-left">
+    <div class="econtact_prepost">
+	    <p>Ознайомтесь з інформацією, яку містить розділ <%= link_to "Як це працює", help_about_path, class: "orange-link" %>. Якщо ви не знайшли відповідь на своє запитання, звертайтесь, заповнивши форму нижче.</p>
+	    <p><a href="https://www.facebook.com/dostupdopravdy">Наша сторінка у Фейсбуці <%= image_tag('fb-16.png') %></a></p>
+    </div>
+    <div id="contact-form">
+      <%= form_for :contact do |f| %>
+        <% if not @user %>
+          <p>
+            <label class="form_label" for="contact_name">Ваше ім’я:</label>
+            <%= f.text_field :name %>
+          </p>
+          <p>
+            <label class="form_label" for="contact_email">Електронна пошта:</label>
+            <%= f.text_field :email %>
+          </p>
+        <% end %>
+        <p>
+          <label class="form_label" for="contact_subject">Тема:</label>
+          <%= f.text_field :subject %>
+        </p>
+        <p>
+          <label class="form_label" for="contact_message">Повідомлення:</label>
+          <%= f.text_area :message, :rows => 15 %>
+        </p>
+        <p style="display:none;">
+          <%= f.label :comment, 'Do not fill in this field' %>
+          <%= f.text_field :comment %>
+         </p>
+        <div class="econtact_postpost">
+    	  <p>
+            Ми можемо допомогти вам лише з <strong>технічних питань</strong> або питань щодо свободи інформації. Ми не маємо ніякого відношення до органів державної влади, тож якщо у вас є питання до них, скористайтесь формою для надсилання запитів.
+          </p>
+          <%= hidden_field_tag(:submitted_contact_form, 1) %>
+          <%= submit_tag "Надіслати"  %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="right_column">
+    <div class="sidebar-section">
+	    <%= render :partial => 'general/zaraz_na_sajti' %>
+    </div>
+    <div class="sidebar-section">
+	  <h4 class="part-title">Вибір редакції</h4>
+	    <%= render :partial => 'general/vybir_red' %>
+    </div>
+  </div>
+</div>

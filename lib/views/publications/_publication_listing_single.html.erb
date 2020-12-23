@@ -1,0 +1,12 @@
+<% if @highlight_words.nil? 
+      @highlight_words = []
+end %>
+
+<div class="publication_listing">
+    <p class="publication-single">
+        <%= link_to highlight_words(display_publication.title, @highlight_words), category_publication_path(display_publication.category, display_publication) %>
+    </p>
+    <p style="font-size:12px">  	
+        <%= (l display_publication.created_at, :format => '%e %B %Y %H:%M').upcase %>
+    </p>
+</div>

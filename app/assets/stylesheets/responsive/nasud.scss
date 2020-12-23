@@ -1,0 +1,297 @@
+@mixin mobile {
+  @media (max-width: 699px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 700px) {
+    @content;
+  }
+}
+
+$orange: #e15f42;
+$blue: #2c96b8;
+
+@-ms-viewport {
+   width: device-width;
+}
+
+html {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  height: 100%;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  -webkit-box-sizing: inherit;
+  margin: 0;
+}
+
+body {
+  overflow-x: hidden;
+  font-family: 'Roboto', 'Arial', sans-serif;
+  height: 100%;
+  background-color: #fefefe;
+  color: #454545;
+  line-height: 1.4;
+}
+
+h1 {
+  font-size: 3.157em;
+  font-weight: 700;
+  padding-bottom: 0.5em;
+}
+
+h2 {
+  font-size: 2.369em;
+  padding-bottom: 0.6em;
+}
+
+h3 {
+  font-size: 1.777em;
+  padding-bottom: 0.6em;
+}
+
+h4 {
+  font-size: 1.333em;
+  padding-bottom: 0.6em;
+}
+
+p {
+  margin-bottom: 1.5em;
+}
+
+a {
+  color: $blue;
+  text-decoration: none;
+  &:hover, &:focus {
+    text-decoration: underline;
+  }
+}
+
+.wrapper {
+  width: 100%;
+  @include desktop {
+    width: 700px;
+    margin: auto;
+  }
+}
+
+.wrapper--wide{
+  max-width: 100%;
+  width: 1020px;
+  margin: auto;
+}
+
+.main {
+  padding-bottom: 100px;
+}
+
+.main-title a {
+  text-decoration: none;
+  color: white;
+  &:hover {
+    color: white;
+  }
+}
+
+#text {
+  background-color: inherit !important;
+}
+
+#text p, #text p span {
+  font-family: "texgyreheros" !important;
+  font-size: 16px !important;
+  background-color: inherit !important;
+}
+
+#text p {
+  padding: 0 !important;
+  line-height: 1.4 !important;
+  margin: 10px 0 !important;
+  position: relative;
+  display: block;
+  clear: both;
+}
+
+.case-single {
+  @include mobile {
+    padding: 0 15px;
+  }
+}
+
+.case-single img {
+  max-width: 100%;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.cases {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+.case {
+  flex-shrink: 1;
+  flex-basis: 300px;
+  padding: 0 15px;
+  margin-bottom: 30px;
+  &__title {
+    padding-top: 15px;
+    a {
+      color: $blue;
+      text-decoration: none;
+      &:hover {
+        color: darken($blue, 20%)
+      }
+    }
+  }
+}
+
+.section {
+  margin-bottom: 3rem;
+  padding: 0 30px;
+}
+
+.section--top {
+  border-bottom: 2px solid #363634;
+  height: auto;
+  background-size: cover;
+  padding-top: 2em;
+  overflow: auto;
+  margin-bottom: 2em;
+}
+
+.back-button {
+  color: #363634;
+  font-size: 1.25em;
+  padding: 0 6px;
+  text-transform: uppercase;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.top-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  @include desktop {
+    flex-wrap: nowrap;
+  }
+}
+
+.top-button {
+  padding: 0 6px;
+  color: $blue;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.25em;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.top-buttons a {
+  margin-left: 2em;
+  text-decoration: none;
+  @include mobile {
+    padding: 6px 0;
+    margin: 0;
+  }
+}
+
+.form {
+  padding: 1em 2em;
+  background-color: white;
+  box-shadow: 0px 5px 30px 0px rgba(0, 0, 0, .3);
+  label {
+    font-size: 1.1em;
+    margin-bottom: 0.5em;
+    display: block;
+  }
+  textarea {
+    width: 100%;
+    padding: 0.5em;
+    border: 2px solid #bcbcbc;
+    height: 300px;
+  }
+  input {
+    height: 3em;
+    width: 100%;
+    padding: 0 0.5em;
+    border: 2px solid #bcbcbc;
+  }
+  input[type='file']{
+    border: none;
+  }
+  .btn-sbm {
+    width: 300px;
+    font-size: 1.2em;
+    background-color: $blue;
+    color: white;
+    border: none;
+    max-width: 100%;
+    &:hover {
+      background-color: darken($blue, 20%)
+    }
+  }
+  .required::before {
+    content: "*";
+    color: $orange;
+    font-weight: 700;
+    padding-right: 5px;
+  }
+  .text-error {
+    color: #da2028
+  }
+}
+
+.has-error input, .has-error textarea {
+  border: 2px solid #da2028
+}
+
+.nasud-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 2em;
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.header__text {
+  margin-left: 2em;
+  @include mobile {
+    margin: 1em 0 0 0;
+  }
+}
+
+.alert--success {
+  padding: 1em 2em;
+  border: 3px solid $blue;
+  font-weight: 700;
+  font-size: 1.6em;
+  margin-bottom: 1em;
+  color: darken($blue, 20%);
+  background-color: white;
+  line-height: 1.4;
+}
+
+.nasud-count {
+  text-align: center;
+  font-size: 1.5em;
+  span {
+    @include mobile {
+      display: block;
+    }
+  }
+}

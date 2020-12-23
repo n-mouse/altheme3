@@ -1,0 +1,155 @@
+<% @show_tips = @xapian_requests.nil? || (@total_hits == 0) %>
+
+<% if @query.nil? %>
+  <% @title = "Пошук на сайті" %>
+<% elsif @total_hits == 0 %>
+  <% @title = _('There were no results matching your query.') %>
+<% else %>
+  <% @title = _("Results page {{page_number}}", :page_number => @page.to_s) %>
+<% end%>
+
+<div class="search-container">
+  <% if @query.nil? %>
+    <p class="part-title">Пошук</p>
+  <% else %>
+    <p class="part-title">Результати пошуку</p>
+  <% end%>
+
+  <%= form_tag(search_redirect_path, {:method => "get", :id => "search_form"}) do %>
+    <p>
+      <%= text_field_tag 'query', params[:query], { :title => "type your search term here" } %>
+        <%= submit_tag _("Search") %>
+    </p>
+  <% end %>
+  <%= form_tag(request.url, {:method => "get", :id => "filter_form"}) do %>
+    <p>
+      <%= hidden_field_tag 'sortby', @inputted_sortby %>
+        <% if @bodies %>
+          <%= hidden_field_tag 'bodies', 1 %>
+        <% end %>
+    </p>
+    <div id="common-subfilters">
+      <div id="variety-filter">
+        <% labels = [
+            ["requests", "запити"],
+            ["users", "користувачі"],
+            ["bodies", "розпорядники"],
+            ["publications", "публікації"],
+            ["all", "усе"]]%>
+          <% for variety, label in labels %>
+            <% if @variety_postfix != variety %>
+              <%=  link_to label, search_path([params[:query], variety, @sort_postfix]) %>
+            <% else %>
+              <span><%= label %></span>
+            <% end %>
+          <% end %>
+      </div>
+    </div>
+  <% end # Search form %>
+
+  <% if !@query.nil? && @total_hits > 0 %>
+    <p id="search_controls">
+      <span><%=link_to_unless @sortby == 'relevant', "Спочатку найрелевантніші", search_path([params[:query], @variety_postfix, 'relevant'], params) %></span>
+      <span><%=link_to_unless @sortby == 'newest', "Спочатку найновіші", search_path([params[:query], @variety_postfix, 'newest'], params) %></span>
+      <% if @sortby == 'described' %>
+      <%= _('Recently described results first') %>
+      <% end %>
+    </p>
+  <% end %>
+</div>
+
+<div style="clear:both;"></div>
+
+<% if @total_hits == 0 %>
+  <div class="results_section">
+    <h2><%=@title %></h2>
+    <% if @spelling_correction %>
+      <p id="did_you_mean"><%= _('Did you mean: {{correction}}', :correction => search_link(@spelling_correction)) %></p>
+    <% end %>
+  </div>
+<% end %>
+
+<% if not @query.nil? %>
+
+    <% if @xapian_bodies_hits > 0 %>
+      <div class="results_section">
+        <% if @xapian_bodies_hits == 1 && @page == 1 %>
+          <h2 class="publicbody_results">Знайдено одного розпорядника інформації</h2>
+        <% else %>
+          <h2 class="publicbody_results"><%= _('Public authorities {{start_count}} to {{end_count}} of {{total_count}}', :start_count => ((@page-1)*@bodies_per_page+1).to_s, :end_count => [@page*@bodies_per_page, @xapian_bodies.matches_estimated].min.to_s, :total_count => @xapian_bodies.matches_estimated.to_s) %></h2>
+        <% end %>
+
+        <div class="results_block">
+          <% for result in @xapian_bodies.results %>
+            <%= render :partial => 'public_body/body_listing_single',
+                       :locals => { :public_body => result[:model],
+                                    :request_link => true }  %>
+          <% end %>
+        </div>
+
+        <%= will_paginate WillPaginate::Collection.new(@page, @bodies_per_page, @max_bodies) %>
+      </div>
+       <% elsif @variety_postfix == 'bodies' %>
+          <p><%= link_to "Перегляньте всіх розпорядників", list_public_bodies_default_path.html_safe, style: "color: black" %> або
+          	<%= link_to "попросіть нас додати", help_contact_path, style: "color: black" %>
+          	</p>
+    <% end %>
+
+    <% if @xapian_users_hits > 0 %>
+      <div class="results_section">
+        <% if @xapian_users_hits == 1 && @page == 1 %>
+            <h2 class="foi_results">Знайдено одного користувача</h2>
+        <% else %>
+            <h2 class="foi_results"><%= _("Користувачі {{start_count}} - {{end_count}} з {{total_count}}", :start_count => ((@page-1)*@users_per_page+1).to_s, :end_count =>  [@page*@users_per_page, @xapian_users.matches_estimated].min.to_s, :total_count =>  @xapian_users.matches_estimated.to_s) %></h2>
+        <% end %>
+
+        <div class="results_block">
+          <% for result in @xapian_users.results %>
+            <%= render :partial => 'user/user_listing_single', :locals => { :display_user => result[:model] } %>
+          <% end %>
+        </div>
+        <%= will_paginate WillPaginate::Collection.new(@page, @users_per_page, @max_users) %>
+
+      </div>
+    <% end %>
+
+        <% if @xapian_publications_hits && @xapian_publications_hits > 0 %>
+
+             <div class="results_section">
+        <% if @xapian_publications_hits == 1 && @page == 1 %>
+            <h2 class="foi_results">Знайдено одну публікацію</h2>
+        <% else %>
+            <h2 class="foi_results"><%= _("Публікації {{start_count}} - {{end_count}} з {{total_count}}",
+            :start_count => ((@page-1)*@publications_per_page+1).to_s,
+            :end_count =>  [@page*@publications_per_page, @xapian_publications.matches_estimated].min.to_s, :total_count =>  @xapian_publications.matches_estimated.to_s) %></h2>
+        <% end %>
+
+        <div class="results_block">
+          <% for result in @xapian_publications.results %>
+            <%= render :partial => 'publications/publication_listing_single', :locals => { :display_publication => result[:model] } %>
+          <% end %>
+        </div>
+        <%= will_paginate WillPaginate::Collection.new(@page, @publications_per_page, @max_publications) %>
+
+      </div>
+
+    <% end %>
+
+    <% if @xapian_requests_hits > 0 %>
+      <div class="results_section">
+        <% if @xapian_requests_hits == 1 && @page == 1 %>
+            <h2 class="foi_results"><%= _("One FOI request found") %></h2>
+        <% else %>
+            <h2 class="foi_results"><%= _("FOI requests {{start_count}} to {{end_count}} of {{total_count}}", :start_count => ((@page-1)*@requests_per_page+1).to_s, :end_count => [@page*@requests_per_page, @xapian_requests.matches_estimated].min.to_s, :total_count =>  @xapian_requests.matches_estimated.to_s) %></h2>
+        <% end %>
+
+        <div class="results_block">
+          <% for result in @xapian_requests.results %>
+            <%= render :partial => 'request/request_listing_via_event', :locals => { :event => result[:model] } %>
+          <% end %>
+        </div>
+
+        <%= will_paginate WillPaginate::Collection.new(@page, @requests_per_page, @max_requests) %>
+      </div>
+    <% end %>
+<% end %>

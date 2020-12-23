@@ -1,0 +1,393 @@
+ <% provide(:title, "Аварійні будинки Києва") %>
+ 
+ <style>
+ body {
+ 	width: 100%;
+ 	height: 100%;
+    font-family: 'Roboto', sans-serif;
+ }
+ 
+ .wrapper {
+ 	margin-bottom: -4px
+ }
+ 
+#themap { 
+	height: 100%; 
+	float: left;
+	width: 70%;
+ }
+ 
+ #vstup {
+ 	position: relative;
+	padding-top: 40px;
+ }
+
+ p {
+ 	font-size: 18px;
+ 	line-height: 22px;
+ }
+ 	
+ .leaflet-marker-icon.extra-marker-circle-red.extra-marker.leaflet-zoom-animated.leaflet-interactive {
+ 	margin-top: -12px !important;
+ }
+ 	
+ #street {
+ 	font-size: 24px;
+ 	text-align: center;
+ 	font-weight: 700;
+ }
+ 
+ #comment {
+ 	font-size: 18px;
+ }
+ 
+ #mapinfo a {
+ 	color: #E15F42;
+ }
+ 
+ #mapinfo a:hover, #mapinfo a:focus {
+ 	color: #2C96B8
+ }
+ 
+ .articles-button-container {
+ 	text-align: center;
+ }
+ 	
+	
+ .map-button {
+	margin-left: 15px;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	border-radius: 2px;
+	background: none;
+	font-family: inherit;
+	font-size: 20px;
+	padding: 10px 20px;
+	text-decoration: none;
+	-moz-user-select: none;
+	box-sizing: border-box;
+	cursor: pointer;
+	display: inline-block;
+	line-height: normal;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+}
+
+#abc-black button {
+	border: 1px solid black;
+	color: black;	
+}
+
+#abc-black {
+	margin-top: 60px;
+}
+
+#abc-white {
+ 	width: 70%;
+ 	position: absolute;
+ 	left: 0;
+ 	bottom: 15px;
+ 	z-index: 1000;		
+ 	display: none;
+}
+
+#abc-white button {
+	border: 1px solid white;
+	color: white;	
+}
+
+#map-button {
+	border: 1px solid black;
+	color: black;
+}
+
+.map-button-container {
+	width: 100%;
+	text-align: center;
+	padding: 15px 0;
+}
+	
+.articlescontainer {
+	display: none;
+	height: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1001;
+}
+	
+.parent {
+   	width: 46%;
+    height: 240px;
+    overflow: hidden;
+    position: relative;
+   	cursor: pointer;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.child {
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+}
+	
+.parent:hover .child, .parent:focus .child {
+    -ms-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+
+.child::before {
+    content: "";
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.55);
+}
+
+.parent a:last-child {
+    font-size: 20px;
+    color: black;
+    text-align: center;
+    margin: auto;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 50px;
+    text-decoration: none;
+    padding: 10px 10px 0 10px;
+    background-color: #eee;
+}
+
+.parent a:first-child {
+	display: block
+}
+
+.image-wrapper {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+	    flex-wrap: wrap;
+	-webkit-box-pack: justify;
+	    -ms-flex-pack: justify;
+	        justify-content: space-between;
+}
+
+#mapinfo {
+	width: 30%;
+	height: 100%; 
+	float: right; 
+	padding: 20px 15px 15px 20px;
+	background-color: #eeeeee;
+	overflow: hidden;
+}
+
+#mapinfo img {
+	max-width: 100%;
+	height: auto;
+}
+
+#mapinfo #houses-logo {
+	height: 25px;
+}
+
+#back-to-vstup {
+	font-weight: 700;
+	font-size: 18px;
+	position: absolute;
+	bottom: 5px;
+	cursor: pointer;
+	padding: 3px;
+	background-color: #eeeeee;
+}
+ </style>
+
+ <div class="mapcontainer" style="position:relative;width: 100%; height: 100%">
+ <div id="themap"></div>
+ <div class="articles-button-container" id="abc-white"><button class="map-button articles-button">Усі статті</button></div>
+ <div id="mapinfo">
+   <div style="text-align: center"><%= link_to image_tag("unnamed.png", id: "houses-logo"), frontpage_url %></div>
+   <div id="houses-text">
+     <div id="vstup">
+       <p>Протягом 2015 – 2016 років «Доступ до правди» реалізовував проект з пошуку власників історичних будинків Києва. </p>
+       <p>Усі тексти проекту «Будиночки» зараз зібрано в цьому розділі. Деякі тексти пропонують фото старих будинків та історичні екскурси. Деякі обмежуються історіями власників. </p>
+       <p>Крім того, тут ви можете знайти <a href="https://dostup.pravda.com.ua/news/publications/instruktsiia-do-poshukiv-vlasnykiv-istorychnykh-budynkiv">інструкцію</a> до пошуку власників пам’яток за допомогою інформаційних запитів та відкритих реєстрів.</p>
+       <p>При натисненні на будиночки на карті тут з'явиться інформація про кожен з них.</p>
+     </div>
+     <div class="articles-button-container" id="abc-black"><button class="map-button articles-button">Показати усі статті проекту</button></div>
+   
+     <p id="street"></p>
+     <p id="comment"></p>
+     <p id="house-image"></p>
+   	</div>
+   	<p id="back-to-vstup"></p>
+ </div>
+ </div>
+ <div class="articlescontainer">
+ 	<div style="width: 980px; margin: auto auto 20px auto">
+ 	 <div class="map-button-container"><button class="map-button" id="map-button">Карта будівель</button></div>
+ 	   <div class="image-wrapper">
+ 	     <div class="parent">
+ 	     	<a href="https://dostup.pravda.com.ua/stories/publications/vlasnyky-prahy-rozdiliai-i-dobudovui">
+              <div class="child" style="background-image: url('/assets/domix/3.jpg')"></div>
+            </a>
+           <a href="https://dostup.pravda.com.ua/stories/publications/vlasnyky-prahy-rozdiliai-i-dobudovui">Власники "Праги": розділяй і добудовуй</a>
+         </div> 
+ 	     <div class="parent">
+ 	     	<a href="https://dostup.pravda.com.ua/stories/publications/budynok-zi-zmiiamy-unikalnyi-i-zanedbanyi">
+              <div class="child" style="background-image: url('/assets/domix/9.jpg')"></div>
+            </a>
+            <a href="https://dostup.pravda.com.ua/stories/publications/budynok-zi-zmiiamy-unikalnyi-i-zanedbanyi">Будинок зі зміями - унікальний і занедбаний</a>
+         </div>
+ 	     <div class="parent">
+ 	     	<a href="https://dostup.pravda.com.ua/stories/publications/sprava-budynku-novikova-chy-mozhe-sud-nadaty-finansovu-informatsiiu-pro-vlasnyka-istorychnoi-pamiatky-komentar-iurysta">
+              <div class="child" style="background-image: url('/assets/domix/4.jpg')"></div>
+            </a>
+            <a href="https://dostup.pravda.com.ua/stories/publications/sprava-budynku-novikova-chy-mozhe-sud-nadaty-finansovu-informatsiiu-pro-vlasnyka-istorychnoi-pamiatky-komentar-iurysta">Справа будинку Новікова</a>
+         </div>
+ 	     <div class="parent">
+ 	     	<a href="https://dostup.pravda.com.ua/stories/publications/bulvar-shevchenka-34-vid-tereshchenkiv-lyshylysia-vitrazhne-sklo-i-metalevi-skhody">
+             <div class="child" style="background-image: url('/assets/domix/12.JPG')"></div>
+           </a>
+           <a href="https://dostup.pravda.com.ua/stories/publications/bulvar-shevchenka-34-vid-tereshchenkiv-lyshylysia-vitrazhne-sklo-i-metalevi-skhody">Бульвар Шевченка, 34</a>
+         </div>
+ 	     <div class="parent">
+ 	     	<a href="https://dostup.pravda.com.ua/stories/publications/podilska-sadyba-na-rozi-trokh-vulyts-istoriia-stiny">
+              <div class="child" style="background-image: url('/assets/domix/13.jpg')"></div>
+            </a>
+           <a href="https://dostup.pravda.com.ua/stories/publications/podilska-sadyba-na-rozi-trokh-vulyts-istoriia-stiny">Подільська садиба на розі трьох вулиць</a>
+         </div>
+ 	     <div class="parent">
+ 	     	<a href="https://dostup.pravda.com.ua/stories/publications/avariini-budynky-andriivskoho-uzvozu">
+              <div class="child" style="background-image: url('/assets/domix/5.JPG')"></div>
+            </a>
+           <a href="https://dostup.pravda.com.ua/stories/publications/avariini-budynky-andriivskoho-uzvozu">Аварійні будинки Андріївського узвозу</a>
+         </div>
+ 	     <div class="parent">
+ 	     	<a href="https://dostup.pravda.com.ua/stories/publications/oberezhno-avariini-budynky">
+              <div class="child" style="background-image: url('/assets/domix/1.JPG')"></div>
+            </a>
+           <a href="https://dostup.pravda.com.ua/stories/publications/oberezhno-avariini-budynky">Обережно: аварійні будинки</a>
+         </div>
+ 	     <div class="parent">
+ 	     	<a href="https://dostup.pravda.com.ua/stories/publications/avariini-budynky-2-u-holosiivskomu-raioni-remontu-ne-bude">
+              <div class="child" style="background-image: url('/assets/domix/2.JPG')"></div>
+            </a>
+           <a href="https://dostup.pravda.com.ua/stories/publications/avariini-budynky-2-u-holosiivskomu-raioni-remontu-ne-bude">У Голосіївському районі ремонту не буде</a>
+         </div>
+ 	     <div class="parent">
+ 	     	<a href="https://dostup.pravda.com.ua/stories/publications/vlasnyky-avariinoho-podolu-prohnimak-kaletnyk-zhebrivska-tabachnyk%E2%80%A6">
+              <div class="child" style="background-image: url('/assets/domix/6.jpg')"></div>
+            </a>
+            <a href="https://dostup.pravda.com.ua/stories/publications/vlasnyky-avariinoho-podolu-prohnimak-kaletnyk-zhebrivska-tabachnyk%E2%80%A6">Власники аварійного Подолу</a>
+         </div>
+ 	     <div class="parent">
+ 	     	<a href="https://dostup.pravda.com.ua/stories/publications/avariini-budynky-podolu-2">
+              <div class="child" style="background-image: url('/assets/domix/7.JPG')"></div>
+            </a>
+            <a href="https://dostup.pravda.com.ua/stories/publications/avariini-budynky-podolu-2">Аваріїні будинки Подолу-2</a>
+         </div>
+ 	     <div class="parent">
+ 	     	<a href="https://dostup.pravda.com.ua/stories/publications/mazepy-11-budynok-v-ochikuvanni-molotka">
+              <div class="child" style="background-image: url('/assets/domix/8.jpg')"></div>
+           </a>
+           <a href="https://dostup.pravda.com.ua/stories/publications/mazepy-11-budynok-v-ochikuvanni-molotka">Мазепи, 11: будинок в очікуванні молотка</a>
+         </div>
+ 	     <div class="parent">
+ 	     	<a href="https://dostup.pravda.com.ua/stories/publications/avariina-komunalka-podolu">
+              <div class="child" style="background-image: url('/assets/domix/5.JPG')"></div>
+            </a>
+            <a href="https://dostup.pravda.com.ua/stories/publications/avariina-komunalka-podolu">Аварійна комуналка Подолу</a>
+         </div>
+ 	     <div class="parent">
+ 	     	<a href="https://dostup.pravda.com.ua/stories/publications/andriivskyi-uzviz-24-ruina-na-prodazh">
+              <div class="child" style="background-image: url('/assets/domix/14.JPG')"></div>
+            </a>
+            <a href="https://dostup.pravda.com.ua/stories/publications/andriivskyi-uzviz-24-ruina-na-prodazh">Андріївський узвіз, 24: руїна на продаж</a>
+         </div>
+ 	     <div class="parent">
+ 	     	<a href="https://dostup.pravda.com.ua/stories/publications/sadyba-mykhelsona-maibutnii-rozumnyi-dim-iakyi-mozhe-posypatysia-kozhnoho-dnia">
+              <div class="child" style="background-image: url('/assets/domix/11.jpg')"></div>
+            </a>
+            <a href="https://dostup.pravda.com.ua/stories/publications/sadyba-mykhelsona-maibutnii-rozumnyi-dim-iakyi-mozhe-posypatysia-kozhnoho-dnia">Садиба Михельсона</a>
+         </div>
+     </div>
+
+
+</div>
+ </div>
+ <script src="/data/houses.js"></script>
+<script>
+
+	var vstup = "<p>Протягом 2015 – 2016 років «Доступ до правди» реалізовував проект з пошуку власників історичних будинків Києва.</p>"+
+       "<p>Усі тексти проекту «Будиночки» зараз зібрано в цьому розділі. Деякі тексти пропонують фото старих будинків та історичні екскурси. Деякі обмежуються історіями власників. </p>"+
+       "<p>Крім того, тут ви можете знайти <a href='https://dostup.pravda.com.ua/news/publications/instruktsiia-do-poshukiv-vlasnykiv-istorychnykh-budynkiv'>інструкцію</a> до пошуку власників пам’яток за допомогою інформаційних запитів та відкритих реєстрів.</p>"+
+       "<p>При натисненні на будиночки на карті тут з'явиться інформація про кожен з них.</p>"
+    var button = "<div class='articles-button-container' id='abc-white'><button class='map-button articles-button'>Усі статті</button></div>";
+    var map = L.map('themap', {minZoom: 10, maxBounds:[[50.73848, 29.70703],[50.12527, 31.2149]]}).setView([50.44, 30.516857], 10);
+	L.tileLayer('http://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png').addTo(map);
+	var markers = L.markerClusterGroup({polygonOptions: {color: '#666'}});
+	var myIcon = L.ExtraMarkers.icon({
+    	icon: 'fa-building',
+    	prefix: 'fa',
+    	extraClasses: "fa-2x"
+  	});
+	
+	$.each( data, function( i, value ) {
+       	var marker = L.marker(value.coords, {icon: myIcon}).on("click", function(){
+       		$(".leaflet-marker-icon.extra-marker-circle-red.extra-marker.leaflet-zoom-animated.leaflet-interactive i").css("color", "white");
+       		$("#vstup").empty();
+			$("#street").text(value.street);
+			$("#comment").html(value.comment);
+			$("#back-to-vstup").text("ПОВЕРНУТИ ОПИС");
+			//$("#house-image").empty();
+			if (value.image){
+				$("#house-image").html("<img src='/assets/domix/domix2/"+value.image+"'>");
+			} else {
+				$("#house-image").empty();
+			}		
+			this._icon.innerHTML="<i class='fa-2x fa fa-building' style='color: #bc2623'></i>";
+			$("#abc-black").hide();
+			$("#abc-white").show();
+			
+		});
+		marker.clicked = false;
+       	markers.addLayer(marker);
+       	 
+    });
+       
+	map.addLayer(markers);
+	
+    $(".articles-button").on("click", function(){
+    	$(".articlescontainer").slideDown().css("padding", "20px").css("background-color", "white");
+    });
+    	
+    $("#map-button").on("click", function(){
+    	$(".articlescontainer").slideUp().css("padding", "0").css("background-color", "none");
+    });	
+	
+	$("#back-to-vstup").on("click", function(){
+		$(".leaflet-marker-icon.extra-marker-circle-red.extra-marker.leaflet-zoom-animated.leaflet-interactive i").css("color", "white");
+		$("#back-to-vstup").empty();
+		$("#houses-text p").empty();
+		$("#vstup").append(vstup);
+		$("#abc-white").hide();
+		$("#abc-black").show();
+	})
+	
+</script>

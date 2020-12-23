@@ -1,0 +1,82 @@
+ <div class="body-list">
+  <p id="show-pb-categories">Показати категорії розпорядників</p>
+  <div class="left_column pb-categories">
+    <h3 style="margin-top:0; padding-top:0">За алфавітом</h3>
+      <%= render :partial => 'alphabet' %>
+      <% first_row = true %>
+      <% for row in PublicBodyCategory.get().with_headings() %>
+        <% if row.instance_of?(Array) %>
+          <li>
+            <%= link_to_unless (@tag == row[0]), row[1], list_public_bodies_path(:tag => row[0]) %>
+          </li>
+        <% else %>
+          <% if not first_row %>
+            </ul>
+          <% else %>
+            <% first_row = false %>
+          <% end %>
+          <h3><%=h row%></h3>
+          <ul class="pb-list">
+        <% end %>
+    <% end %>
+    <% if not first_row %>
+	    </ul>
+    <% end %>
+    <p>
+      <%= link_to "Ми когось забули? Напишіть нам, якщо хочете додати розпорядника", help_contact_path, :style=>"color:#E15F42; font-weight:500" %>
+    </p>
+  </div>
+  <div class="pb-middle_column">
+    <p style="margin-top:0;padding-top:0"><strong>Оберіть розпорядника інформації</strong></p>
+      <%= form_tag(list_public_bodies_default_path, :method => "get", :id=>"pb-search-form") do %>
+        <%= text_field_tag(:public_body_query, params[:public_body_query], :id=>"pb-input") %>
+        <%= submit_tag "Пошук", :id=>"pb-submit" %>
+      <% end %>
+     <% if AlaveteliConfiguration.allow_batch_requests && @user && @user.can_make_batch_requests? %>
+       <div id="batch_request_link">
+         <p>
+          <%= _(' Ви можете зробити <a href="{{url}}">груповий запит</a> до <strong>кількох розпорядників</strong> одночасно.',
+                :url => select_authorities_path) %>
+         </p>
+       </div>
+     <% end %>
+       <p class="publicbody_results">
+         <%= @description %>
+       </p>
+       <p>
+
+     <% if !@user %>
+       <p>Для того, щоб зробити запит, необхідно <%= link_to "авторизуватися", signin_path(:r => request.fullpath), style: "color: black" %></p>
+     <% end %>
+   </p>
+     <%= render :partial => 'body_listing', :locals => { :public_bodies => @public_bodies } %>
+     <%= will_paginate @public_bodies %>
+
+  </div>
+  <div class="right_column">
+    <a class="covid-btn-2" href="https://dostup.pravda.com.ua/covid">
+      <p>Як отримати інформацію про боротьбу з COVID-19 в Україні?</p>
+    </a>
+    <div class="here-now sidebar-section">
+	    <%= render :partial => 'general/zaraz_na_sajti' %>
+    </div>
+    <div class="sidebar-section">
+	    <h4 class="part-title">Вибір редакції<h4>
+	     <%= render :partial => 'general/vybir_red' %>
+    </div>
+  </div>
+</div>
+
+<% content_for :javascript do %>
+  <script>
+  	$("#show-pb-categories").on("click", function(){
+  		if ($(".pb-categories").hasClass("mobile-visible")) {
+  			$(".pb-categories").slideUp(600).removeClass("mobile-visible");
+  			$(this).text("Показати категорії розпорядників");
+  		} else {
+  			$(".pb-categories").slideDown(600).addClass("mobile-visible");
+  			$(this).text("Сховати категорії розпорядників");
+  		}
+  	})
+  </script>
+<% end %>
