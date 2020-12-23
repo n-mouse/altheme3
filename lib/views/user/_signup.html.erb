@@ -32,6 +32,16 @@
   	  і включає оприлюднення на зазначеному сайті повідомлених мною персональних даних.
 
       <p>
+       <label class="form_label">Стать: </label>
+        <input type="radio" id="user_signup_gender_male" name="user_signup[gender]" value="male" />
+        <label for="user_signup_gender_male">чоловік</label>
+        <input type="radio" id="user_signup_gender_female" name="user_signup[gender]" value="female" />
+        <label for="user_signup_gender_female">жінка</label>
+        <input type="radio" id="user_signup_gender_female" name="user_signup[gender]" value="other" />
+        <label for="user_signup_gender_female">інше</label>
+      </p>
+
+      <p>
         <label class="form_label" for="user_signup_password">Пароль:</label>
   	    <%= password_field 'user_signup', 'password', { :size => 15, :tabindex => 80, :autocomplete => "off", :placeholder => "Не менше 12 символів" } %>
       </p>

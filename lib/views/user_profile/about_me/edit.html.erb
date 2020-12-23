@@ -18,6 +18,15 @@
     <% about_me_opts = { :rows => 5, :cols => 55 } %>
     <% about_me_opts.merge!({ :disabled => 'disabled' }) if @user.suspended? %>
     <%= f.text_area :about_me, about_me_opts %>
+    <label class="form_label">
+      Стать:
+    </label>
+    <%= f.radio_button :gender, "male" %>
+    <%= f.label :gender_male, "Чоловік" %>
+    <%= f.radio_button :gender, "female" %>
+    <%= f.label :gender_female, "Жінка" %>
+    <%= f.radio_button :gender, "other" %>
+    <%= f.label :gender_other, "Інше" %>
   </p>
 
   <div class="form_button">
