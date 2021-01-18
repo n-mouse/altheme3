@@ -54,7 +54,7 @@ Rails.configuration.to_prepare do
     InfoRequest.class_eval do
       def self._guess_idhash_from_email(incoming_email)
         incoming_email = incoming_email.downcase
-        incoming_email =~ /re[qg]uest\-?(\w+)-?(\w{8})@/
+        incoming_email =~ /r[a-z]\-?(\w+)-?(\w{8})@/
 
         id = _id_string_to_i(_clean_idhash($1))
         id_hash = $2
