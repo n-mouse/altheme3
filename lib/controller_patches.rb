@@ -6,6 +6,30 @@
 # See http://stackoverflow.com/questions/7072758/plugin-not-reloading-in-development-mode
 #
 Rails.configuration.to_prepare do
+
+    AdminRawEmailController.class_eval do 
+      def show
+        respond_to do |format|
+          format.html do
+            @holding_pen = in_holding_pen?(@raw_email) ? true : false
+
+            # For the holding pen, try to guess where it should be…
+            if @holding_pen
+
+              guess_addresses = @raw_email.addresses(include_invalid: true)
+              @guessed_info_requests =
+                InfoRequest.guess_by_incoming_email(guess_addresses)
+
+              @rejected_reason = rejected_reason(@raw_email) || 'unknown reason'
+            end
+          end
+
+          format.eml do
+            render body: @raw_email.data, content_type: 'message/rfc822'
+          end
+        end
+      end
+    end
  
     UserController.class_eval do
 	  def signup
