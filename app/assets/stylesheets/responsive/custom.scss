@@ -1205,10 +1205,6 @@ h2.foi_results {
   font-size: 1.2em;
 }
 
-.request-title {
-  margin-top: 0;
-}
-
 #request_show {
   h4 {
     font-size: 18px;
@@ -1231,6 +1227,14 @@ h2.foi_results {
   }
 }
 
+.request-header h1 {
+  @include desktop {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    font-size: 2em;
+    line-height: 1.2;
+  }
+}
 
 p.subtitle {
   font-size: 12px;
@@ -1262,7 +1266,7 @@ p#request_status {
 }
 
 .wtf {
-  @include mobile{
+  @include mobile {
     margin: 0;
     padding: 0;
     li {
