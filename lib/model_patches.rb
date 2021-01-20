@@ -52,6 +52,33 @@ Rails.configuration.to_prepare do
     end
     
     InfoRequest.class_eval do
+    
+      def self.matching_incoming_email(emails)
+        requests = Array(emails).map { |email| find_by_incoming_email(email) }.compact
+        if requests.size == 0
+          guesses = guess_by_incoming_email(emails)
+          if guesses.size == 1
+            requests = [guesses.first[:info_request]]
+          end
+        end
+        requests
+      end
+    
+      def self._extract_id_hash_from_email(incoming_email)
+        # Match case insensitively, FOI officers often write Request with capital R.
+        incoming_email = incoming_email.downcase
+
+        # The optional bounce- dates from when we used to have separate emails for the envelope from.
+        # (that was abandoned because councils would send hand written responses to them, not just
+        # bounce messages)
+        incoming_email =~ /r[a-z]+-(?:bounce-)?([a-z0-9]+)-([a-z0-9]+)/
+
+        id = _id_string_to_i($1)
+        hash = _clean_idhash($2)
+
+        [id, hash]
+      end
+    
       def self._guess_idhash_from_email(incoming_email)
         incoming_email = incoming_email.downcase
         incoming_email =~ /r[a-z]+\-?(\w+)-?(\w{8})@/
