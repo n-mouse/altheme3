@@ -50,6 +50,10 @@
           <label class="form_label" for="user_signup_password_confirmation"> Пароль<br />(ще раз)</label>
           <%= password_field 'user_signup', 'password_confirmation', { :size => 15, :tabindex => 90, :autocomplete => "off" } %>
       </p>
+      
+      <% if @request_from_foreign_country %>
+        <%= recaptcha_tags %>
+      <% end %>
 
       <div class="signup-button">
           <%= hidden_field_tag 'token', params[:token], {:id => 'signup_token' } %>

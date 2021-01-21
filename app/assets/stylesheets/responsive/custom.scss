@@ -81,12 +81,6 @@ img {
   }
 }
 
-#sessions_new .right_column {
-  @include mobile {
-    margin-top: 70px;
-  }
-}
-
 #banner-inner {
   position: relative;
   font-size: 11px;
@@ -1513,8 +1507,19 @@ div.comment_in_request {
 }
 
 #sign_together {
+  display: flex;
+
+  clear: both;
   @include mobile {
     margin: 0;
+    flex-direction: column;
+    .main-part-left {
+      order: 2;
+    }
+    .right_column {
+      order: 1;
+      margin-top: 0;
+    }
   }
 }
 
