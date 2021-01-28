@@ -1,5 +1,5 @@
 <div class="correspondence_text">
-    <%  if not attachments.nil? and attachments.size > 0 %>
+    <%  if not attachments.nil? and attachments.size > 0 and attachments.first.display_filename!="attachment.delivery status" %>
         <div class="attachments">
           <ul class="list-of-attachments">
             <% attachments.each do |a| %>
