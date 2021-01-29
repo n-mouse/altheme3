@@ -165,13 +165,15 @@
     </div>
     <% if params[:controller] == 'publications' || params[:controller] == 'categories' %>
       <div class="bottom-section-sub">
-        <ul class="site-parts rozdily main-nav">
-          <% @categories.each do |category| %>
-            <li id="<%= 'selected' if params[:id] == category.slug || params[:category_id] == category.slug  %>">
-              <%= link_to category.name, category_path(category) %>
-            </li>
-          <% end %>
-        </ul>
+	<% if @categories %>
+         <ul class="site-parts rozdily main-nav">
+           <% @categories.each do |category| %>
+             <li id="<%= 'selected' if params[:id] == category.slug || params[:category_id] == category.slug  %>">
+               <%= link_to category.name, category_path(category) %>
+             </li>
+           <% end %>
+	 </ul>
+	<% end %>
       </div>
     <% end %>
     <div class="wrapper" id="main">
