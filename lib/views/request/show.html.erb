@@ -72,7 +72,7 @@
      <% for info_request_event in @info_request_events %>
 
         <% if info_request_event.visible %>
-            <%= render :partial => 'correspondence', :locals => { :info_request_event => info_request_event } %>
+            <%= render :partial => 'correspondence', :locals => { :info_request_event => info_request_event, show_correspondence_footer: !@info_request.embargo } %>
         <% end %>
       <% end %>
       <% if !@info_request.commentaries.blank? %>
