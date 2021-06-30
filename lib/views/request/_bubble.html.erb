@@ -21,10 +21,7 @@
 
             <p class="attachment__meta">
               <%= a.display_size %>
-              <%= link_to "Download", attachment_path(a) %>
-              <% if a.has_body_as_html? && incoming_message.info_request.prominence(:decorate => true).is_public? %>
-                <%= link_to "View as HTML", attachment_path(a, :html => true) %>
-              <% end %>
+              <%= link_to "Завантажити", attachment_path(a) %>
               <%= a.extra_note %>
             </p>
           </li>
