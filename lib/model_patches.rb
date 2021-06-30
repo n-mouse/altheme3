@@ -124,10 +124,10 @@ Rails.configuration.to_prepare do
           if text == "FOLDED_QUOTED_SECTION"
             text = "[Subject only] " + CGI.escapeHTML(self.subject || '') + text
           end
-          text = text.gsub(/FOLDED_QUOTED_SECTION/, "\n\n" + '<span class="unfold_link"><a href="?unfold=1#incoming-'+self.id.to_s+'">'+_("show quoted sections")+'</a></span>' + "\n\n")
+          text = text.gsub(/FOLDED_QUOTED_SECTION/, "\n\n" + '<span class="unfold_link"><a href="?unfold=1#incoming-'+self.id.to_s+'">'+_("показати цитоване")+'</a></span>' + "\n\n")
         else
           if folded_quoted_text.include?('FOLDED_QUOTED_SECTION')
-            text = text + "\n\n" + '<span class="unfold_link"><a href="?#incoming-'+self.id.to_s+'">'+_("hide quoted sections")+'</a></span>'
+            text = text + "\n\n" + '<span class="unfold_link"><a href="?#incoming-'+self.id.to_s+'">'+_("сховати цитоване")+'</a></span>'
           end
         end
         text.strip!
