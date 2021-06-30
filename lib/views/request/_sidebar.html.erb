@@ -1,30 +1,26 @@
-<div class="single-req">
-  <div id="follow_box">
-    <h4><%= _('Відслідковування запиту') %></h4>
-    <p>
-      <%= n_("{{count}} follower",
-     "{{count}} followers",
-     @follower_count,
-     :count => content_tag(:span, @follower_count, :id => "follow_count")) %>
-    </p>
-     <%= render :partial => 'track/tracking_links', :locals => { :track_thing => @track_thing, :own_request => @info_request.user && @info_request.user == @user, :location => 'sidebar' } %>
-   </div>
+<div id="right_column" class="sidebar right_column" role="complementary">
 
-    <div class="act_link">
-        <%
-          # Cast "related" to normal string because html safe string (from rails_xss gem) and CGI::escape
-          # interact badly with ':' character. Go figure! Might go away in rails 3
-        %><p>
-        <%= link_to "https://twitter.com/share?" + {:url => request.url, :via => AlaveteliConfiguration::twitter_username, :text => @info_request.title, :related => _('alaveteli_foi:The software that runs {{site_name}}', :site_name => "Доступ до правди").to_str}.to_query do %>
-          <%= image_tag "tw.png", :alt => "twitter icon", :size=> "16x16" %>
-          <%= _("Tweet this request") %>
-        <% end %></p><p>
-         <%= link_to "http://www.facebook.com/sharer/sharer.php?" + {:u => request.url}.to_query do %>
-          <%= image_tag "fb.png", :alt => "facebook icon", :size=> "16x16" %>
-          <%= _("Поширте через Facebook") %>
-        <% end %>
-        </p>
-    </div>
+  <% if (feature_enabled?(:alaveteli_pro) &&
+         can?(:create_embargo, info_request)) %>
+    <%= render partial: 'alaveteli_pro/info_requests/embargo_form',
+               locals: { info_request: info_request } %>
+  <% end %>
 
-    <%= render :partial => 'request/next_actions' %>
+  <% if info_request.attention_requested %>
+    <%= render partial: 'request/attention_requested',
+               locals: { info_request: info_request } %>
+  <% end %>
+
+  <%= render partial: 'request/batch',
+             locals: { info_request: info_request } %>
+
+  <%= render :partial => 'general/zaraz_na_sajti' %>
+
+  <% if similar_requests.any? %>
+    <%= render partial: 'request/similar',
+               locals: { info_request: info_request,
+                         similar_requests: similar_requests,
+                         similar_more: similar_more } %>
+  <% end %>
+
 </div>

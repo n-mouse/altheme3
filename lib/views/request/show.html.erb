@@ -89,13 +89,13 @@
       <%= render :partial => 'after_actions' %>
 
   </div>
-  <div class="right_column">
-    <div class="here-now sidebar-section">
-	    <%= render :partial => 'general/zaraz_na_sajti' %>
-    </div>
-    <div class="sidebar-section">
-	    <h4 class="part-title">Вибір редакції<h4>
-	     <%= render :partial => 'general/vybir_red' %>
-    </div>
-  </div>
+    <%- if @sidebar %>
+  <%= render partial: @sidebar_template,
+             locals: { info_request: @info_request,
+                       similar_requests: @similar_requests,
+                       similar_more: @similar_more,
+                       citations: @citations } %>
+
+  <% end %>
+
 </div>
