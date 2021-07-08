@@ -8,7 +8,8 @@
         <div>
             <p style="font-size:18px"><strong><%= link_to "Запити про COVID19", request_list_all_path(tag: 'covid') %></strong></p>
 
-            <%= render :partial => 'request/request_filter_form' %>
+  <%= render :partial => 'request/request_search_form',
+             :locals => { :after_form_fields => render(:partial => 'request/request_filter_form') } %>
         </div>
     <% end %>
 
