@@ -38,6 +38,12 @@ Rails.configuration.to_prepare do
 		@user_signup = User.new(user_params(:user_signup))
 		error = false
 		@request_from_foreign_country = country_from_ip != AlaveteliConfiguration::iso_country_code
+        spammers = [/cuoly.com/, /zwoho.com/, /sumwan.com/, /eoopy.com/]
+        re = Regexp.union(spammers)
+        if params[:user_signup][:email].match(re)
+          flash.now[:error] = _("Ми думаємо, що ви спамер, вибачайте")
+          error = true
+        end
 		if params[:name_public_ok] != "1" 
 		  flash.now[:error] = _("Ви маєте погодитись на використання вашої персональної інформації. Поставте, будь ласка, відповідну галочку.")
 		  error = true
