@@ -1,22 +1,22 @@
  <% provide(:title, "Аварійні будинки Києва") %>
- 
+
  <style>
  body {
  	width: 100%;
  	height: 100%;
     font-family: 'Roboto', sans-serif;
  }
- 
+
  .wrapper {
  	margin-bottom: -4px
  }
- 
-#themap { 
-	height: 100%; 
+
+#themap {
+	height: 100%;
 	float: left;
 	width: 70%;
  }
- 
+
  #vstup {
  	position: relative;
 	padding-top: 40px;
@@ -26,34 +26,34 @@
  	font-size: 18px;
  	line-height: 22px;
  }
- 	
+
  .leaflet-marker-icon.extra-marker-circle-red.extra-marker.leaflet-zoom-animated.leaflet-interactive {
  	margin-top: -12px !important;
  }
- 	
+
  #street {
  	font-size: 24px;
  	text-align: center;
  	font-weight: 700;
  }
- 
+
  #comment {
  	font-size: 18px;
  }
- 
+
  #mapinfo a {
  	color: #E15F42;
  }
- 
+
  #mapinfo a:hover, #mapinfo a:focus {
  	color: #2C96B8
  }
- 
+
  .articles-button-container {
  	text-align: center;
  }
- 	
-	
+
+
  .map-button {
 	margin-left: 15px;
 	-moz-appearance: none;
@@ -76,7 +76,7 @@
 
 #abc-black button {
 	border: 1px solid black;
-	color: black;	
+	color: black;
 }
 
 #abc-black {
@@ -88,13 +88,13 @@
  	position: absolute;
  	left: 0;
  	bottom: 15px;
- 	z-index: 1000;		
+ 	z-index: 1000;
  	display: none;
 }
 
 #abc-white button {
 	border: 1px solid white;
-	color: white;	
+	color: white;
 }
 
 #map-button {
@@ -107,7 +107,7 @@
 	text-align: center;
 	padding: 15px 0;
 }
-	
+
 .articlescontainer {
 	display: none;
 	height: 100%;
@@ -117,7 +117,7 @@
 	width: 100%;
 	z-index: 1001;
 }
-	
+
 .parent {
    	width: 46%;
     height: 240px;
@@ -138,7 +138,7 @@
     -o-transition: all .5s;
     transition: all .5s;
 }
-	
+
 .parent:hover .child, .parent:focus .child {
     -ms-transform: scale(1.2);
     -moz-transform: scale(1.2);
@@ -190,8 +190,8 @@
 
 #mapinfo {
 	width: 30%;
-	height: 100%; 
-	float: right; 
+	height: 100%;
+	float: right;
 	padding: 20px 15px 15px 20px;
 	background-color: #eeeeee;
 	overflow: hidden;
@@ -230,7 +230,7 @@
        <p>При натисненні на будиночки на карті тут з'явиться інформація про кожен з них.</p>
      </div>
      <div class="articles-button-container" id="abc-black"><button class="map-button articles-button">Показати усі статті проекту</button></div>
-   
+
      <p id="street"></p>
      <p id="comment"></p>
      <p id="house-image"></p>
@@ -247,7 +247,7 @@
               <div class="child" style="background-image: url('/assets/domix/3.jpg')"></div>
             </a>
            <a href="https://dostup.pravda.com.ua/stories/publications/vlasnyky-prahy-rozdiliai-i-dobudovui">Власники "Праги": розділяй і добудовуй</a>
-         </div> 
+         </div>
  	     <div class="parent">
  	     	<a href="https://dostup.pravda.com.ua/stories/publications/budynok-zi-zmiiamy-unikalnyi-i-zanedbanyi">
               <div class="child" style="background-image: url('/assets/domix/9.jpg')"></div>
@@ -331,7 +331,9 @@
 
 </div>
  </div>
- <script src="/data/houses.js"></script>
+<script src="/data/houses.js"></script>
+<script src="/data/leaflet.extra-markers.min.js"></script>
+<link rel="stylesheet" href="/data/leaflet.extra-markers.min.css">
 <script>
 
 	var vstup = "<p>Протягом 2015 – 2016 років «Доступ до правди» реалізовував проект з пошуку власників історичних будинків Києва.</p>"+
@@ -342,12 +344,13 @@
     var map = L.map('themap', {minZoom: 10, maxBounds:[[50.73848, 29.70703],[50.12527, 31.2149]]}).setView([50.44, 30.516857], 10);
 	L.tileLayer('http://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png').addTo(map);
 	var markers = L.markerClusterGroup({polygonOptions: {color: '#666'}});
+
 	var myIcon = L.ExtraMarkers.icon({
     	icon: 'fa-building',
     	prefix: 'fa',
     	extraClasses: "fa-2x"
   	});
-	
+
 	$.each( data, function( i, value ) {
        	var marker = L.marker(value.coords, {icon: myIcon}).on("click", function(){
        		$(".leaflet-marker-icon.extra-marker-circle-red.extra-marker.leaflet-zoom-animated.leaflet-interactive i").css("color", "white");
@@ -360,27 +363,27 @@
 				$("#house-image").html("<img src='/assets/domix/domix2/"+value.image+"'>");
 			} else {
 				$("#house-image").empty();
-			}		
+			}
 			this._icon.innerHTML="<i class='fa-2x fa fa-building' style='color: #bc2623'></i>";
 			$("#abc-black").hide();
 			$("#abc-white").show();
-			
+
 		});
 		marker.clicked = false;
        	markers.addLayer(marker);
-       	 
+
     });
-       
+
 	map.addLayer(markers);
-	
+
     $(".articles-button").on("click", function(){
     	$(".articlescontainer").slideDown().css("padding", "20px").css("background-color", "white");
     });
-    	
+
     $("#map-button").on("click", function(){
     	$(".articlescontainer").slideUp().css("padding", "0").css("background-color", "none");
-    });	
-	
+    });
+
 	$("#back-to-vstup").on("click", function(){
 		$(".leaflet-marker-icon.extra-marker-circle-red.extra-marker.leaflet-zoom-animated.leaflet-interactive i").css("color", "white");
 		$("#back-to-vstup").empty();
@@ -389,5 +392,5 @@
 		$("#abc-white").hide();
 		$("#abc-black").show();
 	})
-	
+
 </script>

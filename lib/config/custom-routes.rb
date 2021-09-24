@@ -1,7 +1,7 @@
 # Here you can override or add to the pages in the core website
 Alaveteli::Application.routes.draw do
 
-    #get 'ruins', to: 'sandbox#domiki'
+    get 'ruins', to: 'sandbox#domiki'
     get 'covid', to: 'sandbox#covid'
     get 'hto', to: 'publications#hto'
     
