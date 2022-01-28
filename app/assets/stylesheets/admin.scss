@@ -1,0 +1,235 @@
+/*
+*= require jquery-ui/datepicker
+*= require_self
+*/
+
+/* As we're namespacing bootstrap to class admin, which is applied to the body
+element in the admin interface (no id or class allowed on the HTML element
+in HTML 4.01) and to the navbar also, so it can be styled with bootstrap
+when showing for admin users on the front end, re-apply the bootstrap html
+and body styles here.
+*/
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+body.admin {
+  background-color: white;
+  color: #333333;
+  display: flex;
+  flex-direction: column;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* When the admin stylesheet is loaded (and so the user is seeing the admin  navbar), pad the banner of the front end interface so that it isn't hidden, and move any special notice down too.
+*/
+
+.entirebody {
+  padding-top: 42px;
+}
+
+.admin-footer {
+  background-color: #f9f9f9;
+  border-top: 1px solid #dddddd;
+  padding: 1em 0;
+
+  .nav.nav-pills {
+    margin-bottom: 0;
+  }
+}
+
+.admin {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+
+  @import "bootstrap";
+
+  #main {
+    flex: 1;
+    margin-bottom: 50px;
+    padding-top: 50px;
+  }
+
+  /* A nested table on the todo list section of the admin summary page */
+  #public-request-things-to-do,
+  #comments-things-to-do {
+    table {
+      table {
+        margin-bottom: 0;
+        width: 100%;
+
+        td:first-child {
+          width: 20em;
+        }
+      }
+    }
+  }
+
+  .form-inline {
+    display: inline;
+  }
+
+  table .form {
+    display: inline-block;
+    margin: 0;
+  }
+
+  .accordion-group {
+    border: none;
+    div {
+      clear: both;
+    }
+  }
+  .accordion-heading {
+    .btn {
+      float: left;
+      margin: 6px 15px;
+    }
+    .accordion-toggle {
+      padding: 2px;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  div.item-detail {
+    div:nth-child(odd) span {
+      background-color: #eee;
+    }
+  }
+
+  span.label.tag {
+    margin-right: 2px;
+    a {
+      color: white;
+    }
+  }
+
+  body.admin blockquote p {
+    font-size: 13px;
+    display: inline;
+  }
+
+  div#user_locale_switcher {
+    div.btn-group:before,
+    div.btn-group:after {
+      display: inline;
+    }
+  }
+
+  #request_hidden_user_subject_field {
+    width: 440px;
+  }
+  #request_hidden_user_explanation_field {
+    width: 100%;
+    height: 15em;
+  }
+  #request_hidden_user_subject,
+  #request_hide_button,
+  #request_hidden_user_explanation {
+    display: none;
+  }
+
+  #outgoing_message_body,
+  #comment_body {
+    width: 750px;
+  }
+
+  .save-notice {
+    display: inline-block;
+    padding-left: 1em;
+  }
+
+  .category-list-item {
+    padding: 3px 0;
+  }
+
+  .fieldWithErrors {
+    display:block;
+    padding:0.2em;
+
+    textarea, input {
+      border: 1px solid #ff0c11 !important;
+    }
+  }
+
+  .inline-element .fieldWithErrors {
+    display: inline-block;
+  }
+
+  /* Danger Zone */
+  .danger-zone {
+    border: 3px solid #b94a48;
+    border-radius: 5px;
+  }
+
+  .danger-zone__header {
+    color: #b94a48;
+    font-size: 24px
+  }
+
+  /* Users */
+  .sort-order {
+    margin-bottom: 30px;
+  }
+
+  .role-filter {
+    input[type="checkbox"] {
+      margin: 0;
+    }
+  }
+
+  /* Censor Rules */
+  .censor-rule-list td.text,
+  .censor-rule-list td.replacement {
+    font-family: monospace;
+    max-width: 380px;
+    overflow-wrap: break-word;
+  }
+
+  /* Holidays */
+  .day_select {
+    width: 75px;
+  }
+
+  .holiday-description, .holiday-day, .holiday-buttons, .holiday-destroy {
+    padding: 6px 4px;
+  }
+
+  .holiday-description, .holiday-day, .holiday-buttons{
+    display: inline-block;
+  }
+
+  .holiday-description {
+    width: 300px;
+  }
+  .holiday-day {
+    width: 240px;
+    text-align: center;
+  }
+  .holiday-buttons{
+    width: 200px;
+    text-align: right;
+  }
+
+  #import_start_year, #import_end_year {
+    width: 75px;
+  }
+
+}
+
+/* Users */
+
+.user-labels {
+  .label ~ .label {
+    margin-left: 0.4em;
+  }
+}
