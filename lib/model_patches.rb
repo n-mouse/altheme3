@@ -133,13 +133,13 @@ Rails.configuration.to_prepare do
         text.strip!
 
         text = ActionController::Base.helpers.simple_format(text)
-        if text.match(/This message was created automatically by mail delivery software/)
-          if text.match(/No action is required on your part. Delivery attempts will continue/)
+        #if text.match(/This message was created automatically by mail delivery software/)
+          if text.match(/Delivery attempts will continue/)
             text = "<p class='delivery-error'>Не вдалося доставити листа розпоряднику. Ми спробуємо ще раз, поки що нічого не потрібно робити</p>"
-          elsif text.match(/This is a permanent error/)
+          elsif text.match(/This is a permanent error|Delivery has failed to these recipients or groups|I'm sorry to (have to )?inform you that|email address you entered couldn't be found/)
             text = "<p class='delivery-error'>Не вдалося доставити листа розпоряднику. Можливо, ця адреса вже недійсна, в розпорядника переповнена пошта або вони відмовляються отримувати листи з Доступа. Ви можете спробувати написати їм з власної пошти</p>"
           end
-        end
+        #end
         text.html_safe
       end
 
