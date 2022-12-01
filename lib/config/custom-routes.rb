@@ -13,9 +13,7 @@ Alaveteli::Application.routes.draw do
     
     scope '/nasud' do
         get '/', to: 'sandbox#nasud', as: 'nasud'
-        resources :violations, :only => [:new, :create]
         resources :cases, :only => [:show]
-        resources :donations, :only => [:new, :create]
     end
 
     scope '/admin', :as => 'admin' do
