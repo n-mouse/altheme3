@@ -32,66 +32,69 @@ Rails.configuration.to_prepare do
     end
  
     UserController.class_eval do
-	  def signup
-		work_out_post_redirect
-		# Make the user and try to save it
-		@user_signup = User.new(user_params(:user_signup))
-		error = false
-		@request_from_foreign_country = country_from_ip != AlaveteliConfiguration::iso_country_code
-        spammers = [/cuoly.com/, /zwoho.com/, /sumwan.com/, /eoopy.com/]
+	    def signup
+		    work_out_post_redirect
+		    # Make the user and try to save it
+		    @user_signup = User.new(user_params(:user_signup))
+		    error = false
+		    @request_from_foreign_country = country_from_ip != AlaveteliConfiguration::iso_country_code
+        spammers = [/cuoly.com/, /zwoho.com/, /sumwan.com/, /eoopy.com/] #added
         re = Regexp.union(spammers)
-        if params[:user_signup][:email].match(re)
+        if params[:user_signup][:email].match(re) 
           flash.now[:error] = _("Ми думаємо, що ви спамер, вибачайте")
           error = true
         end
-		if params[:name_public_ok] != "1" 
-		  flash.now[:error] = _("Ви маєте погодитись на використання вашої персональної інформації. Поставте, будь ласка, відповідну галочку.")
-		  error = true
-		end
-		@user_signup.valid?
-		user_alreadyexists = User.find_user_by_email(params[:user_signup][:email])
-		if user_alreadyexists
-		  # attempt to remove the 'already in use message' from the errors hash
-		  # so it doesn't get accidentally shown to the end user
-		  @user_signup.errors[:email].delete_if{|message| message == _("Ця пошта вже використовується")}
-		end
-		if error || !@user_signup.errors.empty?
-		  # Show the form
-		  render :action => 'sign'
-		else
-		  if user_alreadyexists
-			already_registered_mail user_alreadyexists
-			return
-		  else
-			# New unconfirmed user
+		    if params[:name_public_ok] != "1" #added
+		      flash.now[:error] = _("Ви маєте погодитись на використання вашої персональної інформації. Поставте, будь ласка, відповідну галочку.")
+		      error = true
+		    end
+		    @user_signup.valid?
+		    user_alreadyexists = User.find_user_by_email(params[:user_signup][:email])
+		    if user_alreadyexists
+		      # attempt to remove the 'already in use message' from the errors hash
+		      # so it doesn't get accidentally shown to the end user
+		      @user_signup.errors[:email].delete_if{|message| message == _("Ця пошта вже використовується")}
+		    end
+		    if error || !@user_signup.errors.empty?
+		      # Show the form
+		      render :action => 'sign'
+		    else
+		      if user_alreadyexists
+			      already_registered_mail user_alreadyexists
+			      return
+		      else
+			      # New unconfirmed user
 
-			# Rate limit signups
-			ip_rate_limiter.record(user_ip)
+			      # Rate limit signups
+			      ip_rate_limiter.record(user_ip)
 
-			if ip_rate_limiter.limit?(user_ip)
-			  if send_exception_notifications?
-				msg = "Rate limited signup from #{ user_ip } email: " \
-					  " #{ @user_signup.email }"
-				e = Exception.new(msg)
-				ExceptionNotifier.notify_exception(e, :env => request.env)
-			  end
+			      if ip_rate_limiter.limit?(user_ip)
+			        if send_exception_notifications?
+				        msg = "Rate limited signup from #{ user_ip } email: " \
+					      " #{ @user_signup.email }"
+				        e = Exception.new(msg)
+				        ExceptionNotifier.notify_exception(e, :env => request.env)
+			        end
 
-			  if AlaveteliConfiguration.enable_anti_spam
-				flash.now[:error] =
-				  _("Sorry, we're currently unable to sign up new users, " \
-					"please try again later")
-				error = true
-				render :action => 'sign'
-				return
-			  end
-			end
+			        if AlaveteliConfiguration.enable_anti_spam
+				        flash.now[:error] =
+				        _("Sorry, we're currently unable to sign up new users, " \
+					      "please try again later")
+				        error = true
+				        render :action => 'sign'
+				        return
+			      end
+			    end
 
-			@user_signup.email_confirmed = false
-			@user_signup.save!
-			send_confirmation_mail @user_signup
-			return
+			    @user_signup.email_confirmed = false
+			    @user_signup.save!
+			    send_confirmation_mail @user_signup
+          if params[:newsletter_ok] == "1" #added
+            CSV.open("files/newsletter.csv","ab") { |f| f << [@user_signup.email] }
+          end
+			    return
+		    end
 		  end
-		end
 	  end
     end
     

@@ -30,7 +30,12 @@
   	  "Доступ до Правди", що передбачає надсилання та оприлюднення запиту на інформацію і відповіді на нього.
   	  Така обробка здійснюється в базах даних та інформаційно комунікаційних системах адміністратора сайту "Доступ до Правди"
   	  і включає оприлюднення на зазначеному сайті повідомлених мною персональних даних.
+      <p>
 
+      <p class="form_item_note">
+        <%= check_box_tag("newsletter_ok",1, false, class: 'css-checkbox') %>
+        <label for="newsletter_ok" class="css-label lite-red-check"></label>
+        Хочу отримувати на пошту <strong>розсилку</strong> з матеріалами, що стосуються доступу до інформацію
       <p>
        <label class="form_label">Стать: </label>
         <input type="radio" id="user_signup_gender_male" name="user_signup[gender]" value="male" />
@@ -40,6 +45,8 @@
         <input type="radio" id="user_signup_gender_female" name="user_signup[gender]" value="other" />
         <label for="user_signup_gender_female">інше</label>
       </p>
+
+
 
       <p>
         <label class="form_label" for="user_signup_password">Пароль:</label>
