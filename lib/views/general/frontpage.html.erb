@@ -48,19 +48,8 @@
 	</div>
 </div>
 <div class="frontpage__banners-container">
-	<h2 class="part-title front-title">Наші партнери</h2>
-	<div class="frontpage__banners">
-		<%= link_to "http://bloggers4gg.org.ua/", class:"banner-link" do %>
-			<%= image_tag "bloggers.jpg" %>
-		<% end %>
-		<%= link_to "http://www.ppl.org.ua/", class:"banner-link" do %>
-			<%= image_tag "platforma.png" %>
-		<% end %>
-		<%= link_to "http://www.cedem.org.ua/", class:"banner-link" do %>
-			<%= image_tag "cedem.png" %>
-		<% end %>
-	</div>
-
+	<h2 class="part-title front-title">Сайт працює за підтримки</h2>
+	<p style="text-align:center"><%= link_to image_tag("ppl.png", height:"80"), "https://ppl.org.ua" %></p>
 </div>
 <div class="frontpage__bottom">
   <div class="commentaries--mob">
@@ -98,9 +87,14 @@
     <div class='link-to-all-pubs'><%= link_to "Усі публікації", publications_path, class: "read-more-top" %></div>
   </section>
 	<section class="righties">
-	  <h2 class="part-title front-title">Проекти</h2>
-	  <%= link_to image_tag("nasudb.jpg"), nasud_path %>
-		<%= link_to image_tag("memo2.jpg"), "https://dostup.pravda.com.ua/news/publications/pidpysano-memorandum-za-znyzhennia-sudovoho-zboru-po-dostupu" %>
+	  <h2 class="part-title front-title">Партнери</h2>
+	  <%= link_to "http://bloggers4gg.org.ua/", class:"banner-link" do %>
+		<%= image_tag "bloggers.jpg" %>
+	<% end %>
+	<%= link_to image_tag("ppl.png", height:"80"), "https://ppl.org.ua" %>
+	<%= link_to "http://www.cedem.org.ua/", class:"banner-link" do %>
+		<%= image_tag "cedem.png" %>
+	<% end %>
 	</section>
 </div>
 
