@@ -37,7 +37,7 @@
 				<span class="step-number">3</span>
 				<span class="step-text">Відправте<br />запит</span>
 				<span class="count1">
-					<%= link_to @number_of_requests, request_list_all_path, class: "fp-count" %> <br />запитів
+					<%= link_to @number_of_requests, request_list_path, class: "fp-count" %> <br />запитів
 			    </span>
 			</span>
 			    <span class="step-inner4 step-inner">
@@ -65,27 +65,6 @@
     <% end %>
    <% end %>
   </div>
-  <section class="pubs" id="pubs-container">
-		<h2 class="part-title front-title">
-			<%= link_to "Публікації", publications_path %>
-		</h2>
-		<div id="masonry-container" class="pub-container">
-    	<% @publications.each do |pub| %>
-	  	<div class="sbox">
-          <% if pub.image_file_name %>
-            <%= link_to (image_tag pub.image.url, size: "310x200"), category_publication_path(pub.category, pub) %>
-          <% end %>
-          <h4 class="pub-title-index"><%= link_to pub.title, category_publication_path(pub.category, pub) %></h4>
-          <p class="pub-date"><%= (l pub.created_at, :format => '%e.%m.%Y %H:%M').upcase %>
-  	        <% if pub.author %>
-  	          <span style="padding-left: 5px"><%= pub.author %></span>
-  	        <% end %>
-          </p>
-      </div>
-    <% end %>
-    </div>
-    <div class='link-to-all-pubs'><%= link_to "Усі публікації", publications_path, class: "read-more-top" %></div>
-  </section>
 	<section class="righties">
 	  <h2 class="part-title front-title">Партнери</h2>
 	  <%= link_to "http://bloggers4gg.org.ua/", class:"banner-link" do %>

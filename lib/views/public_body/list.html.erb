@@ -32,14 +32,6 @@
         <%= text_field_tag(:public_body_query, params[:public_body_query], :id=>"pb-input") %>
         <%= submit_tag "Пошук", :id=>"pb-submit" %>
       <% end %>
-     <% if AlaveteliConfiguration.allow_batch_requests && @user && @user.can_make_batch_requests? %>
-       <div id="batch_request_link">
-         <p>
-          <%= _(' Ви можете зробити <a href="{{url}}">груповий запит</a> до <strong>кількох розпорядників</strong> одночасно.',
-                :url => select_authorities_path) %>
-         </p>
-       </div>
-     <% end %>
        <p class="publicbody_results">
          <%= @description %>
        </p>

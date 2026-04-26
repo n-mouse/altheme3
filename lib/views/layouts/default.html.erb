@@ -47,11 +47,7 @@
     <%= content_for :open_graph_tags %>
     <meta property="og:site_name" content="<%= site_name %>" />
     <meta property="fb:app_id" content="1497998170494004" />
-    <% if @publication && @publication.image_file_name %>
-      <meta property="og:image"  content="<%= "#{request.protocol}#{request.host_with_port}"+@publication.image.url %>" />
-    <% else %>
-     <meta property="og:image" content="<%= "#{request.protocol}#{request.host_with_port}#{asset_path('mainlogo.png')}" %>" />
-    <% end %>
+    <meta property="og:image" content="<%= "#{request.protocol}#{request.host_with_port}#{asset_path('mainlogo.png')}" %>" />
     <script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -137,11 +133,7 @@
         <ul class="site-parts rozdily main-nav wrapper" id="menu">
             <li id="<%= 'selected' if params[:controller] == 'help' and params[:action] == 'about' %>"><%= link_to _("Як працює сайт"), help_about_path %></li>
             <li id="<%= 'selected' if params[:controller] == 'public_body' and params[:action] == 'list' %>"><%= link_to _("Зробити запит"), list_public_bodies_default_path %></li>
-            <li id="<%= 'selected' if params[:controller] == 'publications' and params[:action] == 'index' %>"><%= link_to _("Публікації"), publications_path %> </li>
-            <li id="<%= 'selected' if params[:controller] == 'commentaries' and params[:action] == 'index' %>"><%= link_to _("Юридичні коментарі"), commentaries_path %></li>
             <li id="<%= 'selected' if params[:controller] == 'help' and params[:action] == 'contact' %>"><%= link_to _("Контакт"), help_contact_path %></li>
-            <li id="<%= 'selected' if params[:controller] == 'public_body' and params[:action] == 'statistics' %>"><%= link_to _("Статистика"), statistics_path %></li>
-            <li><%= link_to _("#насудзадоступ"), nasud_path %></li>
             <li class="search-mobile"><%= link_to "Пошук", search_general_path %></li>
         </ul>
       </div>
