@@ -97,191 +97,171 @@ Rails.configuration.to_prepare do
 		  end
 	  end
     end
-    
-    AdminGeneralController.class_eval do
-    
-      def nasud
-      end
       
-    end
-    
     RequestController.class_eval do
-    
-      def new
-        if AlaveteliConfiguration::force_registration_on_new_request && !authenticated?(
-            :web => _("Щоб відправити ваш запит"),
-            :email => _("Тоді ви зможете надсилати запити"),
-            :email_subject => _("Підтвердіть вашу адресу")
-          )
-          # do nothing - as "authenticated?" has done the redirect to signin page for us
-          return
-        end
-        # All new requests are of normal_sort
-        if !params[:outgoing_message].nil?
-          params[:outgoing_message][:what_doing] = 'normal_sort'
-        end
+   
+	  def new
+		if AlaveteliConfiguration.force_registration_on_new_request &&
+		   !authenticated?
+		  ask_to_login(
+			web: _('To send and publish your FOI request'),
+			email: _("Then you'll be allowed to send FOI requests."),
+			email_subject: _('Confirm your email address')
+		  )
+		  return
+		end
+		unless params[:outgoing_message].nil?
+		  params[:outgoing_message][:what_doing] = 'normal_sort'
+		end
 
-        # If we've just got here (so no writing to lose), and we're already
-        # logged in, force the user to describe any undescribed requests. Allow
-        # margin of 1 undescribed so it isn't too annoying - the function
-        # get_undescribed_requests also allows one day since the response
-        # arrived.
-        #if !@user.nil? && params[:submitted_new_request].nil?
-        #  @undescribed_requests = @user.get_undescribed_requests
-        #  if @undescribed_requests.size > 5000
-        #    render :action => 'new_please_describe'
-        #    return
-        #  end
-        #end
+		# If we've just got here (so no writing to lose), and we're already
+		# logged in, force the user to describe any undescribed requests. Allow
+		# margin of 1 undescribed so it isn't too annoying - the function
+		# get_undescribed_requests also allows one day since the response
+		# arrived.
+		if !@user.nil? && params[:submitted_new_request].nil?
+		  @undescribed_requests = @user.get_undescribed_requests
+		  if @undescribed_requests.size > 1
+			render action: 'new_please_describe'
+			return
+		  end
+		end
 
-        # Banned from making new requests?
-        user_exceeded_limit = false
-        if !authenticated_user.nil? && !authenticated_user.can_file_requests?
-          # If the reason the user cannot make new requests is that they are
-          # rate-limited, it’s possible they composed a request before they
-          # logged in and we want to include the text of the request so they
-          # can squirrel it away for tomorrow, so we detect this later after
-          # we have constructed the InfoRequest.
-          user_exceeded_limit = authenticated_user.exceeded_limit?
-          if !user_exceeded_limit
-            @details = authenticated_user.can_fail_html
-            render :template => 'user/banned'
-            return
-          end
-          # User did exceed limit
-          @next_request_permitted_at = authenticated_user.next_request_permitted_at
-        end
+		# Banned from making new requests?
+		if authenticated? && authenticated_user.suspended?
+		  @details = authenticated_user.can_fail_html
+		  render(template: 'user/banned') && return
+		end
 
-        # First time we get to the page, just display it
-        if params[:submitted_new_request].nil? || params[:reedit]
-          if user_exceeded_limit
-            render :template => 'user/rate_limited'
-            return
-          end
-          return render_new_compose(batch=false)
-        end
+		if authenticated? && authenticated_user.exceeded_request_limits?
+		  render(template: 'user/rate_limited') && return
+		end
 
-        # CREATE ACTION
+		# First time we get to the page, just display it
+		if params[:submitted_new_request].nil? || params[:reedit]
+		  return render_new_compose
+		end
 
-        # Check we have :public_body_id - spammers seem to be using :public_body
-        # erroneously instead
-        if params[:info_request][:public_body_id].blank?
-          redirect_to frontpage_path and return
-        end
+		# CREATE ACTION
 
-        # See if the exact same request has already been submitted
-        # TODO: this check should theoretically be a validation rule in the
-        # model, except we really want to pass @existing_request to the view so
-        # it can link to it.
-        @existing_request = InfoRequest.find_existing(params[:info_request][:title], params[:info_request][:public_body_id], params[:outgoing_message][:body])
+		# Check we have :public_body_id - spammers seem to be using :public_body
+		# erroneously instead
+		if params[:info_request][:public_body_id].blank?
+		  redirect_to frontpage_path and return
+		end
 
-        # Create both FOI request and the first request message
-        @info_request = InfoRequest.create_from_attributes(info_request_params,
-                                                           outgoing_message_params)
-        @outgoing_message = @info_request.outgoing_messages.first
+		# See if the exact same request has already been submitted
+		# TODO: this check should theoretically be a validation rule in the
+		# model, except we really want to pass @existing_request to the view so
+		# it can link to it.
+		@existing_request = InfoRequest.find_existing(params[:info_request][:title], params[:info_request][:public_body_id], params[:outgoing_message][:body])
 
-        # Maybe we lost the address while they're writing it
-        unless @info_request.public_body.is_requestable?
-          render :action => "new_#{ @info_request.public_body.not_requestable_reason }"
-          return
-        end
+		# Create both FOI request and the first request message
+		@info_request = InfoRequest.build_from_attributes(info_request_params,
+														  outgoing_message_params)
+		@outgoing_message = @info_request.outgoing_messages.first
 
-        # See if values were valid or not
-        if @existing_request || !@info_request.valid?
-          # We don't want the error "Outgoing messages is invalid", as in this
-          # case the list of errors will also contain a more specific error
-          # describing the reason it is invalid.
-          @info_request.errors.delete(:outgoing_messages)
+		# Maybe we lost the address while they're writing it
+		unless @info_request.public_body.is_requestable?
+		  render action: "new_#{ @info_request.public_body.not_requestable_reason }"
+		  return
+		end
 
-          render :action => 'new'
-          return
-        end
+		# See if values were valid or not
+		if @existing_request || !@info_request.valid?
+		  # We don't want the error "Outgoing messages is invalid", as in this
+		  # case the list of errors will also contain a more specific error
+		  # describing the reason it is invalid.
+		  @info_request.errors.delete(:outgoing_messages)
 
-        # Show preview page, if it is a preview
-        if params[:preview].to_i == 1
-          return render_new_preview
-        end
+		  render action: 'new'
+		  return
+		end
 
-        if user_exceeded_limit
-          render :template => 'user/rate_limited'
-          return
-        end
+		# Show preview page, if it is a preview
+		return render_new_preview if params[:preview].to_i == 1
 
-        if !authenticated?(
-            :web => _("To send and publish your FOI request").to_str,
-            :email => _("Then your FOI request to {{public_body_name}} will be sent and published.",:public_body_name=>@info_request.public_body.name),
-            :email_subject => _("Confirm your FOI request to {{public_body_name}}",:public_body_name=>@info_request.public_body.name)
-          )
-          # do nothing - as "authenticated?" has done the redirect to signin page for us
-          return
-        end
+		if authenticated? && authenticated_user.exceeded_request_limits?
+		  render template: 'user/rate_limited'
+		  return
+		end
 
-        @info_request.user = request_user
+		unless authenticated?
+		  ask_to_login(
+			web: _('To send and publish your FOI request').to_str,
+			email: _('Then your FOI request to {{public_body_name}} will be sent ' \
+					 'and published.',
+					 public_body_name: @info_request.public_body.name),
+			email_subject: _('Confirm your FOI request to {{public_body_name}}',
+							 public_body_name: @info_request.public_body.name)
+		  )
+		  return
+		end
 
-        if spam_subject?(@outgoing_message.subject, @user)
-          handle_spam_subject(@info_request.user) && return
-        end
+		@info_request.user = request_user
 
-        if blocked_ip?(country_from_ip, @user)
-          handle_blocked_ip(@info_request) && return
-        end
+		if spam_subject?(@outgoing_message.subject, @user)
+		  handle_spam_subject(@info_request.user) && return
+		end
 
-        if AlaveteliConfiguration.new_request_recaptcha && !@user.confirmed_not_spam?
-          if @render_recaptcha && !verify_recaptcha
-            flash.now[:error] = _('There was an error with the reCAPTCHA. ' \
-                                  'Please try again.')
+		if !@user.confirmed_not_spam? && blocked_ip?
+		  handle_blocked_ip(@info_request) && return
+		end
 
-            if send_exception_notifications?
-              e = Exception.new("Possible blocked non-spam (recaptcha) from #{@info_request.user_id}: #{@info_request.title}")
-              ExceptionNotifier.notify_exception(e, :env => request.env)
-            end
+		if AlaveteliConfiguration.new_request_recaptcha && !@user.confirmed_not_spam?
+		  if @render_recaptcha && !verify_recaptcha
+			flash.now[:error] = _('There was an error with the reCAPTCHA. ' \
+								  'Please try again.')
 
-            render :action => 'new'
-            return
-          end
-        end
+			if send_exception_notifications?
+			  e = Exception.new("Possible blocked non-spam (recaptcha) from #{@info_request.user_id}: #{@info_request.title}")
+			  ExceptionNotifier.notify_exception(e, env: request.env)
+			end
 
-        # This automatically saves dependent objects, such as @outgoing_message, in the same transaction
-        @info_request.save!
+			render action: 'new'
+			return
+		  end
+		end
 
-        if @outgoing_message.sendable?
-          begin
-            mail_message = OutgoingMailer.initial_request(
-              @outgoing_message.info_request,
-              @outgoing_message
-            ).deliver_now
-          rescue *OutgoingMessage.expected_send_errors => e
-            # Catch a wide variety of potential ActionMailer failures and
-            # record the exception reason so administrators don't have to
-            # dig into logs.
-            @outgoing_message.record_email_failure(
-              e.message
-            )
+		# This automatically saves dependent objects, such as @outgoing_message, in the same transaction
+		@info_request.save!
 
-            flash[:error] = _("An error occurred while sending your request to " \
-                              "{{authority_name}} but has been saved and flagged " \
-                              "for administrator attention.",
-                              authority_name: @info_request.public_body.name)
-          else
-            @outgoing_message.record_email_delivery(
-              mail_message.to_addrs.join(', '),
-              mail_message.message_id
-            )
+		begin
+		  mail_message = OutgoingMailer.initial_request(
+			@outgoing_message.info_request,
+			@outgoing_message
+		  ).deliver_now if @outgoing_message.sendable?
 
-            flash[:request_sent] = true
-          ensure
-            # Ensure the InfoRequest is fully updated before templating to
-            # isolate templating issues recording delivery status.
-            @info_request.save!
-          end
-        end
+		rescue *OutgoingMessage.expected_send_errors => e
+		  # Catch a wide variety of potential ActionMailer failures and
+		  # record the exception reason so administrators don't have to
+		  # dig into logs.
+		  @outgoing_message.record_email_failure(
+			e.message
+		  )
 
-        redirect_to show_request_path(:url_title => @info_request.url_title)
-      end
+		  flash[:error] = _("An error occurred while sending your request to " \
+							"{{authority_name}} but has been saved and flagged " \
+							"for administrator attention.",
+							authority_name: @info_request.public_body.name)
+		else
+		  @outgoing_message.record_email_delivery(
+			mail_message.to_addrs.join(', '),
+			mail_message.message_id
+		  )
+
+		  flash[:request_sent] = true
+		ensure
+		  # Ensure the InfoRequest is fully updated before templating to
+		  # isolate templating issues recording delivery status.
+		  @info_request.save!
+		end
+
+		redirect_to show_request_path(@info_request.url_title)
+	  end 
     
     end
-    
-    
+   
 
 end
 

@@ -27,6 +27,7 @@
     </p>
   </div>
   <div class="pb-middle_column">
+
     <p style="margin-top:0;padding-top:0"><strong>Оберіть розпорядника інформації</strong></p>
       <%= form_tag(list_public_bodies_default_path, :method => "get", :id=>"pb-search-form") do %>
         <%= text_field_tag(:public_body_query, params[:public_body_query], :id=>"pb-input") %>
