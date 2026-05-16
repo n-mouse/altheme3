@@ -35,7 +35,6 @@ html {
 body {
   background: white;
   font-family: 'Roboto', sans-serif !important;
-  font-size: 14px;
   height: 100%;
   text-align: left;
   display: flex;
@@ -63,7 +62,6 @@ img {
 #main {
   width: 980px;
   max-width: 100%;
-  font-size: 14px;
   line-height: 1.2;
   flex: 1;
 }
@@ -152,12 +150,6 @@ img {
 
 .rozdily li a:hover {
   color: $blue;
-}
-
-#upravda {
-  height: 40px;
-  border-collapse: collapse;
-  border: none;
 }
 
 .fillin {
@@ -436,21 +428,8 @@ li { list-style-type: none; }
 
 /* FRONTPAGE */
 
-.fb-page.fb.fb_iframe_widget {
-  margin-top: 12px;
-}
-
-
-.frontpage__commentaries {
-  float: left;
-  display:table-column;
-  width: 310px;
-  @include mobile {
-    display: none;
-  }
-  h2 {
-    margin-top: 0;
-  }
+#general_frontpage a:hover {
+  color: $blue;
 }
 
 .sidebar-section {
@@ -489,147 +468,6 @@ li { list-style-type: none; }
   }
 }
 
-.how-to-send {
-  @include mobile{
-     display: none;
-  }
-}
-
-.how-to-steps {
-  margin-top: 10px;
-  width: 100%;
-  position: relative;
-  height: 360px;
-  background: image-url("steps.png");
-  @include mobile{
-    margin: 10px auto auto auto;
-    width: 100%;
-    height: auto;
-    background: none;
-  }
-}
-
-.how-to-steps a {
-  text-decoration: none
-}
-
-.step-inner {
-  position: absolute;
-  top: -30px;
-  width: 125px;
-  display: block;
-  @include mobile{
-    position: relative;
-    width: 100%;
-    text-align: center;
-    margin: 0;
-    top: unset;
-  }
-}
-
-.step-inner1 {
-  left: 25px;
-  z-index: 7;
-  @include mobile{
-    left: unset
-  }
-}
-
-.step-inner2 {
-  left: 185px;
-  z-index: 9;
-  @include mobile{
-    left: unset
-  }
-}
-
-.step-inner3 {
-  left: 345px;
-  z-index: 7;
-  @include mobile{
-    left: unset
-  }
-}
-
-.step-inner4 {
-  left: 505px;
-  z-index: 10;
-  @include mobile{
-    left: unset
-  }
-}
-
-.orange-button {
-  color: white;
-  background-color: $orange;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 14px;
-  margin-top: 20px;
-  display: block;
-  padding: 10px 4px 12px 4px;
-  text-align: center;
-  width: 103px;
-}
-
-.how-to-steps .orange-button {
-  font-size: 18px;
-  @include mobile{
-    margin: 5px auto;
-    font-size: 18px;
-    width: unset;
-    display: inline-block;
-    padding: 10px 25px;
-  }
-}
-
-.orange-button:hover {
-  background-color: #AA2C12;
-  color: white;
-}
-
-.count1 {
-  margin-top: 15px;
-  display: block;
-  line-height: 2px;
-  font-size: 14px;
-  color: #7a7a7a;
-  @include mobile{
-    background-color: #f2f2f2;
-    padding: 5px 0;
-    overflow: auto;
-    line-height: 20px;
-  }
-}
-
-.count2 {
-  position: absolute;
-  left: 20px;
-  bottom: 145px;
-
-}
-
-.fp-count {
-  text-decoration: none;
-  color: #7a7a7a;
-  font-size: 30px;
-  font-weight: 700;
-  line-height: 37px;
-}
-
-.fp-count:hover {
-  color: $blue
-}
-
-.fp {
-  float: left;
-  width: 33.33%;
-  padding: 10px;
-}
-
 .part-title {
   margin: 0 0 1em 0;
 }
@@ -646,16 +484,6 @@ li { list-style-type: none; }
 .front-title {
   @include mobile{
     text-align: center
-  }
-}
-
-
-.link-to-all-pubs {
-  text-align: center;
-  clear: both;
-  margin-bottom: 20px;
-  @include mobile {
-    margin: 35px 0 50px;
   }
 }
 
